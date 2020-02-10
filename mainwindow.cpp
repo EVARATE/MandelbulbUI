@@ -1,3 +1,22 @@
+/*
+Copyright 2019, 2020 Sebastian Motzet
+
+This file is part of MandelbulbUI_V2.
+
+MandelbulbUI_V2 is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MandelbulbUI_V2 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MandelbulbUI_V2.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -44,6 +63,13 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_generate, SIGNAL(clicked(bool)), this, SLOT(calcMBulbUI()));
     connect(ui->pushButton_filterHull, SIGNAL(clicked(bool)), this, SLOT(calcHullUI()));
 
+    //---SCATTER GRAPH---
+    //Checkbox:
+    connect(ui->checkBox_showGraph, SIGNAL(stateChanged(int)),this, SLOT(toggleScatterGraph()));
+    //Graph:
+    QWidget *container = QWidget::createWindowContainer(&scatterGraph,this);
+    ui->horizontalLayout->addWidget(container);
+    scatterGraph.setAspectRatio(1.0);
 
     //=================================
 }
@@ -85,7 +111,7 @@ void MainWindow::actionInfo(){
 void MainWindow::actionAbout(){
     QMessageBox aboutBox;
     aboutBox.about(this,"Mandelbulb_V2 Pre Alpha",
-    "Made with Qt Creator 4.11\n\nLicensed under the GNU General Public License v3.0");
+    "Made with Qt Creator 4.11.0\n\nLicensed under the GNU General Public License v3.0\n\nCopyright 2019, 2020 Sebastian Motzet");
 }
 
 //Output:
@@ -98,6 +124,15 @@ void MainWindow::updateOutput(){
     ui->label_distance->setText(QString::number(distance));
     ui->label_rawPoints->setText(QString::number(std::pow(res,3.0)));
 
+}
+//Scatter graph:
+void MainWindow::toggleScatterGraph(){
+    bool checked = ui->checkBox_showGraph->isChecked();
+    if(checked){
+        scatterGraph.show();
+    }else{
+        scatterGraph.hide();
+    }
 }
 
 //Main functions:
@@ -126,6 +161,9 @@ void MainWindow::calcMBulbUI(){
     mBulb.initPrimary(vDist,vMin,vSize);
     ui->label_setPoints->setText("0");
     ui->label_infoText->setText("Generating Mandelbulb...");
+    //Initialize Scatter series:
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
 
     //Calculation:
           double density = 0;
@@ -181,11 +219,14 @@ void MainWindow::calcMBulbUI(){
                     ui->label_setPoints->setText(QString::number(pointCount));
                     dvec coord = {xpos,ypos,zpos};
                     mBulb.setPState(coord,true);
+                    scatterData << QVector3D(xpos,ypos,zpos);
                 }
 
             }//zpos loop end
             }//ypos loop end
             }//xpos loop end
+          scatterSeries.dataProxy()->addItems(scatterData);
+          scatterGraph.addSeries(&scatterSeries);
           ui->label_infoText->setText("Generated Mandelbulb");
           ui->actionSave_Mandelbulb->setEnabled(true);
           if(autoHull){
@@ -201,6 +242,9 @@ void MainWindow::calcHullUI(){
     //Reset UI:
     ui->label_hullPoints->setText("0");
     ui->label_infoText->setText("Generating Hull...");
+    //Initialize Scatter series:
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
     //Progress:
         double progress = 0.0;
         double progdiv = 100.0 / pow(double(mBulb.xsize - 3), 3.0);
@@ -214,35 +258,35 @@ void MainWindow::calcHullUI(){
             dvec coord(3);
             mBulb.convIndexToCoord(active,coord);
             if(mBulb.getPState(active)){
-                     if(!mBulb.getPState(i-1,j-1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j-1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j-1,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j  ,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j  ,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j  ,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j+1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j+1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i-1,j+1,k+1)){mBulb.setHState(active,true);pC++;}
+                     if(!mBulb.getPState(i-1,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j  ,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i-1,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i  ,j-1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j-1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j-1,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j  ,k-1)){mBulb.setHState(active,true);pC++;}
+                else if(!mBulb.getPState(i  ,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i  ,j  ,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j+1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j+1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i  ,j+1,k+1)){mBulb.setHState(active,true);pC++;}
+                else if(!mBulb.getPState(i  ,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i  ,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i+1,j-1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j-1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j-1,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j  ,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j  ,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j  ,k+1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j+1,k-1)){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j+1,k  )){mBulb.setHState(active,true);pC++;}
-                else if(!mBulb.getPState(i+1,j+1,k+1)){mBulb.setHState(active,true);pC++;}
+                else if(!mBulb.getPState(i+1,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j  ,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getPState(i+1,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
             }
 
 
@@ -254,6 +298,8 @@ void MainWindow::calcHullUI(){
         }
         }
         }
+        scatterSeries.dataProxy()->addItems(scatterData);
+        scatterGraph.addSeries(&scatterSeries);
         ui->pushButton_filterHull->setEnabled(false);
         ui->checkBox_autoHull->setEnabled(true);
         ui->actionSave_Hull->setEnabled(true);

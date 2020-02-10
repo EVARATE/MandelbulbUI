@@ -10,6 +10,18 @@
     <height>540</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>540</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>540</height>
+   </size>
+  </property>
   <property name="palette">
    <palette>
     <active>
@@ -489,6 +501,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Divisions in each axis</string>
+    </property>
     <property name="text">
      <string>Resolution:</string>
     </property>
@@ -521,6 +536,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Reset Resolution</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -538,6 +556,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Maximum amount of iterations calculated for the sequence in each point (Determines quality of the Mandelbulb)</string>
+    </property>
     <property name="text">
      <string>Iterations:</string>
     </property>
@@ -550,6 +571,9 @@
       <width>20</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Reset Iterations</string>
     </property>
     <property name="text">
      <string/>
@@ -587,6 +611,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Lowerst coordinate in each axis</string>
+    </property>
     <property name="text">
      <string>Minimum:</string>
     </property>
@@ -599,6 +626,9 @@
       <width>20</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Reset Minimum</string>
     </property>
     <property name="text">
      <string/>
@@ -636,6 +666,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Highest coordinate in each axis</string>
+    </property>
     <property name="text">
      <string>Maximum:</string>
     </property>
@@ -668,6 +701,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Reset Maximum</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -684,6 +720,9 @@
       <width>101</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Exponent in the sequence (Determines shape of the Mandelbulb)</string>
     </property>
     <property name="text">
      <string>Power</string>
@@ -714,6 +753,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Reset Power</string>
+    </property>
     <property name="text">
      <string/>
     </property>
@@ -730,6 +772,9 @@
       <width>101</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Upper limit for one point to jump within one iteration step</string>
     </property>
     <property name="text">
      <string>Max. Length:</string>
@@ -759,6 +804,9 @@
       <width>20</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Reset Max. Length</string>
     </property>
     <property name="text">
      <string/>
@@ -810,6 +858,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Raw amount of point to be calculated</string>
+    </property>
     <property name="text">
      <string>Raw points:</string>
     </property>
@@ -835,6 +886,9 @@
       <width>101</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Points for which the sequence doesn't diverge</string>
     </property>
     <property name="text">
      <string>In the set:</string>
@@ -862,6 +916,9 @@
       <height>20</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Points left in the hull</string>
+    </property>
     <property name="text">
      <string>In the Hull:</string>
     </property>
@@ -888,6 +945,9 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Generate Mandelbulb with the above settings</string>
+    </property>
     <property name="text">
      <string>Generate</string>
     </property>
@@ -901,6 +961,9 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Remove all points except those that lie on the hull</string>
+    </property>
     <property name="text">
      <string>Filter Hull</string>
     </property>
@@ -913,6 +976,9 @@
       <width>92</width>
       <height>25</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Automatically filter hull after the generation has finished</string>
     </property>
     <property name="text">
      <string>Auto</string>
@@ -968,18 +1034,7 @@
       <height>461</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout">
-     <item>
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>To be implemented</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-    </layout>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
    </widget>
    <widget class="QCheckBox" name="checkBox_showGraph">
     <property name="geometry">
@@ -990,8 +1045,14 @@
       <height>25</height>
      </rect>
     </property>
+    <property name="toolTip">
+     <string>Display 3d graph of the calculated points. WARNING: Significant performance loss for resolutions above 100</string>
+    </property>
     <property name="text">
      <string>Show Scatter Graph</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
@@ -1002,6 +1063,9 @@
       <width>101</width>
       <height>20</height>
      </rect>
+    </property>
+    <property name="toolTip">
+     <string>Distance between two neighbouring points</string>
     </property>
     <property name="text">
      <string>Distance:</string>

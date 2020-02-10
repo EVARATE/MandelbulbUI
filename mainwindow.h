@@ -1,9 +1,29 @@
+/*
+Copyright 2019, 2020 Sebastian Motzet
+
+This file is part of MandelbulbUI_V2.
+
+MandelbulbUI_V2 is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+MandelbulbUI_V2 is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with MandelbulbUI_V2.  If not, see <https://www.gnu.org/licenses/>.
+*/
+
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <Q3DScatter>
 #include "pointcloudbool.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,11 +38,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    //pointCloudBool objects:
-    pointCloudBool mBulb;
-
 private:
     Ui::MainWindow *ui;
+    //pointCloudBool objects:
+    pointCloudBool mBulb;
+    //Scatter graph:
+    QtDataVisualization::QScatter3DSeries scatterSeries;
+    QtDataVisualization::Q3DScatter scatterGraph;
 private slots:
     //Saving:
     void actionSaveMBulb();
@@ -34,11 +56,15 @@ private slots:
     void actionInfo();
     void actionAbout();
 
-    //small signals:
-    void updateOutput();
-
     //Output:
+    void updateOutput();
+    //Scatter graph:
+    void toggleScatterGraph();
+
+    //Main functions:
     void calcMBulbUI();
     void calcHullUI();
+
+
 };
 #endif // MAINWINDOW_H
