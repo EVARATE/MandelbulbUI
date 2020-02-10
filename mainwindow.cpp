@@ -85,7 +85,7 @@ void MainWindow::actionInfo(){
 void MainWindow::actionAbout(){
     QMessageBox aboutBox;
     aboutBox.about(this,"Mandelbulb_V2 Pre Alpha",
-    "Made with Qt");
+    "Made with Qt Creator 4.11\n\nLicensed under the GNU General Public License v3.0");
 }
 
 //Output:
