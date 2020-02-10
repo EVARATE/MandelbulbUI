@@ -17,10 +17,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    pointcloudbool.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    pointcloudbool.h
 
 FORMS += \
     mainwindow.ui
