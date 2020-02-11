@@ -62,6 +62,7 @@ MainWindow::MainWindow(QWidget *parent)
     //---GENERATE/HULL BUTTONS---
     connect(ui->pushButton_generate, SIGNAL(clicked(bool)), this, SLOT(calcMBulbUI()));
     connect(ui->pushButton_filterHull, SIGNAL(clicked(bool)), this, SLOT(calcHullUI()));
+    connect(ui->actionExport_Mesh_obj, SIGNAL(triggered(bool)), this, SLOT(saveCubeModel()));
 
     //---SCATTER GRAPH---
     //Checkbox:
@@ -303,5 +304,18 @@ void MainWindow::calcHullUI(){
         ui->pushButton_filterHull->setEnabled(false);
         ui->checkBox_autoHull->setEnabled(true);
         ui->actionSave_Hull->setEnabled(true);
+        ui->actionExport_Mesh_obj->setEnabled(true);
         ui->label_infoText->setText("Generated Hull");
+}
+
+void MainWindow::saveCubeModel(){
+    QFileDialog saveDialog;
+    saveDialog.setDefaultSuffix("obj");
+    QString fileName = saveDialog.getSaveFileName();
+    ui->label_infoText->setText("Building CubeModel...");
+    cubeMat cubeModel(mBulb);
+    cubeModel.remAllOverlapping();
+    ui->label_infoText->setText("Saving CubeModel...");
+    cubeModel.saveObj(fileName.toStdString());
+    ui->label_infoText->setText("Saved CubeModel");
 }

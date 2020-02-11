@@ -25,6 +25,7 @@ along with MandelbulbUI_V2.  If not, see <https://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <Q3DScatter>
 #include "pointcloudbool.h"
+#include "cubemat.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -49,6 +50,7 @@ private slots:
     //Saving:
     void actionSaveMBulb();
     void actionSaveHull();
+    void saveCubeModel();
     //Loading:
     void actionLoadMBulb();
     void actionLoadHull();

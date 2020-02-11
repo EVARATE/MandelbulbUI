@@ -953,6 +953,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_filterHull">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -1105,6 +1108,8 @@
     <addaction name="actionLoad_Hull"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport_Mesh_obj"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -1155,6 +1160,14 @@
   <action name="actionInfo">
    <property name="text">
     <string>Info</string>
+   </property>
+  </action>
+  <action name="actionExport_Mesh_obj">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Export Mesh (.obj)</string>
    </property>
   </action>
  </widget>

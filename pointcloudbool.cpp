@@ -422,3 +422,5 @@ void pointCloudBool::convCoordToIndex(dvec &coord, ivec &index){
     index[1] = (coord[1] - ymin) / ydistance;
     index[2] = (coord[2] - zmin) / zdistance;
 }
+
+//---MESH GENERATION---

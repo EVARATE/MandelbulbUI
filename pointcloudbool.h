@@ -28,33 +28,12 @@ along with MandelbulbUI_V2.  If not, see <https://www.gnu.org/licenses/>.
 #include <string>
 #include <cmath>
 
-//not using namespace std
 
 //Typedefs:
 typedef std::vector<std::vector<bool>> bmat2d;
 typedef std::vector<bmat2d> bmat;
 typedef std::vector<int> ivec;
 typedef std::vector<double> dvec;
-
-/* CHANGES:
- *
- * TODO:
- * Make pointCloudBool more accessible:
- * -More constructer variations (overloading)
- * -Work without 0-border
- * -Don't use 'using namespace std;'
- * -Don't use cout
- *
- * Add exception handling (I'll do it tomorrow for sure)
- *
- * Add Functions:
- * -getPrimLayer(...);
- * -getHullLayer(...);
- * -calcMandelBulb();
- *
- * The whole chain detection algorithm
- */
-
 
 //Classes:
 class pointCloudBool{
