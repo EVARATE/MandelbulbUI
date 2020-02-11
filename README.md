@@ -1,10 +1,10 @@
 # Mandelbulb_V2
 
-This application will generate a set of coordinates which are in the Mandelbulb set based on user input.
+This application will generate a set of coordinates which are in the Mandelbulb set based on user input. Alternatively it could crash your computer.
 
 ## Installation
 
-Just download the Appimage and run it. There are also source files available. You can find both in the [releases](https://github.com/EVARATE/MandelbulbUI_V2/releases) section.
+Download the Appimage, in the terminal give it execute permission via `chmod +x` and run it. There are also source files available. You can find both in the [releases](https://github.com/EVARATE/MandelbulbUI_V2/releases) section.
 
 ## Built With
 
