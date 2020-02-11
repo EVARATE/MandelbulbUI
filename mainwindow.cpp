@@ -71,6 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     QWidget *container = QWidget::createWindowContainer(&scatterGraph,this);
     ui->horizontalLayout->addWidget(container);
     scatterGraph.setAspectRatio(1.0);
+    scatterGraph.setHorizontalAspectRatio(1.0);
 
     //=================================
 }
