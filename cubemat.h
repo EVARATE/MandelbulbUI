@@ -48,6 +48,7 @@ public:
     void remOverlapping(cube& cubeA, cube& cubeB);
     void remAllOverlapping();
     void saveObj(std::string fileName);
+    void faceToBuffer(face& inFace, std::string& faceBuffer, std::string& polyBuffer, int& counter);
 
     bool isEmpty(cube& checkCube);
 
@@ -57,15 +58,6 @@ private:
 
     bool isInit = false;
 
-    const face emptyFace = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
-    const cube emptyCube = {
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}},
-        {{0,0,0},{0,0,0},{0,0,0},{0,0,0}}
-    };
 };
 
 #endif // CUBEMAT_H
