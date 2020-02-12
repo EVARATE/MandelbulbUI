@@ -99,10 +99,18 @@ void MainWindow::actionSaveHull(){
 }
 //Loading:
 void MainWindow::actionLoadMBulb(){
-
+    QFileDialog loadDialog;
+    loadDialog.setDefaultSuffix("bin");
+    QString fileName = loadDialog.getOpenFileName();
+    mBulb.loadPrimary(fileName.toStdString());
+    ui->label_infoText->setText(QString::fromStdString("Loaded " + fileName.toStdString() ));
 }
 void MainWindow::actionLoadHull(){
-
+    QFileDialog loadDialog;
+    loadDialog.setDefaultSuffix("bin");
+    QString fileName = loadDialog.getOpenFileName();
+    mBulb.loadHull(fileName.toStdString());
+    ui->label_infoText->setText(QString::fromStdString("Loaded " + fileName.toStdString() ));
 }
 //Info/About Dialog:
 void MainWindow::actionInfo(){
