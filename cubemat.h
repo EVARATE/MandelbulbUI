@@ -52,11 +52,12 @@ public:
 
     bool isEmpty(cube& checkCube);
 
-private:
-    pointCloudBool bCloud;
     cubeMat3d cubeSlots;  //Map of all cubes
 
     bool isInit = false;
+
+    pointCloudBool bCloud;
+
 
 };
 

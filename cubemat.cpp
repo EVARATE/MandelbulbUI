@@ -17,7 +17,7 @@ void cubeMat::placeCubes(){
     for(int j = 0; j < cubeSlots[i].size(); ++j){
     for(int k = 0; k < cubeSlots[i][j].size(); ++k){
         ivec index = {i,j,k};
-        if(bCloud.getPState(index)){
+        if(bCloud.getHState(index)){
             cube localCube;
             genLocalCube(index,localCube);
             placeCubeAt(index, localCube);
@@ -62,10 +62,10 @@ void cubeMat::remOverlapping(cube &cubeA, cube &cubeB){
     //If cubes are next to eachother, these index pairs of their faces can overlap:
     //LR:02 ; FB:13 ; UD:45 (in either order)
     face emptyFace = {{0,0,0},{0,0,0},{0,0,0},{0,0,0}};
+
     if(cubeA[0] == cubeB[2]){
         cubeA[0] = emptyFace;
         cubeB[2] = emptyFace;
-
     }
     if(cubeA[1] == cubeB[3]){
         cubeA[1] = emptyFace;
@@ -87,6 +87,14 @@ void cubeMat::remOverlapping(cube &cubeA, cube &cubeB){
     if(cubeA[5] == cubeB[4]){
         cubeA[5] = emptyFace;
         cubeB[4] = emptyFace;
+    }
+    for(int i = 0; i < cubeA.size(); ++i){
+        for(int j = 0; j < cubeB.size(); ++j){
+            if(cubeA[i] == cubeB[j]){
+                cubeA[i] = emptyFace;
+                cubeB[j] = emptyFace;
+            }
+        }
     }
 
 }

@@ -313,10 +313,60 @@ void MainWindow::saveCubeModel(){
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("obj");
     QString fileName = saveDialog.getSaveFileName();
-    ui->label_infoText->setText("Building CubeModel...");
+    ui->label_infoText->setText("Building cubemodel...");
     cubeMat cubeModel(mBulb);
-    cubeModel.remAllOverlapping();
-    ui->label_infoText->setText("Saving CubeModel...");
-    cubeModel.saveObj(fileName.toStdString());
-    ui->label_infoText->setText("Saved CubeModel");
+    //Remove overlapping:
+    double progress = 0;
+    double progdiv = 100.0 / std::pow(cubeModel.cubeSlots.size() - 3, 3.0);
+    if(!cubeModel.isInit){return;}
+    for(int i = 0; i < cubeModel.cubeSlots.size(); ++i){
+    for(int j = 0; j < cubeModel.cubeSlots[i].size(); ++j){
+    for(int k = 0; k < cubeModel.cubeSlots[i][j].size(); ++k){
+        cube active = cubeModel.cubeSlots[i][j][k];
+        if(!cubeModel.isEmpty(active)){
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i-1][j][k],active);//Left
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i+1][j][k],active);//Right
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j-1][k],active);//Back
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j+1][k],active);//Front
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j][k-1],active);//Down
+            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j][k+1],active);//Up
+        }
+        progress += progdiv;
+        ui->progressBar->setValue(progress);
+    }
+    }
+    }
+
+    ui->label_infoText->setText("Saving cubemodel...");
+    //cubeModel.saveObj(fileName.toStdString());
+    std::ofstream ofile;
+    ofile.open(fileName.toStdString());
+    if(!ofile.is_open()){return;}
+    std::string polyBuffer;
+    std::string faceBuffer;
+    int vCounter = 0;
+    progress = 0;
+    ofile << "#DANGER: File generated via MandelbulbUI_V2:\n";
+    ofile << "o Mandelbulb\n";
+    for(int i = 0; i < cubeModel.cubeSlots.size(); ++i){
+    for(int j = 0; j < cubeModel.cubeSlots[i].size(); ++j){
+    for(int k = 0; k < cubeModel.cubeSlots[i][j].size(); ++k){
+        if(!cubeModel.isEmpty(cubeModel.cubeSlots[i][j][k])){
+            ivec index = {i,j,k};
+            dvec coord(3);
+            cubeModel.bCloud.convIndexToCoord(index,coord);
+            cube active = cubeModel.cubeSlots[i][j][k];
+            for(int n = 0; n < active.size(); ++n){
+                cubeModel.faceToBuffer(active[n], faceBuffer, polyBuffer, vCounter);
+            }
+        }
+        progress += progdiv;
+        ui->progressBar->setValue(progress);
+    }
+    }
+    }
+    ofile << faceBuffer;
+    ofile << polyBuffer;
+    ofile.close();
+    ui->label_infoText->setText("Saved cubemodel");
 }
