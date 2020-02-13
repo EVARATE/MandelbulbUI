@@ -1,4 +1,4 @@
-# Mandelbulb
+# MandelbulbUI
 
 This application will generate a set of coordinates which are in the Mandelbulb set based on user input. Alternatively it could crash your computer.
 
