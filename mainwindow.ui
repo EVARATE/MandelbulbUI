@@ -1156,8 +1156,11 @@
    </property>
   </action>
   <action name="actionLoad_Mandelbulb">
-   <property name="enabled">
+   <property name="checkable">
     <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Load Mandelbulb</string>
@@ -1170,8 +1173,11 @@
    </property>
   </action>
   <action name="actionLoad_Hull">
-   <property name="enabled">
+   <property name="checkable">
     <bool>false</bool>
+   </property>
+   <property name="enabled">
+    <bool>true</bool>
    </property>
    <property name="text">
     <string>Load Hull</string>

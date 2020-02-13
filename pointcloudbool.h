@@ -101,4 +101,8 @@ private:
     bmat hullCloud;
 };
 
+
+
 #endif // POINTCLOUDBOOL_H
+
+

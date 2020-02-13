@@ -62,6 +62,8 @@ private slots:
     void updateOutput();
     //Scatter graph:
     void toggleScatterGraph();
+    void MBulbToGraph();
+    void HullToGraph();
 
     //Main functions:
     void calcMBulbUI();

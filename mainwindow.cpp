@@ -81,36 +81,128 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//---OTHER FUNCTIONS---
+std::string getFileExt(std::string& filePath, std::string defaultExtension){
+    std::string revExt;
+    bool noDot = false;
+    for(int i = filePath.size() -1; i >= 0; --i){
+        if(filePath[i] == '.'){
+            break;
+        }
+        else if( filePath[i] == '/' ){
+            noDot = true;
+            break;
+        }
+        else{
+            revExt.push_back(filePath[i]);
+        }
+        if(i == 0){
+            noDot = true;
+        }
+    }
+    if(!noDot){
+        std::string ext;
+        for(int i = revExt.size() - 1; i >= 0; --i){
+            ext.push_back(revExt[i]);
+        }
+        return ext;
+    }else{
+        filePath.append('.' + defaultExtension);
+        return defaultExtension;
+    }
+}
+
+std::string getFileExt(std::string& filePath){
+    std::string revExt;
+    bool noDot = false;
+    for(int i = filePath.size() -1; i >= 0; --i){
+        if(filePath[i] == '.'){
+            break;
+        }
+        else if( filePath[i] == '/' ){
+            noDot = true;
+            break;
+        }
+        else{
+            revExt.push_back(filePath[i]);
+        }
+        if(i == 0){
+            noDot = true;
+        }
+    }
+    if(!noDot){
+        std::string ext;
+        for(int i = revExt.size() - 1; i >= 0; --i){
+            ext.push_back(revExt[i]);
+        }
+        return ext;
+    }else{
+        return " ";
+    }
+}
+
 //---IMPLEMENTATION---
 //Saving:
 void MainWindow::actionSaveMBulb(){
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("txt");
     QString fileName = saveDialog.getSaveFileName();
-    mBulb.savePrimCoords(fileName.toStdString());
-    ui->label_infoText->setText(QString::fromStdString("Saved to " + fileName.toStdString() ));
+    std::string filePath = fileName.toStdString();
+    std::string extension = getFileExt(filePath, "txt");
+    if(extension == "txt"){
+        mBulb.savePrimCoords(filePath);
+    }
+    else if(extension == "bin"){
+        mBulb.savePrimary(filePath);
+    }
+    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
 }
 void MainWindow::actionSaveHull(){
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("txt");
     QString fileName = saveDialog.getSaveFileName();
-    mBulb.saveHullCoords(fileName.toStdString());
-    ui->label_infoText->setText(QString::fromStdString("Saved to " + fileName.toStdString() ));
+    std::string filePath = fileName.toStdString();
+    std::string extension = getFileExt(filePath, "txt");
+    if(extension == "txt"){
+        mBulb.saveHullCoords(filePath);
+    }
+    else if(extension == "bin"){
+        mBulb.saveHull(filePath);
+    }
+    ui->label_infoText->setText(QString::fromStdString("Saved hull to " + filePath ));
 }
 //Loading:
 void MainWindow::actionLoadMBulb(){
     QFileDialog loadDialog;
     loadDialog.setDefaultSuffix("bin");
     QString fileName = loadDialog.getOpenFileName();
-    mBulb.loadPrimary(fileName.toStdString());
-    ui->label_infoText->setText(QString::fromStdString("Loaded " + fileName.toStdString() ));
+    std::string filePath = fileName.toStdString();
+    std::string extension = getFileExt(filePath);
+    if(extension == "bin"){
+        mBulb.loadPrimary(filePath);
+        MBulbToGraph();
+        ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
+    }
+    else{
+        ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
+    }
+
 }
 void MainWindow::actionLoadHull(){
     QFileDialog loadDialog;
     loadDialog.setDefaultSuffix("bin");
     QString fileName = loadDialog.getOpenFileName();
-    mBulb.loadHull(fileName.toStdString());
-    ui->label_infoText->setText(QString::fromStdString("Loaded " + fileName.toStdString() ));
+    std::string filePath = fileName.toStdString();
+    std::string extension = getFileExt(filePath);
+    if(extension == "bin"){
+        mBulb.loadHull(filePath);
+        ui->pushButton_filterHull->setEnabled(false);
+        HullToGraph();
+        ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
+    }
+    else{
+        ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
+    }
 }
 //Info/About Dialog:
 void MainWindow::actionInfo(){
@@ -144,6 +236,44 @@ void MainWindow::toggleScatterGraph(){
         scatterGraph.hide();
     }
 }
+void MainWindow::MBulbToGraph(){
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
+    for(int i = 0; i < mBulb.xsize; ++i){
+    for(int j = 0; j < mBulb.ysize; ++j){
+    for(int k = 0; k < mBulb.zsize; ++k){
+        ivec index = {i,j,k};
+        if(mBulb.getPState(index)){
+            dvec coords(3);
+            mBulb.convIndexToCoord(index,coords);
+            scatterData << QVector3D(coords[0], coords[1], coords[2]);
+        }
+    }
+    }
+    }
+    scatterSeries.dataProxy()->addItems(scatterData);
+    scatterGraph.addSeries(&scatterSeries);
+    ui->pushButton_filterHull->setEnabled(true);
+}
+void MainWindow::HullToGraph(){
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
+    for(int i = 0; i < mBulb.xsize; ++i){
+    for(int j = 0; j < mBulb.ysize; ++j){
+    for(int k = 0; k < mBulb.zsize; ++k){
+        ivec index = {i,j,k};
+        if(mBulb.getHState(index)){
+            dvec coords(3);
+            mBulb.convIndexToCoord(index,coords);
+            scatterData << QVector3D(coords[0], coords[1], coords[2]);
+        }
+    }
+    }
+    }
+    scatterSeries.dataProxy()->addItems(scatterData);
+    scatterGraph.addSeries(&scatterSeries);
+}
+
 
 //Main functions:
 void MainWindow::calcMBulbUI(){
@@ -378,3 +508,4 @@ void MainWindow::saveCubeModel(){
     ofile.close();
     ui->label_infoText->setText("Saved cubemodel");
 }
+

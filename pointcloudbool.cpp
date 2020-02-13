@@ -260,10 +260,10 @@ void pointCloudBool::saveHull(std::string filename){
     ofile.open(filename);
     if(!ofile.is_open()){return;}
 
-    ofile << xdistance << ydistance << zdistance;
-    ofile << xmin << ymin << zmin;
-    ofile << xmax << ymax << zmax;
-    ofile << xsize << ysize << zsize;
+    ofile << xdistance << " " << ydistance << " " << zdistance << "\n";
+    ofile << xmin << " " << ymin << " " << zmin << "\n";
+    ofile << xmax << " " << ymax << " " << zmax << "\n";
+    ofile << xsize << " " << ysize << " " << zsize << "\n";
 
     for(int i = 0; i < xsize; ++i){
         for(int j = 0; j < ysize; ++j){
@@ -423,4 +423,3 @@ void pointCloudBool::convCoordToIndex(dvec &coord, ivec &index){
     index[2] = (coord[2] - zmin) / zdistance;
 }
 
-//---MESH GENERATION---
