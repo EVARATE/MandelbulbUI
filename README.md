@@ -1,14 +1,10 @@
-# Mandelbulb_V2
+# Mandelbulb
 
 This application will generate a set of coordinates which are in the Mandelbulb set based on user input. Alternatively it could crash your computer.
 
 ## Installation
 
 Download the Appimage, in the terminal give it execute permission via `chmod +x` and run it. There are also source files available. You can find both in the [releases](https://github.com/EVARATE/MandelbulbUI_V2/releases) section.
-
-## Built With
-
-* [Qt Open Source](https://www.qt.io/)
 
 ## User guide
 * Execute the Appimage
@@ -17,6 +13,10 @@ Download the Appimage, in the terminal give it execute permission via `chmod +x`
 * Press the *Filter Hull*-button
 
 [¹] *I recommend to disable the scatter graph for resolutions above 100*
+
+## Built With
+
+* [Qt Open Source](https://www.qt.io/)
 
 ## License
 
