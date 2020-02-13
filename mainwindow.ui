@@ -465,11 +465,7 @@
    </palette>
   </property>
   <property name="windowTitle">
-   <string>MandelbulbUI_V2</string>
-  </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>../icons/MandelbulbUI_V2.png</normaloff>../icons/MandelbulbUI_V2.png</iconset>
+   <string>MandelbulbUI</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_Input">
@@ -542,10 +538,6 @@
     <property name="text">
      <string/>
     </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
-    </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -577,10 +569,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_iter">
@@ -632,10 +620,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="doubleSpinBox_min">
@@ -707,10 +691,6 @@
     <property name="text">
      <string/>
     </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
-    </property>
    </widget>
    <widget class="QLabel" name="label_5">
     <property name="geometry">
@@ -759,10 +739,6 @@
     <property name="text">
      <string/>
     </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
-    </property>
    </widget>
    <widget class="QLabel" name="label_6">
     <property name="geometry">
@@ -810,10 +786,6 @@
     </property>
     <property name="text">
      <string/>
-    </property>
-    <property name="icon">
-     <iconset>
-      <normaloff>../icons/Reset_icon.png</normaloff>../icons/Reset_icon.png</iconset>
     </property>
    </widget>
    <widget class="Line" name="line">
