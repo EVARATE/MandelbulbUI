@@ -73,6 +73,8 @@ MainWindow::MainWindow(QWidget *parent)
     scatterGraph.setAspectRatio(1.0);
     scatterGraph.setHorizontalAspectRatio(1.0);
 
+    //Experimental:
+    connect(ui->pushButton_cubeMarch, SIGNAL(clicked(bool)), this, SLOT(doCubeMarch()));
     //=================================
 }
 
@@ -509,3 +511,30 @@ void MainWindow::saveCubeModel(){
     ui->label_infoText->setText("Saved cubemodel");
 }
 
+//Experimental:
+void MainWindow::doCubeMarch(){
+    MarchingCube march(mBulb);
+    march.cubeMarch();
+
+    //Quick write to .obj:
+    std::ofstream ofile;
+    ofile.open("/tmp/cubeMarchMBulb.obj");
+    if(!ofile.is_open()){return;}
+    std::string polyBuffer;
+    unsigned int vCounter = 0;
+    ofile << "#Experimental cubemarching mesh:\n";
+    ofile << "o cubeMarch\n";
+    for(int i = 0; i < march.triBuffer.size(); ++i){
+        for(int j = 0; j < march.triCountBuffer[i]; ++j){
+            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[0][1] << " " << march.triBuffer[j].p[0][2] << "\n";
+            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[1][1] << " " << march.triBuffer[j].p[1][2] << "\n";
+            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[2][1] << " " << march.triBuffer[j].p[2][2] << "\n";
+            vCounter++; polyBuffer.append("f " + std::to_string(vCounter));
+            vCounter++; polyBuffer.append(" " + std::to_string(vCounter));
+            vCounter++; polyBuffer.append(" " + std::to_string(vCounter) + "\n");
+        }
+    }
+    ofile << "#triangles:\n";
+    ofile << polyBuffer;
+    ofile.close();
+}

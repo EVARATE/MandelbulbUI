@@ -19,11 +19,13 @@ SOURCES += \
 	cubemat.cpp \
 	main.cpp \
 	mainwindow.cpp \
+	marchingcube.cpp \
 	pointcloudbool.cpp
 
 HEADERS += \
 	cubemat.h \
 	mainwindow.h \
+	marchingcube.h \
 	pointcloudbool.h
 
 FORMS += \

@@ -26,6 +26,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <Q3DScatter>
 #include "pointcloudbool.h"
 #include "cubemat.h"
+#include "marchingcube.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -69,6 +70,8 @@ private slots:
     void calcMBulbUI();
     void calcHullUI();
 
+    //Experimental:
+    void doCubeMarch();
 
 };
 #endif // MAINWINDOW_H
