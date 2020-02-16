@@ -1088,7 +1088,6 @@
     <addaction name="actionLoad_Mandelbulb"/>
     <addaction name="actionLoad_Hull"/>
     <addaction name="separator"/>
-    <addaction name="actionExport_Mesh_obj"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
