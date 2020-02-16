@@ -24,9 +24,8 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QMessageBox>
 #include <QFileDialog>
 #include <Q3DScatter>
-#include "pointcloudbool.h"
-#include "cubemat.h"
-#include "marchingcube.h"
+#include "boolcloud.h"
+//#include "cubemat.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,8 +41,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    //pointCloudBool objects:
-    pointCloudBool mBulb;
+    //boolCloud:
+    boolCloud mBulb;
+    boolCloud hull;
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;

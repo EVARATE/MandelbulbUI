@@ -19,6 +19,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "utilityFunctions.cpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -74,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent)
     scatterGraph.setHorizontalAspectRatio(1.0);
 
     //Experimental:
-    connect(ui->pushButton_cubeMarch, SIGNAL(clicked(bool)), this, SLOT(doCubeMarch()));
+
     //=================================
 }
 
@@ -84,64 +85,8 @@ MainWindow::~MainWindow()
 }
 
 //---OTHER FUNCTIONS---
-std::string getFileExt(std::string& filePath, std::string defaultExtension){
-    std::string revExt;
-    bool noDot = false;
-    for(int i = filePath.size() -1; i >= 0; --i){
-        if(filePath[i] == '.'){
-            break;
-        }
-        else if( filePath[i] == '/' ){
-            noDot = true;
-            break;
-        }
-        else{
-            revExt.push_back(filePath[i]);
-        }
-        if(i == 0){
-            noDot = true;
-        }
-    }
-    if(!noDot){
-        std::string ext;
-        for(int i = revExt.size() - 1; i >= 0; --i){
-            ext.push_back(revExt[i]);
-        }
-        return ext;
-    }else{
-        filePath.append('.' + defaultExtension);
-        return defaultExtension;
-    }
-}
 
-std::string getFileExt(std::string& filePath){
-    std::string revExt;
-    bool noDot = false;
-    for(int i = filePath.size() -1; i >= 0; --i){
-        if(filePath[i] == '.'){
-            break;
-        }
-        else if( filePath[i] == '/' ){
-            noDot = true;
-            break;
-        }
-        else{
-            revExt.push_back(filePath[i]);
-        }
-        if(i == 0){
-            noDot = true;
-        }
-    }
-    if(!noDot){
-        std::string ext;
-        for(int i = revExt.size() - 1; i >= 0; --i){
-            ext.push_back(revExt[i]);
-        }
-        return ext;
-    }else{
-        return " ";
-    }
-}
+
 
 //---IMPLEMENTATION---
 //Saving:
@@ -152,10 +97,10 @@ void MainWindow::actionSaveMBulb(){
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath, "txt");
     if(extension == "txt"){
-        mBulb.savePrimCoords(filePath);
+        mBulb.saveCoords(filePath);
     }
     else if(extension == "bin"){
-        mBulb.savePrimary(filePath);
+        mBulb.saveInternal(filePath);
     }
     ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
 }
@@ -166,10 +111,10 @@ void MainWindow::actionSaveHull(){
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath, "txt");
     if(extension == "txt"){
-        mBulb.saveHullCoords(filePath);
+        hull.saveCoords(filePath);
     }
     else if(extension == "bin"){
-        mBulb.saveHull(filePath);
+        hull.saveInternal(filePath);
     }
     ui->label_infoText->setText(QString::fromStdString("Saved hull to " + filePath ));
 }
@@ -181,7 +126,7 @@ void MainWindow::actionLoadMBulb(){
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath);
     if(extension == "bin"){
-        mBulb.loadPrimary(filePath);
+        mBulb.loadInternal(filePath);
         MBulbToGraph();
         ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
     }
@@ -197,7 +142,7 @@ void MainWindow::actionLoadHull(){
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath);
     if(extension == "bin"){
-        mBulb.loadHull(filePath);
+        hull.loadInternal(filePath);
         ui->pushButton_filterHull->setEnabled(false);
         HullToGraph();
         ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
@@ -245,7 +190,7 @@ void MainWindow::MBulbToGraph(){
     for(int j = 0; j < mBulb.ysize; ++j){
     for(int k = 0; k < mBulb.zsize; ++k){
         ivec index = {i,j,k};
-        if(mBulb.getPState(index)){
+        if(mBulb.getState(index)){
             dvec coords(3);
             mBulb.convIndexToCoord(index,coords);
             scatterData << QVector3D(coords[0], coords[1], coords[2]);
@@ -264,7 +209,7 @@ void MainWindow::HullToGraph(){
     for(int j = 0; j < mBulb.ysize; ++j){
     for(int k = 0; k < mBulb.zsize; ++k){
         ivec index = {i,j,k};
-        if(mBulb.getHState(index)){
+        if(hull.getState(index)){
             dvec coords(3);
             mBulb.convIndexToCoord(index,coords);
             scatterData << QVector3D(coords[0], coords[1], coords[2]);
@@ -299,8 +244,8 @@ void MainWindow::calcMBulbUI(){
     dvec vMin(3,min);
     ivec vSize(3,res);
     //Reset primCloud:
-    mBulb.deletePrimary();
-    mBulb.initPrimary(vDist,vMin,vSize);
+    mBulb.remove();
+    mBulb.init(vDist,vMin,vSize);
     ui->label_setPoints->setText("0");
     ui->label_infoText->setText("Generating Mandelbulb...");
     //Initialize Scatter series:
@@ -360,7 +305,7 @@ void MainWindow::calcMBulbUI(){
                     pointCount++;
                     ui->label_setPoints->setText(QString::number(pointCount));
                     dvec coord = {xpos,ypos,zpos};
-                    mBulb.setPState(coord,true);
+                    mBulb.setState(coord,true);
                     scatterData << QVector3D(xpos,ypos,zpos);
                 }
 
@@ -378,9 +323,17 @@ void MainWindow::calcMBulbUI(){
           }
 }
 void MainWindow::calcHullUI(){
+    //Get input values:
+    int res = ui->spinBox_res->value();
+    double min = ui->doubleSpinBox_min->value();
+    double max = ui->doubleSpinBox_max->value();
+    double distance = std::abs(max - min) / res;
+    dvec vDist(3,distance);
+    dvec vMin(3,min);
+    ivec vSize(3,res);
     //Reset Hull cloud:
-    mBulb.deleteHull();
-    mBulb.initHull();
+    hull.remove();
+    hull.init(vDist, vMin, vSize);
     //Reset UI:
     ui->label_hullPoints->setText("0");
     ui->label_infoText->setText("Generating Hull...");
@@ -399,36 +352,36 @@ void MainWindow::calcHullUI(){
             ivec active = {i,j,k};
             dvec coord(3);
             mBulb.convIndexToCoord(active,coord);
-            if(mBulb.getPState(active)){
-                     if(!mBulb.getPState(i-1,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j  ,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i-1,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+            if(mBulb.getState(active)){
+                     if(!mBulb.getState(i-1,j-1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j-1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j-1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j  ,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j  ,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j  ,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j+1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j+1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i-1,j+1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i  ,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j-1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j-1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j-1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j  ,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i  ,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i  ,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j  ,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j+1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j+1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i  ,j+1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
 
-                else if(!mBulb.getPState(i+1,j-1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j-1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j-1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j  ,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j  ,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j  ,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j+1,k-1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j+1,k  )){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
-                else if(!mBulb.getPState(i+1,j+1,k+1)){mBulb.setHState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j-1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j-1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j-1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j  ,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j  ,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j  ,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j+1,k-1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j+1,k  )){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
+                else if(!mBulb.getState(i+1,j+1,k+1)){hull.setState(active,true);pC++;scatterData << QVector3D(coord[0],coord[1],coord[2]);}
             }
 
 
@@ -450,6 +403,7 @@ void MainWindow::calcHullUI(){
 }
 
 void MainWindow::saveCubeModel(){
+    /*
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("obj");
     QString fileName = saveDialog.getSaveFileName();
@@ -509,10 +463,12 @@ void MainWindow::saveCubeModel(){
     ofile << polyBuffer;
     ofile.close();
     ui->label_infoText->setText("Saved cubemodel");
+    */
 }
 
 //Experimental:
 void MainWindow::doCubeMarch(){
+    /*
     MarchingCube march(mBulb);
     march.cubeMarch();
 
@@ -537,4 +493,5 @@ void MainWindow::doCubeMarch(){
     ofile << "#triangles:\n";
     ofile << polyBuffer;
     ofile.close();
+    */
 }

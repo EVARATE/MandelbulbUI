@@ -17,10 +17,11 @@ You should have received a copy of the GNU General Public License
 along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
 #ifndef CUBEMAT_H
 #define CUBEMAT_H
 
-#include <pointcloudbool.h>
+//#include <pointcloudbool.h>
 
 //To avoid undefined behaviour when accessing a 'deleted' face
 //it will not actually be deleted. Instead the vertices of the face
@@ -62,3 +63,4 @@ public:
 };
 
 #endif // CUBEMAT_H
+*/

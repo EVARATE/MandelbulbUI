@@ -17,6 +17,7 @@ You should have received a copy of the GNU General Public License
 along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
 #include "cubemat.h"
 
 void cubeMat::initCubeMat(){
@@ -191,3 +192,4 @@ bool cubeMat::isEmpty(cube& checkCube){
     if(checkCube == emptyCube){return true;}
     else{return false;}
 }
+*/
