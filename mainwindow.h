@@ -25,7 +25,6 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <Q3DScatter>
 #include "boolcloud.h"
-//#include "cubemat.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

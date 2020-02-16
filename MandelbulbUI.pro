@@ -17,14 +17,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
 	boolcloud.cpp \
-	cubemat.cpp \
 	main.cpp \
 	mainwindow.cpp \
+	mainwindowfunctions.cpp \
 	utilityFunctions.cpp
 
 HEADERS += \
 	boolcloud.h \
-	cubemat.h \
 	mainwindow.h
 
 FORMS += \
