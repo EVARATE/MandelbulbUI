@@ -24,4 +24,6 @@ This project is licensed under the GNU General Public License v3.0 - see the [LI
 
 ## Acknowledgments
 
+* [Paul Bourke](http://paulbourke.net/geometry/): The (upcomming) marching cube feature is based on [his code](http://paulbourke.net/geometry/polygonise/)
+
 * Thanks to my physics professors for giving me something to run away from. I couldn't have made this without them.
