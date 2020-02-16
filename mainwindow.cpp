@@ -61,7 +61,6 @@ MainWindow::MainWindow(QWidget *parent)
     //---GENERATE/HULL BUTTONS---
     connect(ui->pushButton_generate, SIGNAL(clicked(bool)), this, SLOT(calcMBulbUI()));
     connect(ui->pushButton_filterHull, SIGNAL(clicked(bool)), this, SLOT(calcHullUI()));
-    connect(ui->actionExport_Mesh_obj, SIGNAL(triggered(bool)), this, SLOT(saveCubeModel()));
 
     //---SCATTER GRAPH---
     //Checkbox:
@@ -69,10 +68,11 @@ MainWindow::MainWindow(QWidget *parent)
     //Graph:
     QWidget *container = QWidget::createWindowContainer(&scatterGraph,this);
     ui->horizontalLayout->addWidget(container);
-    scatterGraph.setAspectRatio(1.0);
-    scatterGraph.setHorizontalAspectRatio(1.0);
+    //scatterGraph.setAspectRatio(1.0);
+    //scatterGraph.setHorizontalAspectRatio(1.0);
 
-    //---EXPERIMENTAL---
+    //Marching Cubes:
+    connect(ui->pushButton_cubeMarch, SIGNAL(clicked(bool)), this, SLOT(generateMesh()));
 
 }
 

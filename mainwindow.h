@@ -25,6 +25,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <Q3DScatter>
 #include "boolcloud.h"
+#include "trimesh.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -46,11 +47,11 @@ private:
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;
+
 private slots:
     //Saving:
     void actionSaveMBulb();
     void actionSaveHull();
-    void saveCubeModel();
     //Loading:
     void actionLoadMBulb();
     void actionLoadHull();
@@ -69,8 +70,8 @@ private slots:
     void calcMBulbUI();
     void calcHullUI();
 
-    //Experimental:
-    void doCubeMarch();
+    //Marching Cubes:
+    void generateMesh();
 
 };
 #endif // MAINWINDOW_H

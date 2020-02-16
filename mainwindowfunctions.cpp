@@ -19,7 +19,6 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "blockymesh.cpp"
 #include "utilityFunctions.cpp"
 
 MainWindow::~MainWindow()
@@ -341,96 +340,27 @@ void MainWindow::calcHullUI(){
         ui->label_infoText->setText("Generated Hull");
 }
 
-void MainWindow::saveCubeModel(){
-    /*
-    QFileDialog saveDialog;
-    saveDialog.setDefaultSuffix("obj");
-    QString fileName = saveDialog.getSaveFileName();
-    ui->label_infoText->setText("Building cubemodel...");
-    cubeMat cubeModel(mBulb);
-    //Remove overlapping:
-    double progress = 0;
-    double progdiv = 100.0 / std::pow(cubeModel.cubeSlots.size() - 3, 3.0);
-    if(!cubeModel.isInit){return;}
-    for(int i = 0; i < cubeModel.cubeSlots.size(); ++i){
-    for(int j = 0; j < cubeModel.cubeSlots[i].size(); ++j){
-    for(int k = 0; k < cubeModel.cubeSlots[i][j].size(); ++k){
-        cube active = cubeModel.cubeSlots[i][j][k];
-        if(!cubeModel.isEmpty(active)){
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i-1][j][k],active);//Left
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i+1][j][k],active);//Right
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j-1][k],active);//Back
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j+1][k],active);//Front
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j][k-1],active);//Down
-            cubeModel.remOverlapping(cubeModel.cubeSlots[i][j][k+1],active);//Up
-        }
-        progress += progdiv;
-        ui->progressBar->setValue(progress);
-    }
-    }
-    }
+//Marching Cubes:
+void MainWindow::generateMesh(){
+    std::vector<TRIANGLE> triBuffer;
+    cubeMarch(hull, triBuffer);
 
-    ui->label_infoText->setText("Saving cubemodel...");
-    //cubeModel.saveObj(fileName.toStdString());
+    //Quick .obj exporter:
     std::ofstream ofile;
-    ofile.open(fileName.toStdString());
+    ofile.open("/tmp/marchingCubesMBulb.obj");
     if(!ofile.is_open()){return;}
     std::string polyBuffer;
-    std::string faceBuffer;
-    int vCounter = 0;
-    progress = 0;
-    ofile << "#DANGER: File generated via MandelbulbUI:\n";
-    ofile << "o Mandelbulb\n";
-    for(int i = 0; i < cubeModel.cubeSlots.size(); ++i){
-    for(int j = 0; j < cubeModel.cubeSlots[i].size(); ++j){
-    for(int k = 0; k < cubeModel.cubeSlots[i][j].size(); ++k){
-        if(!cubeModel.isEmpty(cubeModel.cubeSlots[i][j][k])){
-            ivec index = {i,j,k};
-            dvec coord(3);
-            cubeModel.bCloud.convIndexToCoord(index,coord);
-            cube active = cubeModel.cubeSlots[i][j][k];
-            for(int n = 0; n < active.size(); ++n){
-                cubeModel.faceToBuffer(active[n], faceBuffer, polyBuffer, vCounter);
-            }
-        }
-        progress += progdiv;
-        ui->progressBar->setValue(progress);
+    int lineCounter = 0;
+    ofile << "#Marching cubes mesh\n";
+    ofile << "o marchingCubesMBulb\n";
+    for(int i = 0; i < triBuffer.size(); ++i){
+        ofile << "v " << triBuffer[i].p[0][0] << " " << triBuffer[i].p[0][1] << " " << triBuffer[i].p[0][0] << "\n";
+        ofile << "v " << triBuffer[i].p[1][0] << " " << triBuffer[i].p[1][1] << " " << triBuffer[i].p[1][0] << "\n";
+        ofile << "v " << triBuffer[i].p[2][0] << " " << triBuffer[i].p[2][1] << " " << triBuffer[i].p[2][0] << "\n";
+        lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
     }
-    }
-    }
-    ofile << faceBuffer;
     ofile << polyBuffer;
     ofile.close();
-    ui->label_infoText->setText("Saved cubemodel");
-    */
-}
-
-//Experimental:
-void MainWindow::doCubeMarch(){
-    /*
-    MarchingCube march(mBulb);
-    march.cubeMarch();
-
-    //Quick write to .obj:
-    std::ofstream ofile;
-    ofile.open("/tmp/cubeMarchMBulb.obj");
-    if(!ofile.is_open()){return;}
-    std::string polyBuffer;
-    unsigned int vCounter = 0;
-    ofile << "#Experimental cubemarching mesh:\n";
-    ofile << "o cubeMarch\n";
-    for(int i = 0; i < march.triBuffer.size(); ++i){
-        for(int j = 0; j < march.triCountBuffer[i]; ++j){
-            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[0][1] << " " << march.triBuffer[j].p[0][2] << "\n";
-            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[1][1] << " " << march.triBuffer[j].p[1][2] << "\n";
-            ofile << "v " << march.triBuffer[j].p[0][0] << " " << march.triBuffer[j].p[2][1] << " " << march.triBuffer[j].p[2][2] << "\n";
-            vCounter++; polyBuffer.append("f " + std::to_string(vCounter));
-            vCounter++; polyBuffer.append(" " + std::to_string(vCounter));
-            vCounter++; polyBuffer.append(" " + std::to_string(vCounter) + "\n");
-        }
-    }
-    ofile << "#triangles:\n";
-    ofile << polyBuffer;
-    ofile.close();
-    */
 }

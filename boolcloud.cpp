@@ -155,11 +155,15 @@ void boolCloud::saveCoords(std::string fpath){
 }
 //Converters:
 void boolCloud::convIndexToCoord(ivec &index, dvec &coord){
+    index.resize(3);
+    coord.resize(3);
     coord[0] = index[0] * xdistance + xmin;
     coord[1] = index[1] * ydistance + ymin;
     coord[2] = index[2] * zdistance + zmin;
 }
 void boolCloud::convCoordToIndex(dvec &coord, ivec &index){
+    index.resize(3);
+    coord.resize(3);
     index[0] = (coord[0] - xmin) / xdistance;
     index[1] = (coord[1] - ymin) / ydistance;
     index[2] = (coord[2] - zmin) / zdistance;

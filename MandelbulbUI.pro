@@ -20,11 +20,13 @@ SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
 	mainwindowfunctions.cpp \
+	trimesh.cpp \
 	utilityFunctions.cpp
 
 HEADERS += \
 	boolcloud.h \
-	mainwindow.h
+	mainwindow.h \
+	trimesh.h
 
 FORMS += \
 	mainwindow.ui
