@@ -343,6 +343,14 @@ void MainWindow::calcHullUI(){
 
 //Marching Cubes:
 void MainWindow::generateMesh(){
+    //Save dialog:
+    QFileDialog saveDialog;
+    saveDialog.setDefaultSuffix("obj");
+    QString fileName = saveDialog.getSaveFileName();
+    std::string filePath = fileName.toStdString();
+    setFileExt(filePath, "obj");
+
+
     ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
     std::vector<TRIANGLE> triBuffer;
 
@@ -350,7 +358,7 @@ void MainWindow::generateMesh(){
 
     //Quick .obj exporter:
     std::ofstream ofile;
-    ofile.open("/tmp/marchingCubesMBulb.obj");
+    ofile.open(filePath);
     if(!ofile.is_open()){return;}
     std::string polyBuffer;
     int lineCounter = 0;
@@ -366,5 +374,20 @@ void MainWindow::generateMesh(){
     }
     ofile << polyBuffer;
     ofile.close();
-    ui->label_infoText->setText("Generated marchingCube mesh.");
+    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
+}
+
+//Delete cache:
+void MainWindow::delMBulbCache(){
+    mBulb.remove();
+    ui->actionSave_Mandelbulb->setEnabled(false);
+    ui->pushButton_filterHull->setEnabled(false);
+    ui->pushButton_generate->setEnabled(true);
+    ui->label_infoText->setText("Deleted mandelbulb cache.");
+}
+void MainWindow::delHullCache(){
+    hull.remove();
+    ui->actionSave_Hull->setEnabled(false);
+    ui->actionMesh_obj->setEnabled(false);
+    ui->label_infoText->setText("Deleted hull cache.");
 }

@@ -536,7 +536,7 @@
      <string>Reset Resolution</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -568,7 +568,7 @@
      <string>Reset Iterations</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_iter">
@@ -619,7 +619,7 @@
      <string>Reset Minimum</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="doubleSpinBox_min">
@@ -689,7 +689,7 @@
      <string>Reset Maximum</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -737,7 +737,7 @@
      <string>Reset Power</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
@@ -785,7 +785,7 @@
      <string>Reset Max. Length</string>
     </property>
     <property name="text">
-     <string/>
+     <string>R</string>
     </property>
    </widget>
    <widget class="Line" name="line">
@@ -911,9 +911,9 @@
    <widget class="QPushButton" name="pushButton_generate">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>380</y>
-      <width>121</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -933,9 +933,9 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>410</y>
-      <width>121</width>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -1066,6 +1066,124 @@
     </property>
     <property name="text">
      <string>0.07</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonDelete_MBulb">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>20</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>204</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>204</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>42</red>
+          <green>43</green>
+          <blue>41</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Delete mandelbulb cache</string>
+    </property>
+    <property name="text">
+     <string>X</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButtonDelete_Hull">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>410</y>
+      <width>20</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>204</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>204</red>
+          <green>0</green>
+          <blue>0</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="ButtonText">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>42</red>
+          <green>43</green>
+          <blue>41</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>Delete hull cache</string>
+    </property>
+    <property name="text">
+     <string>X</string>
     </property>
    </widget>
   </widget>

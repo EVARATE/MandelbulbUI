@@ -79,6 +79,14 @@ std::string getFileExt(std::string& filePath){
     }
 }
 
-
+void setFileExt(std::string &filePath, std::string defaultExtension){
+    std::string extension = getFileExt(filePath, defaultExtension);
+    if(extension != defaultExtension){
+        for(int i = 0; i < extension.size(); ++i){
+            filePath.pop_back();
+        }
+        filePath.append(defaultExtension);
+    }
+}
 
 

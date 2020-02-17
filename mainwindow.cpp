@@ -74,6 +74,10 @@ MainWindow::MainWindow(QWidget *parent)
     //Marching Cubes:
     connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
 
+    //Delete cache:
+    connect(ui->pushButtonDelete_MBulb, SIGNAL(clicked(bool)), this, SLOT(delMBulbCache()));
+    connect(ui->pushButtonDelete_Hull, SIGNAL(clicked(bool)), this, SLOT(delHullCache()));
+
 
 }
 

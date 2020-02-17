@@ -74,5 +74,9 @@ private slots:
     //Marching Cubes:
     void generateMesh();
 
+    //Delete cache:
+    void delMBulbCache();
+    void delHullCache();
+
 };
 #endif // MAINWINDOW_H

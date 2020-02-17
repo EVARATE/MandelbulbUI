@@ -442,6 +442,10 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *pare
             triBuffer.push_back(triangles[n]);
         }
         }
+
+        if(progDialog.wasCanceled()){
+            return;
+        }
         progress++;
         progDialog.setValue(progress);
         QApplication::processEvents();
