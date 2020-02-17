@@ -23,6 +23,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QProgressDialog>
 #include <Q3DScatter>
 #include "boolcloud.h"
 #include "trimesh.h"

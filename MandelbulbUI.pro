@@ -20,6 +20,7 @@ SOURCES += \
 	main.cpp \
 	mainwindow.cpp \
 	mainwindowfunctions.cpp \
+	marchingCubesAlgorithm.cpp \
 	trimesh.cpp \
 	utilityFunctions.cpp
 

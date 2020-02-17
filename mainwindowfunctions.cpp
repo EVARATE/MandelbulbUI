@@ -20,6 +20,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "utilityFunctions.cpp"
+#include "marchingCubesAlgorithm.cpp"
 
 MainWindow::~MainWindow()
 {
@@ -336,14 +337,16 @@ void MainWindow::calcHullUI(){
         ui->pushButton_filterHull->setEnabled(false);
         ui->checkBox_autoHull->setEnabled(true);
         ui->actionSave_Hull->setEnabled(true);
-        ui->actionExport_Mesh_obj->setEnabled(true);
         ui->label_infoText->setText("Generated Hull");
+        ui->actionMesh_obj->setEnabled(true);
 }
 
 //Marching Cubes:
 void MainWindow::generateMesh(){
+    ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
     std::vector<TRIANGLE> triBuffer;
-    cubeMarch(hull, triBuffer);
+
+    cubeMarch(hull, triBuffer,this);
 
     //Quick .obj exporter:
     std::ofstream ofile;
@@ -354,13 +357,14 @@ void MainWindow::generateMesh(){
     ofile << "#Marching cubes mesh\n";
     ofile << "o marchingCubesMBulb\n";
     for(int i = 0; i < triBuffer.size(); ++i){
-        ofile << "v " << triBuffer[i].p[0][0] << " " << triBuffer[i].p[0][1] << " " << triBuffer[i].p[0][0] << "\n";
-        ofile << "v " << triBuffer[i].p[1][0] << " " << triBuffer[i].p[1][1] << " " << triBuffer[i].p[1][0] << "\n";
-        ofile << "v " << triBuffer[i].p[2][0] << " " << triBuffer[i].p[2][1] << " " << triBuffer[i].p[2][0] << "\n";
+        ofile << "v " << triBuffer[i].p[0][0] << " " << triBuffer[i].p[0][1] << " " << triBuffer[i].p[0][2] << "\n";
+        ofile << "v " << triBuffer[i].p[1][0] << " " << triBuffer[i].p[1][1] << " " << triBuffer[i].p[1][2] << "\n";
+        ofile << "v " << triBuffer[i].p[2][0] << " " << triBuffer[i].p[2][1] << " " << triBuffer[i].p[2][2] << "\n";
         lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
         lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
         lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
     }
     ofile << polyBuffer;
     ofile.close();
+    ui->label_infoText->setText("Generated marchingCube mesh.");
 }

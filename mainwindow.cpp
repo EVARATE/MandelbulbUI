@@ -68,11 +68,12 @@ MainWindow::MainWindow(QWidget *parent)
     //Graph:
     QWidget *container = QWidget::createWindowContainer(&scatterGraph,this);
     ui->horizontalLayout->addWidget(container);
-    //scatterGraph.setAspectRatio(1.0);
-    //scatterGraph.setHorizontalAspectRatio(1.0);
+    scatterGraph.setAspectRatio(1.0);
+    scatterGraph.setHorizontalAspectRatio(1.0);
 
     //Marching Cubes:
-    connect(ui->pushButton_cubeMarch, SIGNAL(clicked(bool)), this, SLOT(generateMesh()));
+    connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
+
 
 }
 
