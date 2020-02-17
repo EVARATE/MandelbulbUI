@@ -480,7 +480,7 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer){
         if (grid.val[6] == isolevel) {cubeindex |= 64;}
         if (grid.val[7] == isolevel) {cubeindex |= 128;}
 
-        if (edgeTable[cubeindex] == 0){return;}
+        if (!(edgeTable[cubeindex] == 0)){
 
         std::vector<dvec> vertlist(12);
         findTriVertices(cubeindex, grid, vertlist);
@@ -497,6 +497,7 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer){
         //Add triangle to mesh:
         for(int n = 0; n < ntriang; ++n){
             triBuffer.push_back(triangles[n]);
+        }
         }
     }
     }
