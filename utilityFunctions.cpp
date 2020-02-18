@@ -20,7 +20,10 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include "boolcloud.h"
 #include <string>
 
-std::string getFileExt(std::string& filePath, std::string defaultExtension){
+//inline reason: Compiler puts these functions into several files and
+//then complains that there are multiple definitions of it. Inline fixes that.
+
+inline std::string getFileExt(std::string& filePath, std::string defaultExtension){
     std::string revExt;
     bool noDot = false;
     for(int i = filePath.size() -1; i >= 0; --i){
@@ -50,7 +53,7 @@ std::string getFileExt(std::string& filePath, std::string defaultExtension){
     }
 }
 
-std::string getFileExt(std::string& filePath){
+inline std::string getFileExt(std::string& filePath){
     std::string revExt;
     bool noDot = false;
     for(int i = filePath.size() -1; i >= 0; --i){
@@ -79,7 +82,7 @@ std::string getFileExt(std::string& filePath){
     }
 }
 
-void setFileExt(std::string &filePath, std::string defaultExtension){
+inline void setFileExt(std::string &filePath, std::string defaultExtension){
     std::string extension = getFileExt(filePath, defaultExtension);
     if(extension != defaultExtension){
         for(int i = 0; i < extension.size(); ++i){
@@ -88,5 +91,3 @@ void setFileExt(std::string &filePath, std::string defaultExtension){
         filePath.append(defaultExtension);
     }
 }
-
-

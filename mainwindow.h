@@ -26,7 +26,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QProgressDialog>
 #include <Q3DScatter>
 #include "boolcloud.h"
-#include "trimesh.h"
+#include "utilityFunctions.cpp"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -48,6 +48,16 @@ private:
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;
+
+    //Input data:
+    struct {
+        int res = 50;
+        int iter = 10;
+        double min = -1.75;
+        double max = 1.75;
+        double power = 8.0;
+        double maxLength = 2.0;
+    } inputValues;
 
 private slots:
     //Saving:

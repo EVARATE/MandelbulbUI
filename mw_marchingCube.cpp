@@ -15,17 +15,12 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
-
---------------
-This marching cubes algorithm is based on
-code from Paul Bourke. See the README.md for details.
-
 */
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//---MARCHING CUBES---
+
 typedef struct {
    dvec p[3];
 } TRIANGLE;
@@ -453,4 +448,38 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *pare
     }
     }
 
+}
+
+void MainWindow::generateMesh(){
+    //Save dialog:
+    QFileDialog saveDialog;
+    saveDialog.setDefaultSuffix("obj");
+    QString fileName = saveDialog.getSaveFileName();
+    std::string filePath = fileName.toStdString();
+    setFileExt(filePath, "obj");
+
+    ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
+    std::vector<TRIANGLE> triBuffer;
+
+    cubeMarch(hull, triBuffer,this);
+
+    //Quick .obj exporter:
+    std::ofstream ofile;
+    ofile.open(filePath);
+    if(!ofile.is_open()){return;}
+    std::string polyBuffer;
+    int lineCounter = 0;
+    ofile << "#Marching cubes mesh\n";
+    ofile << "o marchingCubesMBulb\n";
+    for(int i = 0; i < triBuffer.size(); ++i){
+        ofile << "v " << triBuffer[i].p[0][0] << " " << triBuffer[i].p[0][1] << " " << triBuffer[i].p[0][2] << "\n";
+        ofile << "v " << triBuffer[i].p[1][0] << " " << triBuffer[i].p[1][1] << " " << triBuffer[i].p[1][2] << "\n";
+        ofile << "v " << triBuffer[i].p[2][0] << " " << triBuffer[i].p[2][1] << " " << triBuffer[i].p[2][2] << "\n";
+        lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
+    }
+    ofile << polyBuffer;
+    ofile.close();
+    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
 }

@@ -18,7 +18,6 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 */
 
 #include "mainwindow.h"
-
 #include <QApplication>
 
 int main(int argc, char *argv[])

@@ -18,16 +18,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
 	boolcloud.cpp \
 	main.cpp \
-	mainwindow.cpp \
-	mainwindowfunctions.cpp \
-	marchingCubesAlgorithm.cpp \
-	trimesh.cpp \
+	mw_connections.cpp \
+	mw_functions.cpp \
+	mw_hull.cpp \
+	mw_marchingCube.cpp \
+	mw_mbulb.cpp \
 	utilityFunctions.cpp
 
 HEADERS += \
 	boolcloud.h \
-	mainwindow.h \
-	trimesh.h
+	mainwindow.h
 
 FORMS += \
 	mainwindow.ui
