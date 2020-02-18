@@ -6,14 +6,6 @@ This application will generate a set of coordinates which are in the Mandelbulb 
 
 Download the Appimage, in the terminal give it execute permission via `chmod +x` and run it. There are also source files available. You can find both in the [releases](https://github.com/EVARATE/MandelbulbUI_V2/releases) section.
 
-## User guide
-* Execute the Appimage
-* Change input to your liking [¹]
-* Press the *Generate*-button
-* Press the *Filter Hull*-button
-
-[¹] *I recommend to disable the scatter graph for resolutions above 100*
-
 ## Built With
 
 * [Qt Open Source](https://www.qt.io/)
