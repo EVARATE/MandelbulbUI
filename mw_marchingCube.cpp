@@ -1,5 +1,6 @@
 /*
 Copyright 2019, 2020 Sebastian Motzet
+Copyright Paul Bourke
 
 This file is part of MandelbulbUI.
 
@@ -15,20 +16,18 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
+
+----------------------
+The implementation of the marching cubes algorithm is based on and uses
+code from Paul Bourke. See the 'Aknowledgements' section of the README.md
+for more details.
 */
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
 
-typedef struct {
-   dvec p[3];
-} TRIANGLE;
 
-typedef struct {
-   dvec p[8];
-   double val[8];
-} GRIDCELL;
 
 int edgeTable[256]={
     //These are the combinations of connected edges in binary (e.g. 0x109 = 100001001)
@@ -461,7 +460,7 @@ void MainWindow::generateMesh(){
     ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
     std::vector<TRIANGLE> triBuffer;
 
-    cubeMarch(hull, triBuffer,this);
+    //cubeMarch(hull, triBuffer,this);
 
     //Quick .obj exporter:
     std::ofstream ofile;

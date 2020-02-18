@@ -20,73 +20,13 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-//Saving/Loading:
-void MainWindow::actionSaveMBulb(){
-    QFileDialog saveDialog;
-    saveDialog.setDefaultSuffix("txt");
-    QString fileName = saveDialog.getSaveFileName();
-    std::string filePath = fileName.toStdString();
-    std::string extension = getFileExt(filePath, "txt");
-    if(extension == "txt"){
-        mBulb.saveCoords(filePath);
-    }
-    else if(extension == "bin"){
-        mBulb.saveInternal(filePath);
-    }
-    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
-}
-void MainWindow::actionLoadMBulb(){
-    QFileDialog loadDialog;
-    loadDialog.setDefaultSuffix("bin");
-    QString fileName = loadDialog.getOpenFileName();
-    std::string filePath = fileName.toStdString();
-    std::string extension = getFileExt(filePath);
-    if(extension == "bin"){
-        mBulb.loadInternal(filePath);
-        MBulbToGraph();
-        ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
-    }
-    else{
-        ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
-    }
-
-}
-//Show in scatter graph:
-void MainWindow::MBulbToGraph(){
-    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
-    QtDataVisualization::QScatterDataArray scatterData;
-    for(int i = 0; i < mBulb.xsize; ++i){
-    for(int j = 0; j < mBulb.ysize; ++j){
-    for(int k = 0; k < mBulb.zsize; ++k){
-        ivec index = {i,j,k};
-        if(mBulb.getState(index)){
-            dvec coords(3);
-            mBulb.convIndexToCoord(index,coords);
-            scatterData << QVector3D(coords[0], coords[1], coords[2]);
-        }
-    }
-    }
-    }
-    scatterSeries.dataProxy()->addItems(scatterData);
-    scatterGraph.addSeries(&scatterSeries);
-    ui->pushButton_filterHull->setEnabled(true);
-}
-//Delete cache:
-void MainWindow::delMBulbCache(){
-    mBulb.remove();
-    ui->actionSave_Mandelbulb->setEnabled(false);
-    ui->pushButton_filterHull->setEnabled(false);
-    ui->pushButton_generate->setEnabled(true);
-    ui->label_infoText->setText("Deleted mandelbulb cache.");
-}
 //Algorithm:
-void MainWindow::calcMBulbUI(){
+void MainWindow::calcMBulb(){
     //See if 'auto' is checked:
     bool autoHull = ui->checkBox_autoHull->isChecked();
     //Adapt UI:
     ui->pushButton_generate->setEnabled(false);
     if(autoHull){
-        ui->pushButton_filterHull->setEnabled(false);
         ui->checkBox_autoHull->setEnabled(false);
     }
     //Get input values:
@@ -107,14 +47,11 @@ void MainWindow::calcMBulbUI(){
     inputValues.max = max;
     inputValues.power = power;
     inputValues.maxLength = maxLength;
-    //Reset primCloud:
-    mBulb.remove();
-    mBulb.init(vDist,vMin,vSize);
+    //Create cloud object:
+    boolCloud mBulb(vDist,vMin,vSize);
+
     ui->label_setPoints->setText("0");
     ui->label_infoText->setText("Generating Mandelbulb...");
-    //Initialize Scatter series:
-    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
-    QtDataVisualization::QScatterDataArray scatterData;
 
     //Calculation:
           double density = 0;
@@ -170,19 +107,16 @@ void MainWindow::calcMBulbUI(){
                     ui->label_setPoints->setText(QString::number(pointCount));
                     dvec coord = {xpos,ypos,zpos};
                     mBulb.setState(coord,true);
-                    scatterData << QVector3D(xpos,ypos,zpos);
                 }
 
             }//zpos loop end
             }//ypos loop end
             }//xpos loop end
-          scatterSeries.dataProxy()->addItems(scatterData);
-          scatterGraph.addSeries(&scatterSeries);
           ui->label_infoText->setText("Generated Mandelbulb");
-          ui->actionSave_Mandelbulb->setEnabled(true);
+          std::string name = "Mbulb_r" + std::to_string(res) + "_i" + std::to_string(iter);
+          createAbstrObj(mBulb,name);
+
           if(autoHull){
-              calcHullUI();
-          }else{
-              ui->pushButton_filterHull->setEnabled(true);
+              calcHull(mBulb);
           }
 }

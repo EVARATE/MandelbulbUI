@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>540</height>
+    <width>1000</width>
+    <height>510</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>800</width>
-    <height>540</height>
+    <height>480</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>800</width>
-    <height>540</height>
+    <width>1000</width>
+    <height>730</height>
    </size>
   </property>
   <property name="palette">
@@ -472,8 +472,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>71</width>
+      <y>240</y>
+      <width>211</width>
       <height>30</height>
      </rect>
     </property>
@@ -485,14 +485,14 @@
      </font>
     </property>
     <property name="text">
-     <string>Input:</string>
+     <string>Mandelbulb Generator:</string>
     </property>
    </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>50</y>
+      <y>270</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -508,7 +508,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>50</y>
+      <y>270</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -527,7 +527,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>50</y>
+      <y>270</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -543,7 +543,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>300</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -559,7 +559,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>80</y>
+      <y>300</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -575,7 +575,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>80</y>
+      <y>300</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -594,7 +594,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>110</y>
+      <y>330</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -610,7 +610,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>110</y>
+      <y>330</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -626,7 +626,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>110</y>
+      <y>330</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -645,7 +645,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>360</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -661,7 +661,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>140</y>
+      <y>360</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -680,7 +680,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>140</y>
+      <y>360</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -696,7 +696,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>170</y>
+      <y>390</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -712,7 +712,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>170</y>
+      <y>390</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -728,7 +728,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>170</y>
+      <y>390</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -744,7 +744,7 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>200</y>
+      <y>420</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -760,7 +760,7 @@
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>200</y>
+      <y>420</y>
       <width>81</width>
       <height>20</height>
      </rect>
@@ -776,7 +776,7 @@
     <property name="geometry">
      <rect>
       <x>200</x>
-      <y>200</y>
+      <y>420</y>
       <width>20</width>
       <height>20</height>
      </rect>
@@ -788,44 +788,11 @@
      <string>R</string>
     </property>
    </widget>
-   <widget class="Line" name="line">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>220</y>
-      <width>210</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="orientation">
-     <enum>Qt::Horizontal</enum>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_Input_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>230</y>
-      <width>71</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>12</pointsize>
-      <weight>75</weight>
-      <bold>true</bold>
-     </font>
-    </property>
-    <property name="text">
-     <string>Results:</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_7">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>290</y>
+      <x>240</x>
+      <y>300</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -840,8 +807,8 @@
    <widget class="QLabel" name="label_rawPoints">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>290</y>
+      <x>330</x>
+      <y>300</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -853,8 +820,8 @@
    <widget class="QLabel" name="label_9">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>320</y>
+      <x>240</x>
+      <y>330</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -869,37 +836,8 @@
    <widget class="QLabel" name="label_setPoints">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>320</y>
-      <width>121</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>0</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_11">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>350</y>
-      <width>101</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>Points left in the hull</string>
-    </property>
-    <property name="text">
-     <string>In the Hull:</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_hullPoints">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>350</y>
+      <x>330</x>
+      <y>330</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -911,8 +849,8 @@
    <widget class="QPushButton" name="pushButton_generate">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>380</y>
+      <x>240</x>
+      <y>389</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -927,33 +865,11 @@
      <string>Ctrl+G</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_filterHull">
-    <property name="enabled">
-     <bool>false</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>410</y>
-      <width>101</width>
-      <height>25</height>
-     </rect>
-    </property>
-    <property name="toolTip">
-     <string>Remove all points except those that lie on the hull</string>
-    </property>
-    <property name="text">
-     <string>Filter Hull</string>
-    </property>
-    <property name="shortcut">
-     <string>Ctrl+H</string>
-    </property>
-   </widget>
    <widget class="QCheckBox" name="checkBox_autoHull">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>410</y>
+      <x>350</x>
+      <y>389</y>
       <width>92</width>
       <height>25</height>
      </rect>
@@ -968,8 +884,8 @@
    <widget class="QProgressBar" name="progressBar">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>440</y>
+      <x>240</x>
+      <y>420</y>
       <width>211</width>
       <height>23</height>
      </rect>
@@ -982,9 +898,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>469</y>
-      <width>211</width>
-      <height>41</height>
+      <y>450</y>
+      <width>441</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -1009,10 +925,10 @@
    <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>460</x>
       <y>50</y>
-      <width>551</width>
-      <height>461</height>
+      <width>531</width>
+      <height>431</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout"/>
@@ -1020,7 +936,7 @@
    <widget class="QCheckBox" name="checkBox_showGraph">
     <property name="geometry">
      <rect>
-      <x>240</x>
+      <x>460</x>
       <y>20</y>
       <width>191</width>
       <height>25</height>
@@ -1030,7 +946,7 @@
      <string>Display 3d graph of the calculated points. WARNING: Significant performance loss for resolutions above 100</string>
     </property>
     <property name="text">
-     <string>Show Scatter Graph</string>
+     <string>Show viewport</string>
     </property>
     <property name="shortcut">
      <string>Alt+H</string>
@@ -1042,8 +958,8 @@
    <widget class="QLabel" name="label_8">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>260</y>
+      <x>240</x>
+      <y>270</y>
       <width>101</width>
       <height>20</height>
      </rect>
@@ -1058,8 +974,8 @@
    <widget class="QLabel" name="label_distance">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>260</y>
+      <x>330</x>
+      <y>270</y>
       <width>121</width>
       <height>20</height>
      </rect>
@@ -1068,13 +984,87 @@
      <string>0.07</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonDelete_MBulb">
+   <widget class="QTreeWidget" name="treeWidget_objects">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>380</y>
-      <width>20</width>
-      <height>25</height>
+      <y>51</y>
+      <width>441</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="palette">
+     <palette>
+      <active>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>52</red>
+          <green>52</green>
+          <blue>52</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </active>
+      <inactive>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>52</red>
+          <green>52</green>
+          <blue>52</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </inactive>
+      <disabled>
+       <colorrole role="Base">
+        <brush brushstyle="SolidPattern">
+         <color alpha="255">
+          <red>85</red>
+          <green>87</green>
+          <blue>83</blue>
+         </color>
+        </brush>
+       </colorrole>
+      </disabled>
+     </palette>
+    </property>
+    <property name="indentation">
+     <number>1</number>
+    </property>
+    <attribute name="headerMinimumSectionSize">
+     <number>20</number>
+    </attribute>
+    <attribute name="headerDefaultSectionSize">
+     <number>170</number>
+    </attribute>
+    <attribute name="headerHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <column>
+     <property name="text">
+      <string>Object</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>ID</string>
+     </property>
+    </column>
+   </widget>
+   <widget class="QPushButton" name="pushButton_remObject">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>25</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="palette">
@@ -1083,7 +1073,7 @@
        <colorrole role="ButtonText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>204</red>
+          <red>255</red>
           <green>0</green>
           <blue>0</blue>
          </color>
@@ -1094,7 +1084,7 @@
        <colorrole role="ButtonText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>204</red>
+          <red>255</red>
           <green>0</green>
           <blue>0</blue>
          </color>
@@ -1116,24 +1106,25 @@
     </property>
     <property name="font">
      <font>
+      <pointsize>19</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="toolTip">
-     <string>Delete mandelbulb cache</string>
+     <string>Delete selected object and all containing data</string>
     </property>
     <property name="text">
-     <string>X</string>
+     <string>x</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButtonDelete_Hull">
+   <widget class="QPushButton" name="pushButton_viewObject">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>410</y>
-      <width>20</width>
-      <height>25</height>
+      <x>40</x>
+      <y>30</y>
+      <width>25</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="palette">
@@ -1142,9 +1133,9 @@
        <colorrole role="ButtonText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>204</red>
-          <green>0</green>
-          <blue>0</blue>
+          <red>32</red>
+          <green>74</green>
+          <blue>135</blue>
          </color>
         </brush>
        </colorrole>
@@ -1153,9 +1144,9 @@
        <colorrole role="ButtonText">
         <brush brushstyle="SolidPattern">
          <color alpha="255">
-          <red>204</red>
-          <green>0</green>
-          <blue>0</blue>
+          <red>32</red>
+          <green>74</green>
+          <blue>135</blue>
          </color>
         </brush>
        </colorrole>
@@ -1175,15 +1166,29 @@
     </property>
     <property name="font">
      <font>
+      <pointsize>17</pointsize>
       <weight>75</weight>
       <bold>true</bold>
      </font>
     </property>
     <property name="toolTip">
-     <string>Delete hull cache</string>
+     <string>Render object in viewport</string>
     </property>
     <property name="text">
-     <string>X</string>
+     <string>v</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>270</y>
+      <width>20</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Vertical</enum>
     </property>
    </widget>
   </widget>
@@ -1192,7 +1197,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1000</width>
      <height>22</height>
     </rect>
    </property>
@@ -1200,20 +1205,22 @@
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuExport">
+    <widget class="QMenu" name="menuExport_2">
      <property name="title">
       <string>Export</string>
      </property>
-     <addaction name="actionMesh_obj"/>
+     <addaction name="action_saveMeshObj"/>
+     <addaction name="action_saveCoords"/>
+     <addaction name="action_saveInternal"/>
     </widget>
-    <addaction name="actionSave_Mandelbulb"/>
-    <addaction name="actionSave_Hull"/>
-    <addaction name="separator"/>
-    <addaction name="actionLoad_Mandelbulb"/>
-    <addaction name="actionLoad_Hull"/>
-    <addaction name="separator"/>
-    <addaction name="separator"/>
-    <addaction name="menuExport"/>
+    <widget class="QMenu" name="menuImport">
+     <property name="title">
+      <string>Import</string>
+     </property>
+     <addaction name="action_loadInternal"/>
+    </widget>
+    <addaction name="menuImport"/>
+    <addaction name="menuExport_2"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
@@ -1224,7 +1231,15 @@
     <addaction name="actionInfo"/>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuObject">
+    <property name="title">
+     <string>Object</string>
+    </property>
+    <addaction name="actionFilter_Hull"/>
+    <addaction name="actionGenerate_Mesh"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuObject"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionSave_Mandelbulb">
@@ -1320,6 +1335,42 @@
     <string>Mesh (.obj)</string>
    </property>
   </action>
+  <action name="actionFilter_Hull">
+   <property name="text">
+    <string>Filter Hull</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove all points except those that lie on the hull</string>
+   </property>
+  </action>
+  <action name="actionGenerate_Mesh">
+   <property name="text">
+    <string>Generate Mesh</string>
+   </property>
+   <property name="toolTip">
+    <string>Generate triangle mesh (cube marching)</string>
+   </property>
+  </action>
+  <action name="action_saveMeshObj">
+   <property name="text">
+    <string>Mesh (.obj)</string>
+   </property>
+  </action>
+  <action name="action_saveCoords">
+   <property name="text">
+    <string>Coordinates (.txt)</string>
+   </property>
+  </action>
+  <action name="action_saveInternal">
+   <property name="text">
+    <string>Internal Format (.bin)</string>
+   </property>
+  </action>
+  <action name="action_loadInternal">
+   <property name="text">
+    <string>Internal Format (.bin)</string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>spinBox_res</tabstop>
@@ -1329,7 +1380,6 @@
   <tabstop>doubleSpinBox_power</tabstop>
   <tabstop>doubleSpinBox_maxLength</tabstop>
   <tabstop>pushButton_generate</tabstop>
-  <tabstop>pushButton_filterHull</tabstop>
   <tabstop>checkBox_autoHull</tabstop>
   <tabstop>checkBox_showGraph</tabstop>
   <tabstop>pushButtonReset_res</tabstop>

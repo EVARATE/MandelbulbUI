@@ -26,21 +26,13 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    //---CONNECT ACTIONS---
-    //Save Mandelbulb:
-    connect(ui->actionSave_Mandelbulb, SIGNAL(triggered(bool)),this, SLOT(actionSaveMBulb()));
-    //Save Hull:
-    connect(ui->actionSave_Hull, SIGNAL(triggered(bool)),this, SLOT(actionSaveHull()));
-    //Load Mandelbulb:
-    connect(ui->actionLoad_Mandelbulb, SIGNAL(triggered(bool)),this, SLOT(actionLoadMBulb()));
-    //Load Hull:
-    connect(ui->actionLoad_Hull, SIGNAL(triggered(bool)),this, SLOT(actionLoadHull()));
-    //Exit:
+    //FILE ACTIONS:
     connect(ui->actionExit, SIGNAL(triggered(bool)),this, SLOT(close()));
-    //Info:
     connect(ui->actionInfo, SIGNAL(triggered(bool)),this, SLOT(actionInfo()));
-    //About:
     connect(ui->actionAbout, SIGNAL(triggered(bool)),this, SLOT(actionAbout()));
+    //OBJECT ACTIONS:
+    connect(ui->actionFilter_Hull, SIGNAL(triggered(bool)), this, SLOT(calcHull()));
+    connect(ui->actionGenerate_Mesh, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
 
     //---RESET BUTTONS---
     connect(ui->pushButtonReset_res, &QPushButton::clicked, this, [this](){ui->spinBox_res->setValue(50);});
@@ -59,10 +51,11 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->doubleSpinBox_maxLength, SIGNAL(valueChanged(double)), this, SLOT(updateOutput()));
 
     //---GENERATE/HULL BUTTONS---
-    connect(ui->pushButton_generate, SIGNAL(clicked(bool)), this, SLOT(calcMBulbUI()));
-    connect(ui->pushButton_filterHull, SIGNAL(clicked(bool)), this, SLOT(calcHullUI()));
+    connect(ui->pushButton_generate, SIGNAL(clicked(bool)), this, SLOT(calcMBulb()));
 
     //---SCATTER GRAPH---
+    //Cloud to graph:
+    connect(ui->pushButton_viewObject, SIGNAL(clicked(bool)), this, SLOT(boolCloudToGraph()));
     //Checkbox:
     connect(ui->checkBox_showGraph, SIGNAL(stateChanged(int)),this, SLOT(toggleScatterGraph()));
     //Graph:
@@ -74,9 +67,7 @@ MainWindow::MainWindow(QWidget *parent)
     //Marching Cubes:
     connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
 
-    //Delete cache:
-    connect(ui->pushButtonDelete_MBulb, SIGNAL(clicked(bool)), this, SLOT(delMBulbCache()));
-    connect(ui->pushButtonDelete_Hull, SIGNAL(clicked(bool)), this, SLOT(delHullCache()));
-
+    //Object management:
+    connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteItem()));
 
 }

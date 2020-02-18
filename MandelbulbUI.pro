@@ -19,6 +19,7 @@ SOURCES += \
 	boolcloud.cpp \
 	main.cpp \
 	mw_connections.cpp \
+	mw_experimental.cpp \
 	mw_functions.cpp \
 	mw_hull.cpp \
 	mw_marchingCube.cpp \

@@ -20,6 +20,9 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <list>
+#include <iterator>
+#include <algorithm>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -27,6 +30,28 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <Q3DScatter>
 #include "boolcloud.h"
 #include "utilityFunctions.cpp"
+
+//Structs:
+typedef struct {
+   dvec p[3];
+} TRIANGLE;
+
+typedef struct {
+   dvec p[8];
+   double val[8];
+} GRIDCELL;
+//Items in memory:
+typedef struct {
+    std::string name = "Abstract Item";
+    int type = 0;
+    int id;
+    //Each item can only contain one of the following:
+    boolCloud cloud;//Type: 0
+    std::vector<TRIANGLE> triMesh;//Type: 1
+} abstrItem;
+
+
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -42,9 +67,7 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    //boolCloud:
-    boolCloud mBulb;
-    boolCloud hull;
+
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;
@@ -59,13 +82,14 @@ private:
         double maxLength = 2.0;
     } inputValues;
 
+    //List of all items:
+    int nextObjID = 0;
+    std::list<abstrItem> allItems;
+
 private slots:
-    //Saving:
-    void actionSaveMBulb();
-    void actionSaveHull();
-    //Loading:
-    void actionLoadMBulb();
-    void actionLoadHull();
+    //Saving/Loading:
+    void actionSaveBoolCloud(boolCloud& cloud);
+    void actionLoadBoolCloud();
     //Info/About Dialog:
     void actionInfo();
     void actionAbout();
@@ -74,19 +98,25 @@ private slots:
     void updateOutput();
     //Scatter graph:
     void toggleScatterGraph();
-    void MBulbToGraph();
-    void HullToGraph();
+    void boolCloudToGraph(boolCloud& cloud);
+    void boolCloudToGraph();
 
     //Main functions:
-    void calcMBulbUI();
-    void calcHullUI();
+    void calcMBulb();
+    void calcHull(boolCloud& cloud);
+    void calcHull();
 
     //Marching Cubes:
+    //void generateMesh(boolCloud& cloud);
     void generateMesh();
 
-    //Delete cache:
-    void delMBulbCache();
-    void delHullCache();
+    //Abstract object management:
+    void createAbstrObj(boolCloud& cloud, std::string name);
+    void createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name);
+    void deleteAbstrObj(int id);
+    void createItemEntry(std::string name, int type, int id);
+    void deleteItem();
+    void getObjAtID(int id, abstrItem& item);
 
 };
 #endif // MAINWINDOW_H
