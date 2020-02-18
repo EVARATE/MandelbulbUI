@@ -68,6 +68,9 @@ public:
 private:
     Ui::MainWindow *ui;
 
+    //Methods:
+    int getSelectedID();
+
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;
@@ -89,7 +92,10 @@ private:
 private slots:
     //Saving/Loading:
     void actionSaveBoolCloud(boolCloud& cloud);
+    void actionSaveBoolCloud();
     void actionLoadBoolCloud();
+    void actionSaveTriMesh(std::vector<TRIANGLE>& triMesh);
+    void actionSaveTriMesh();
     //Info/About Dialog:
     void actionInfo();
     void actionAbout();
@@ -107,7 +113,7 @@ private slots:
     void calcHull();
 
     //Marching Cubes:
-    //void generateMesh(boolCloud& cloud);
+    void generateMesh(boolCloud& cloud);
     void generateMesh();
 
     //Abstract object management:

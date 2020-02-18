@@ -25,6 +25,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+//Methods:
+int MainWindow::getSelectedID(){
+    return ui->treeWidget_objects->currentItem()->text(2).toInt();
+}
+
 void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     //Select file:
     QFileDialog saveDialog;
@@ -42,6 +47,12 @@ void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     }
     ui->label_infoText->setText(QString::fromStdString("Saved cloud to " + filePath ));
 }
+void MainWindow::actionSaveBoolCloud(){
+    int id = getSelectedID();
+    abstrItem cloudObj;
+    getObjAtID(id, cloudObj);
+    actionSaveBoolCloud(cloudObj.cloud);
+}
 void MainWindow::actionLoadBoolCloud(){
     //Select file:
     QFileDialog loadDialog;
@@ -55,13 +66,47 @@ void MainWindow::actionLoadBoolCloud(){
     if(extension == "bin"){
         cloud.loadInternal(filePath);
         ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
+        createAbstrObj(cloud, "Cloud import");
     }
     else{
         ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
     }
 
 }
+void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
+    //Save dialog:
+    QFileDialog saveDialog;
+    saveDialog.setDefaultSuffix("obj");
+    QString fileName = saveDialog.getSaveFileName();
+    std::string filePath = fileName.toStdString();
+    setFileExt(filePath, "obj");
 
+    //Quick .obj exporter:
+    std::ofstream ofile;
+    ofile.open(filePath);
+    if(!ofile.is_open()){return;}
+    std::string polyBuffer;
+    int lineCounter = 0;
+    ofile << "#MandelbulbUI: Marching cubes mesh\n";
+    ofile << "o MandelbulbUI Mesh\n";
+    for(int i = 0; i < triMesh.size(); ++i){
+        ofile << "v " << triMesh[i].p[0][0] << " " << triMesh[i].p[0][1] << " " << triMesh[i].p[0][2] << "\n";
+        ofile << "v " << triMesh[i].p[1][0] << " " << triMesh[i].p[1][1] << " " << triMesh[i].p[1][2] << "\n";
+        ofile << "v " << triMesh[i].p[2][0] << " " << triMesh[i].p[2][1] << " " << triMesh[i].p[2][2] << "\n";
+        lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
+    }
+    ofile << polyBuffer;
+    ofile.close();
+    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
+}
+void MainWindow::actionSaveTriMesh(){
+    int id = getSelectedID();
+    abstrItem cloudObj;
+    getObjAtID(id, cloudObj);
+    actionSaveTriMesh(cloudObj.triMesh);
+}
 
 //Info/About Dialog:
 void MainWindow::actionInfo(){
@@ -167,8 +212,7 @@ void MainWindow::deleteAbstrObj(int id){
 void MainWindow::createItemEntry(std::string name, int type, int id){
     QString typeName;
     QTreeWidgetItem *item = new QTreeWidgetItem();
-    item->setFlags(item->flags() | Qt::ItemIsUserCheckable | Qt::ItemIsSelectable);
-    item->setCheckState(0, Qt::Unchecked);
+    item->setFlags(item->flags() | Qt::ItemIsSelectable);
     item->setText(0,QString::fromStdString(name));
     if(type == 0){typeName = "boolCloud";}
     else if(type == 1){typeName = "triMesh";}
@@ -182,7 +226,7 @@ void MainWindow::deleteItem(){
     if(!ui->treeWidget_objects->currentItem()){
         return;
     }
-    int id = ui->treeWidget_objects->currentItem()->text(2).toInt();
+    int id = getSelectedID();
     delete ui->treeWidget_objects->currentItem();
     //Delete data:
     deleteAbstrObj(id);

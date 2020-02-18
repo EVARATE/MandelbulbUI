@@ -27,12 +27,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     //FILE ACTIONS:
+    //Import:
+    connect(ui->action_loadInternal, SIGNAL(triggered(bool)), this, SLOT(actionLoadBoolCloud()));
+    //Export:
+    connect(ui->action_saveMeshObj, SIGNAL(triggered(bool)), this, SLOT(actionSaveTriMesh()));
+    connect(ui->action_saveBCloud, SIGNAL(triggered(bool)), this, SLOT(actionSaveBoolCloud()));
+    //Exit:
     connect(ui->actionExit, SIGNAL(triggered(bool)),this, SLOT(close()));
-    connect(ui->actionInfo, SIGNAL(triggered(bool)),this, SLOT(actionInfo()));
-    connect(ui->actionAbout, SIGNAL(triggered(bool)),this, SLOT(actionAbout()));
+
     //OBJECT ACTIONS:
     connect(ui->actionFilter_Hull, SIGNAL(triggered(bool)), this, SLOT(calcHull()));
     connect(ui->actionGenerate_Mesh, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
+
+    //HELP ACTIONS:
+    connect(ui->actionInfo, SIGNAL(triggered(bool)),this, SLOT(actionInfo()));
+    connect(ui->actionAbout, SIGNAL(triggered(bool)),this, SLOT(actionAbout()));
 
     //---RESET BUTTONS---
     connect(ui->pushButtonReset_res, &QPushButton::clicked, this, [this](){ui->spinBox_res->setValue(50);});

@@ -19,15 +19,12 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 ----------------------
 The implementation of the marching cubes algorithm is based on and uses
-code from Paul Bourke. See the 'Aknowledgements' section of the README.md
+code from Paul Bourke. See the 'Acknowledgements' section of the README.md
 for more details.
 */
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-
-
 
 int edgeTable[256]={
     //These are the combinations of connected edges in binary (e.g. 0x109 = 100001001)
@@ -449,36 +446,17 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *pare
 
 }
 
-void MainWindow::generateMesh(){
-    //Save dialog:
-    QFileDialog saveDialog;
-    saveDialog.setDefaultSuffix("obj");
-    QString fileName = saveDialog.getSaveFileName();
-    std::string filePath = fileName.toStdString();
-    setFileExt(filePath, "obj");
-
+void MainWindow::generateMesh(boolCloud& cloud){
     ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
     std::vector<TRIANGLE> triBuffer;
-
-    //cubeMarch(hull, triBuffer,this);
-
-    //Quick .obj exporter:
-    std::ofstream ofile;
-    ofile.open(filePath);
-    if(!ofile.is_open()){return;}
-    std::string polyBuffer;
-    int lineCounter = 0;
-    ofile << "#Marching cubes mesh\n";
-    ofile << "o marchingCubesMBulb\n";
-    for(int i = 0; i < triBuffer.size(); ++i){
-        ofile << "v " << triBuffer[i].p[0][0] << " " << triBuffer[i].p[0][1] << " " << triBuffer[i].p[0][2] << "\n";
-        ofile << "v " << triBuffer[i].p[1][0] << " " << triBuffer[i].p[1][1] << " " << triBuffer[i].p[1][2] << "\n";
-        ofile << "v " << triBuffer[i].p[2][0] << " " << triBuffer[i].p[2][1] << " " << triBuffer[i].p[2][2] << "\n";
-        lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
-        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
-        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
-    }
-    ofile << polyBuffer;
-    ofile.close();
-    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
+    cubeMarch(cloud, triBuffer,this);
+    //Save as object:
+    createAbstrObj(triBuffer, "MC_Mesh");
+    ui->label_infoText->setText("Generated mesh.");
+}
+void MainWindow::generateMesh(){
+    int id = getSelectedID();
+    abstrItem cloudObj;
+    getObjAtID(id, cloudObj);
+    generateMesh(cloudObj.cloud);
 }

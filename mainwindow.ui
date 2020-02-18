@@ -1030,9 +1030,18 @@
       </disabled>
      </palette>
     </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
+    </property>
     <property name="indentation">
      <number>1</number>
     </property>
+    <attribute name="headerVisible">
+     <bool>true</bool>
+    </attribute>
+    <attribute name="headerCascadingSectionResizes">
+     <bool>false</bool>
+    </attribute>
     <attribute name="headerMinimumSectionSize">
      <number>20</number>
     </attribute>
@@ -1040,6 +1049,12 @@
      <number>170</number>
     </attribute>
     <attribute name="headerHighlightSections">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="headerShowSortIndicator" stdset="0">
+     <bool>false</bool>
+    </attribute>
+    <attribute name="headerStretchLastSection">
      <bool>false</bool>
     </attribute>
     <column>
@@ -1210,8 +1225,7 @@
       <string>Export</string>
      </property>
      <addaction name="action_saveMeshObj"/>
-     <addaction name="action_saveCoords"/>
-     <addaction name="action_saveInternal"/>
+     <addaction name="action_saveBCloud"/>
     </widget>
     <widget class="QMenu" name="menuImport">
      <property name="title">
@@ -1356,9 +1370,9 @@
     <string>Mesh (.obj)</string>
    </property>
   </action>
-  <action name="action_saveCoords">
+  <action name="action_saveBCloud">
    <property name="text">
-    <string>Coordinates (.txt)</string>
+    <string>Bool Cloud (.txt, .bin)</string>
    </property>
   </action>
   <action name="action_saveInternal">
