@@ -878,7 +878,7 @@
      <string>Automatically filter hull after the generation has finished</string>
     </property>
     <property name="text">
-     <string>Auto</string>
+     <string>Auto Hull</string>
     </property>
    </widget>
    <widget class="QProgressBar" name="progressBar">
@@ -1350,6 +1350,9 @@
    </property>
   </action>
   <action name="actionFilter_Hull">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Filter Hull</string>
    </property>
@@ -1358,6 +1361,9 @@
    </property>
   </action>
   <action name="actionGenerate_Mesh">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Generate Mesh</string>
    </property>
@@ -1366,11 +1372,17 @@
    </property>
   </action>
   <action name="action_saveMeshObj">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Mesh (.obj)</string>
    </property>
   </action>
   <action name="action_saveBCloud">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Bool Cloud (.txt, .bin)</string>
    </property>

@@ -78,5 +78,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     //Object management:
     connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteItem()));
-
+    //Action buttons are only available when they fit:
+    connect(ui->treeWidget_objects, SIGNAL(itemSelectionChanged()), this, SLOT(updateActionAvailability()));
 }

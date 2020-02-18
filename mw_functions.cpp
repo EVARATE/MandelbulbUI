@@ -27,7 +27,7 @@ MainWindow::~MainWindow()
 
 //Methods:
 int MainWindow::getSelectedID(){
-    return ui->treeWidget_objects->currentItem()->text(2).toInt();
+        return ui->treeWidget_objects->currentItem()->text(2).toInt();
 }
 
 void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
@@ -99,7 +99,7 @@ void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
     }
     ofile << polyBuffer;
     ofile.close();
-    ui->label_infoText->setText(QString::fromStdString("Saved mandelbulb to " + filePath ));
+    ui->label_infoText->setText(QString::fromStdString("Saved mesh to " + filePath ));
 }
 void MainWindow::actionSaveTriMesh(){
     int id = getSelectedID();
@@ -116,8 +116,8 @@ void MainWindow::actionInfo(){
 }
 void MainWindow::actionAbout(){
     QMessageBox aboutBox;
-    aboutBox.about(this,"Mandelbulb_V2 Pre Alpha",
-    "Made with Qt Creator 4.11.0\n\nLicensed under the GNU General Public License v3.0\n\nCopyright 2019, 2020 Sebastian Motzet");
+    aboutBox.about(this,"Mandelbulb_V2 Pre Release",
+    "Made with Qt Creator 4.11\n\nLicensed under the GNU General Public License v3.0\n\nCopyright 2019, 2020 Sebastian Motzet");
 }
 //Scatter graph:
 void MainWindow::toggleScatterGraph(){
@@ -232,6 +232,37 @@ void MainWindow::deleteItem(){
     deleteAbstrObj(id);
     //View next item:
     boolCloudToGraph();
+}
+void MainWindow::updateActionAvailability(){
+    if(!ui->treeWidget_objects->currentItem()){
+        ui->action_saveInternal->setEnabled(false);
+        ui->actionFilter_Hull->setEnabled(false);
+        ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveMeshObj->setEnabled(false);
+        //Activate Generate button:
+        ui->pushButton_generate->setEnabled(true);
+        return;
+    }
+    int id = getSelectedID();
+    abstrItem item;
+    getObjAtID(id, item);
+    if(item.type == 0){
+        //bool cloud:
+        ui->action_saveInternal->setEnabled(true);
+        ui->actionFilter_Hull->setEnabled(true);
+        ui->actionGenerate_Mesh->setEnabled(true);
+        ui->action_saveMeshObj->setEnabled(false);
+    }else if(item.type == 1){
+        ui->action_saveInternal->setEnabled(false);
+        ui->actionFilter_Hull->setEnabled(false);
+        ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveMeshObj->setEnabled(true);
+    }else{
+        ui->action_saveInternal->setEnabled(false);
+        ui->actionFilter_Hull->setEnabled(false);
+        ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveMeshObj->setEnabled(false);
+    }
 }
 void MainWindow::getObjAtID(int id, abstrItem& item){
     std::list<abstrItem>::iterator it = allItems.begin();

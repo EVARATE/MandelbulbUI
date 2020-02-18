@@ -122,6 +122,7 @@ private slots:
     void deleteAbstrObj(int id);
     void createItemEntry(std::string name, int type, int id);
     void deleteItem();
+    void updateActionAvailability();
     void getObjAtID(int id, abstrItem& item);
 
 };
