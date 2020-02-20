@@ -2,9 +2,9 @@
 
 This application will generate a set of coordinates which are in the Mandelbulb set based on user input. Alternatively it could crash your computer.
 
-## Installation
+## Further Information
 
-Download the Appimage, in the terminal give it execute permission via `chmod +x` and run it. There are also source files available. You can find both in the [releases](https://github.com/EVARATE/MandelbulbUI_V2/releases) section.
+See the [wiki](https://github.com/EVARATE/MandelbulbUI/wiki) for detailed information about the project.
 
 ## Built With
 
