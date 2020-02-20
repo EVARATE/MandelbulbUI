@@ -214,9 +214,18 @@ void MainWindow::createItemEntry(std::string name, int type, int id){
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setFlags(item->flags() | Qt::ItemIsSelectable);
     item->setText(0,QString::fromStdString(name));
-    if(type == 0){typeName = "boolCloud";}
-    else if(type == 1){typeName = "triMesh";}
-    else{typeName = "Unknown";}
+    if(type == 0){
+        typeName = "boolCloud";
+        item->setIcon( 0, QIcon(":/icons/icons/icon_bcloud.png") );
+    }
+    else if(type == 1){
+        typeName = "triMesh";
+        item->setIcon(0,(QIcon(":/icons/icons/icon_mesh.png")));
+    }
+    else{
+        typeName = "Unknown";
+        item->setIcon(0,(QIcon(":/icons/icons/icon_unknown.png")));
+    }
     item->setText(1, typeName);
     item->setText(2, QString::number(id));
     ui->treeWidget_objects->insertTopLevelItem(0, item);

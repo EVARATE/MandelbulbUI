@@ -467,6 +467,10 @@
   <property name="windowTitle">
    <string>MandelbulbUI</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="iconFile.qrc">
+    <normaloff>:/icons/icons/icon_main1.png</normaloff>:/icons/icons/icon_main1.png</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label_Input">
     <property name="geometry">
@@ -536,7 +540,11 @@
      <string>Reset Resolution</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
@@ -568,7 +576,11 @@
      <string>Reset Iterations</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QSpinBox" name="spinBox_iter">
@@ -619,7 +631,11 @@
      <string>Reset Minimum</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QDoubleSpinBox" name="doubleSpinBox_min">
@@ -689,7 +705,11 @@
      <string>Reset Maximum</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
@@ -737,7 +757,11 @@
      <string>Reset Power</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
@@ -785,7 +809,11 @@
      <string>Reset Max. Length</string>
     </property>
     <property name="text">
-     <string>R</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">
@@ -948,6 +976,10 @@
     <property name="text">
      <string>Show viewport</string>
     </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_viewport.png</normaloff>:/icons/icons/icon_viewport.png</iconset>
+    </property>
     <property name="shortcut">
      <string>Alt+H</string>
     </property>
@@ -1033,8 +1065,17 @@
     <property name="alternatingRowColors">
      <bool>true</bool>
     </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
     <property name="indentation">
      <number>1</number>
+    </property>
+    <property name="itemsExpandable">
+     <bool>false</bool>
     </property>
     <attribute name="headerVisible">
      <bool>true</bool>
@@ -1055,7 +1096,7 @@
      <bool>false</bool>
     </attribute>
     <attribute name="headerStretchLastSection">
-     <bool>false</bool>
+     <bool>true</bool>
     </attribute>
     <column>
      <property name="text">
@@ -1072,6 +1113,18 @@
       <string>ID</string>
      </property>
     </column>
+    <item>
+     <property name="text">
+      <string>Dummy Item</string>
+     </property>
+     <property name="icon">
+      <iconset resource="iconFile.qrc">
+       <normaloff>:/icons/icons/icon_unknown.png</normaloff>:/icons/icons/icon_unknown.png</iconset>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </item>
    </widget>
    <widget class="QPushButton" name="pushButton_remObject">
     <property name="geometry">
@@ -1130,7 +1183,11 @@
      <string>Delete selected object and all containing data</string>
     </property>
     <property name="text">
-     <string>x</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_trash.png</normaloff>:/icons/icons/icon_trash.png</iconset>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_viewObject">
@@ -1190,7 +1247,11 @@
      <string>Render object in viewport</string>
     </property>
     <property name="text">
-     <string>v</string>
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="iconFile.qrc">
+      <normaloff>:/icons/icons/icon_viewobject.png</normaloff>:/icons/icons/icon_viewobject.png</iconset>
     </property>
    </widget>
    <widget class="Line" name="line">
@@ -1415,6 +1476,8 @@
   <tabstop>pushButtonReset_power</tabstop>
   <tabstop>pushButtonReset_maxLength</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="iconFile.qrc"/>
+ </resources>
  <connections/>
 </ui>
