@@ -1113,18 +1113,6 @@
       <string>ID</string>
      </property>
     </column>
-    <item>
-     <property name="text">
-      <string>Dummy Item</string>
-     </property>
-     <property name="icon">
-      <iconset resource="iconFile.qrc">
-       <normaloff>:/icons/icons/icon_unknown.png</normaloff>:/icons/icons/icon_unknown.png</iconset>
-     </property>
-     <property name="text">
-      <string/>
-     </property>
-    </item>
    </widget>
    <widget class="QPushButton" name="pushButton_remObject">
     <property name="geometry">

@@ -247,6 +247,7 @@ void MainWindow::updateActionAvailability(){
         ui->action_saveInternal->setEnabled(false);
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveBCloud->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
         //Activate Generate button:
         ui->pushButton_generate->setEnabled(true);
@@ -260,16 +261,19 @@ void MainWindow::updateActionAvailability(){
         ui->action_saveInternal->setEnabled(true);
         ui->actionFilter_Hull->setEnabled(true);
         ui->actionGenerate_Mesh->setEnabled(true);
+        ui->action_saveBCloud->setEnabled(true);
         ui->action_saveMeshObj->setEnabled(false);
     }else if(item.type == 1){
         ui->action_saveInternal->setEnabled(false);
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveBCloud->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(true);
     }else{
         ui->action_saveInternal->setEnabled(false);
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
+        ui->action_saveBCloud->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
     }
 }
