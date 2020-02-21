@@ -111,8 +111,10 @@ void MainWindow::actionSaveTriMesh(){
 //Info/About Dialog:
 void MainWindow::actionInfo(){
     QMessageBox infoBox;
-    infoBox.information(this,"Info","Please read the readme.md file");
-    infoBox.show();
+    infoBox.setTextFormat(Qt::RichText);
+    infoBox.setWindowTitle("Info");
+    infoBox.setText("Please refer to the <a href='https://github.com/EVARATE/MandelbulbUI/wiki'>wiki</a> for detailed information.");
+    infoBox.exec();
 }
 void MainWindow::actionAbout(){
     QMessageBox aboutBox;

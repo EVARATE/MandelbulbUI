@@ -12,14 +12,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>480</height>
+    <width>1000</width>
+    <height>510</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>1000</width>
-    <height>730</height>
+    <height>510</height>
    </size>
   </property>
   <property name="palette">
@@ -878,7 +878,7 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>389</y>
+      <y>360</y>
       <width>101</width>
       <height>25</height>
      </rect>
@@ -896,9 +896,9 @@
    <widget class="QCheckBox" name="checkBox_autoHull">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>389</y>
-      <width>92</width>
+      <x>240</x>
+      <y>390</y>
+      <width>101</width>
       <height>25</height>
      </rect>
     </property>
@@ -1253,6 +1253,22 @@
     </property>
     <property name="orientation">
      <enum>Qt::Vertical</enum>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="checkBox_autoMesh">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>390</y>
+      <width>101</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Automatically generate mesh. (Generates mesh from hull if 'Auto Hull' is checked)</string>
+    </property>
+    <property name="text">
+     <string>Auto Mesh</string>
     </property>
    </widget>
   </widget>
