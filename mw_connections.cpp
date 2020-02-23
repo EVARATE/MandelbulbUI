@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     //FILE ACTIONS:
     //Import:
     connect(ui->action_loadInternal, SIGNAL(triggered(bool)), this, SLOT(actionLoadBoolCloud()));
+    connect(ui->action_loadPointSet, SIGNAL(triggered(bool)), this, SLOT(actionLoadPointSet()));
     //Export:
     connect(ui->action_saveMeshObj, SIGNAL(triggered(bool)), this, SLOT(actionSaveTriMesh()));
     connect(ui->action_saveBCloud, SIGNAL(triggered(bool)), this, SLOT(actionSaveBoolCloud()));

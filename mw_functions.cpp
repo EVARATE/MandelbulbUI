@@ -201,6 +201,19 @@ void MainWindow::createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name
     allItems.push_back(triItem);
     createItemEntry(name, 1, triItem.id);
 }
+void MainWindow::createAbstrObj(std::vector<dvec>& pointSet, std::string name){
+    abstrItem triItem;
+    if(name.size() == 0){
+        name = "Point cloud";
+    }
+    triItem.id = nextObjID;
+    nextObjID++;
+    triItem.name = name;
+    triItem.type = 2;
+    triItem.pointSet = pointSet;
+    allItems.push_back(triItem);
+    createItemEntry(name, 2, triItem.id);
+}
 void MainWindow::deleteAbstrObj(int id){
     std::list<abstrItem>::iterator it = allItems.begin();
     do{
@@ -223,6 +236,10 @@ void MainWindow::createItemEntry(std::string name, int type, int id){
     else if(type == 1){
         typeName = "triMesh";
         item->setIcon(0,(QIcon(":/icons/icons/icon_mesh.png")));
+    }
+    else if(type == 2){
+        typeName = "pointSet";
+        item->setIcon(0,(QIcon(":/icons/icons/icon_pointSet.png")));
     }
     else{
         typeName = "Unknown";

@@ -1,13 +1,13 @@
 <RCC>
-    <qresource prefix="/icons">
-        <file>icons/icon_main1.png</file>
-        <file>icons/icon_bcloud.png</file>
-        <file>icons/icon_mesh.png</file>
-        <file>icons/icon_reset.png</file>
-        <file>icons/icon_trash.png</file>
-        <file>icons/icon_unknown.png</file>
-        <file>icons/icon_unorderedcloud.png</file>
-        <file>icons/icon_viewobject.png</file>
-        <file>icons/icon_viewport.png</file>
-    </qresource>
+	<qresource prefix="/icons">
+		<file>icons/icon_main1.png</file>
+		<file>icons/icon_bcloud.png</file>
+		<file>icons/icon_mesh.png</file>
+		<file>icons/icon_reset.png</file>
+		<file>icons/icon_trash.png</file>
+		<file>icons/icon_unknown.png</file>
+		<file>icons/icon_viewobject.png</file>
+		<file>icons/icon_viewport.png</file>
+		<file>icons/icon_pointSet.png</file>
+	</qresource>
 </RCC>

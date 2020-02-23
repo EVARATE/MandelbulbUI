@@ -48,6 +48,7 @@ typedef struct {
     //Each item can only contain one of the following:
     boolCloud cloud;//Type: 0
     std::vector<TRIANGLE> triMesh;//Type: 1
+    std::vector<dvec> pointSet;//Type 2
 } abstrItem;
 
 
@@ -96,6 +97,7 @@ private slots:
     void actionLoadBoolCloud();
     void actionSaveTriMesh(std::vector<TRIANGLE>& triMesh);
     void actionSaveTriMesh();
+    void actionLoadPointSet();
     //Info/About Dialog:
     void actionInfo();
     void actionAbout();
@@ -119,6 +121,7 @@ private slots:
     //Abstract object management:
     void createAbstrObj(boolCloud& cloud, std::string name);
     void createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name);
+    void createAbstrObj(std::vector<dvec>& pointSet, std::string name);
     void deleteAbstrObj(int id);
     void createItemEntry(std::string name, int type, int id);
     void deleteItem();
