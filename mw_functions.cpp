@@ -35,6 +35,10 @@ void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("txt");
     QString fileName = saveDialog.getSaveFileName();
+    if(fileName.isNull()){
+        return;
+    }
+
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath, "txt");
 
@@ -58,6 +62,10 @@ void MainWindow::actionLoadBoolCloud(){
     QFileDialog loadDialog;
     loadDialog.setDefaultSuffix("bin");
     QString fileName = loadDialog.getOpenFileName();
+    if(fileName.isNull()){
+        return;
+    }
+
     std::string filePath = fileName.toStdString();
     std::string extension = getFileExt(filePath);
 
@@ -78,6 +86,10 @@ void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("obj");
     QString fileName = saveDialog.getSaveFileName();
+    if(fileName.isNull()){
+        return;
+    }
+
     std::string filePath = fileName.toStdString();
     setFileExt(filePath, "obj");
 
@@ -107,6 +119,45 @@ void MainWindow::actionSaveTriMesh(){
     getObjAtID(id, cloudObj);
     actionSaveTriMesh(cloudObj.triMesh);
 }
+void MainWindow::actionLoadPointSet(){
+    //Select file:
+    QFileDialog loadDialog;
+    loadDialog.setDefaultSuffix("txt");
+    QString fileName = loadDialog.getOpenFileName();
+    if(fileName.isNull()){
+        return;
+    }
+
+    std::string filePath = fileName.toStdString();
+    std::string extension = getFileExt(filePath);
+
+    //Create and load object:
+    std::vector<dvec> pointSet;
+    dvec point(3);
+    if(extension == "txt"){
+        std::ifstream ifile;
+        ifile.open(filePath);
+        if(!ifile.is_open()){
+            ui->label_infoText->setText(QString::fromStdString("Couldn't open file: " + filePath));
+            return;
+        }
+        while(true){
+            if(ifile.eof()){
+                break;
+            }else{
+                ifile >> point[0] >> point[1] >> point[2];
+                pointSet.push_back(point);
+            }
+        }
+        ifile.close();
+        createAbstrObj(pointSet, "Point Set");
+        ui->label_infoText->setText(QString::fromStdString("Imported file: " + filePath));
+    }else{
+        ui->label_infoText->setText(QString::fromStdString("Invalid file extension: " + extension));
+        return;
+    }
+}
+
 
 //Info/About Dialog:
 void MainWindow::actionInfo(){
@@ -202,17 +253,17 @@ void MainWindow::createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name
     createItemEntry(name, 1, triItem.id);
 }
 void MainWindow::createAbstrObj(std::vector<dvec>& pointSet, std::string name){
-    abstrItem triItem;
+    abstrItem pointSetItem;
     if(name.size() == 0){
         name = "Point cloud";
     }
-    triItem.id = nextObjID;
+    pointSetItem.id = nextObjID;
     nextObjID++;
-    triItem.name = name;
-    triItem.type = 2;
-    triItem.pointSet = pointSet;
-    allItems.push_back(triItem);
-    createItemEntry(name, 2, triItem.id);
+    pointSetItem.name = name;
+    pointSetItem.type = 2;
+    pointSetItem.pointSet = pointSet;
+    allItems.push_back(pointSetItem);
+    createItemEntry(name, 2, pointSetItem.id);
 }
 void MainWindow::deleteAbstrObj(int id){
     std::list<abstrItem>::iterator it = allItems.begin();

@@ -1470,8 +1470,14 @@
    </property>
   </action>
   <action name="action_pointSetToCloud">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Point Set to cloud</string>
+   </property>
+   <property name="toolTip">
+    <string>Work in progress</string>
    </property>
   </action>
  </widget>

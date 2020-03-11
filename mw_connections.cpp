@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     //OBJECT ACTIONS:
     connect(ui->actionFilter_Hull, SIGNAL(triggered(bool)), this, SLOT(calcHull()));
     connect(ui->actionGenerate_Mesh, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
+    connect(ui->action_pointSetToCloud, SIGNAL(triggered(bool)), this, SLOT(pointSetToBoolCloud()));
 
     //HELP ACTIONS:
     connect(ui->actionInfo, SIGNAL(triggered(bool)),this, SLOT(actionInfo()));

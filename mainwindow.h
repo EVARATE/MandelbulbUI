@@ -118,6 +118,14 @@ private slots:
     void generateMesh(boolCloud& cloud);
     void generateMesh();
 
+    //Point set:
+    void pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth);
+    void pointSetToBoolCloud();
+    void checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist);
+    int lowestPoint(std::vector<dvec>& pointSet, double index);
+    int highestPoint(std::vector<dvec>& pointSet, double index);
+    bool isNear(dvec& pointA, dvec& pointB, double radius);
+
     //Abstract object management:
     void createAbstrObj(boolCloud& cloud, std::string name);
     void createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name);
