@@ -74,12 +74,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalLayout->addWidget(container);
     scatterGraph.setAspectRatio(1.0);
     scatterGraph.setHorizontalAspectRatio(1.0);
+    //scatterGraph.activeTheme().setType(Q3DTheme::ThemeEbony);
 
     //Marching Cubes:
     connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
 
     //Object management:
-    connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteItem()));
+    connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteEntry()));
     //Action buttons are only available when they fit:
     connect(ui->treeWidget_objects, SIGNAL(itemSelectionChanged()), this, SLOT(updateActionAvailability()));
 }

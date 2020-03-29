@@ -451,12 +451,15 @@ void MainWindow::generateMesh(boolCloud& cloud){
     std::vector<TRIANGLE> triBuffer;
     cubeMarch(cloud, triBuffer,this);
     //Save as object:
-    createAbstrObj(triBuffer, "MC_Mesh");
+    internalEntity triMeshEntity(triBuffer, "MC_Mesh");
+    entityHandler.addEntity(triMeshEntity);
+    createEntry(triMeshEntity.name, triMeshEntity.type, triMeshEntity.id);
+
     ui->label_infoText->setText("Generated mesh.");
 }
 void MainWindow::generateMesh(){
     int id = getSelectedID();
-    abstrItem cloudObj;
-    getObjAtID(id, cloudObj);
-    generateMesh(cloudObj.cloud);
+    internalEntity cloudObj;
+    entityHandler.getEntityAtID(id, cloudObj);
+    generateMesh(cloudObj.bCloud);
 }

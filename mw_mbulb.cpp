@@ -24,6 +24,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 void MainWindow::calcMBulb(){
     //See if 'auto' is checked:
     bool autoHull = ui->checkBox_autoHull->isChecked();
+    bool autoMesh = ui->checkBox_autoMesh->isChecked();
     //Adapt UI:
     ui->pushButton_generate->setEnabled(false);
     if(autoHull){
@@ -114,9 +115,15 @@ void MainWindow::calcMBulb(){
             }//xpos loop end
           ui->label_infoText->setText("Generated Mandelbulb");
           std::string name = "Mbulb_r" + std::to_string(res) + "_i" + std::to_string(iter);
-          createAbstrObj(mBulb,name);
+
+          internalEntity mBulbEntity(mBulb,name);
+          entityHandler.addEntity(mBulbEntity);
+          createEntry(mBulbEntity.name, mBulbEntity.type, mBulbEntity.id);
 
           if(autoHull){
               calcHull(mBulb);
+          }
+          else if(autoMesh){
+              generateMesh(mBulb);
           }
 }

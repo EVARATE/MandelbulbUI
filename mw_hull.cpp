@@ -24,6 +24,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 //Algorithm:
 void MainWindow::calcHull(boolCloud& cloud){
     //Get input values:
+    bool autoMesh = ui->checkBox_autoMesh->isChecked();
     int res = cloud.xsize;
     double min = cloud.xmin;
     double max = cloud.xmax;
@@ -92,17 +93,19 @@ void MainWindow::calcHull(boolCloud& cloud){
         ui->label_infoText->setText("Generated Hull");
 
         std::string name = "Hull_r" + std::to_string(res);
-        createAbstrObj(hull,name);
+
+        internalEntity hullEntity(hull,name);
+        entityHandler.addEntity(hullEntity);
+        createEntry(hullEntity.name, hullEntity.type, hullEntity.id);
+
+        if(autoMesh){
+            generateMesh(hull);
+        }
 }
 
 void MainWindow::calcHull(){
     int id = ui->treeWidget_objects->currentItem()->text(2).toInt();
-    std::list<abstrItem>::iterator it = allItems.begin();
-    do{
-        if(it->id == id){
-            calcHull(it->cloud);
-            break;
-        }
-    ++it;
-    }while(it != allItems.end());
+    internalEntity entity;
+    entityHandler.getEntityAtID(id, entity);
+    calcHull(entity.bCloud);
 }

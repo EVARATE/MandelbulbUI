@@ -57,15 +57,17 @@ void MainWindow::pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth){
     }
 
     //Create object:
-    createAbstrObj(cloud, "New cloud");
+    internalEntity cloudEntity(cloud, "New cloud");
+    entityHandler.addEntity(cloudEntity);
+    createEntry(cloudEntity.name, cloudEntity.type, cloudEntity.id);
     ui->label_infoText->setText("Generated boolcloud.");
 }
 void MainWindow::pointSetToBoolCloud(){
     int id = getSelectedID();
-    abstrItem pointSetObj;
-    getObjAtID(id, pointSetObj);
+    internalEntity pointSetObj;
+    entityHandler.getEntityAtID(id, pointSetObj);
     ivec depth = {100,100,100};
-    pointSetToBoolCloud(pointSetObj.pointSet, depth);
+    pointSetToBoolCloud(pointSetObj.pointCloud, depth);
 }
 void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist){
     dvec slot(3);

@@ -53,9 +53,9 @@ void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
 }
 void MainWindow::actionSaveBoolCloud(){
     int id = getSelectedID();
-    abstrItem cloudObj;
-    getObjAtID(id, cloudObj);
-    actionSaveBoolCloud(cloudObj.cloud);
+    internalEntity cloudObj;
+    entityHandler.getEntityAtID(id, cloudObj);
+    actionSaveBoolCloud(cloudObj.bCloud);
 }
 void MainWindow::actionLoadBoolCloud(){
     //Select file:
@@ -74,7 +74,9 @@ void MainWindow::actionLoadBoolCloud(){
     if(extension == "bin"){
         cloud.loadInternal(filePath);
         ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
-        createAbstrObj(cloud, "Cloud import");
+        internalEntity bCloudEntity(cloud, "Imported boolCloud");
+        entityHandler.addEntity(bCloudEntity);
+        createEntry(bCloudEntity.name, bCloudEntity.type, bCloudEntity.id);
     }
     else{
         ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
@@ -115,8 +117,8 @@ void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
 }
 void MainWindow::actionSaveTriMesh(){
     int id = getSelectedID();
-    abstrItem cloudObj;
-    getObjAtID(id, cloudObj);
+    internalEntity cloudObj;
+    entityHandler.getEntityAtID(id, cloudObj);
     actionSaveTriMesh(cloudObj.triMesh);
 }
 void MainWindow::actionLoadPointSet(){
@@ -150,7 +152,9 @@ void MainWindow::actionLoadPointSet(){
             }
         }
         ifile.close();
-        createAbstrObj(pointSet, "Point Set");
+        internalEntity pointCloudEntity(pointSet, "Point Cloud");
+        entityHandler.addEntity(pointCloudEntity);
+        createEntry(pointCloudEntity.name, pointCloudEntity.type, pointCloudEntity.id);
         ui->label_infoText->setText(QString::fromStdString("Imported file: " + filePath));
     }else{
         ui->label_infoText->setText(QString::fromStdString("Invalid file extension: " + extension));
@@ -201,15 +205,15 @@ void MainWindow::boolCloudToGraph(boolCloud& cloud){
     scatterGraph.addSeries(&scatterSeries);
 }
 void MainWindow::boolCloudToGraph(){
-    abstrItem cloudObj;
+    internalEntity cloudObj;
     if(!ui->treeWidget_objects->currentItem()){
     scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
     scatterGraph.addSeries(&scatterSeries);
     return;
     }
     int id = ui->treeWidget_objects->currentItem()->text(2).toInt();
-    getObjAtID(id, cloudObj);
-    boolCloudToGraph(cloudObj.cloud);
+    entityHandler.getEntityAtID(id, cloudObj);
+    boolCloudToGraph(cloudObj.bCloud);
 }
 
 //Update output:
@@ -225,57 +229,7 @@ void MainWindow::updateOutput(){
 
 }
 
-//Abstract object management:
-void MainWindow::createAbstrObj(boolCloud& cloud, std::string name){
-    abstrItem cloudItem;
-    if(name.size() == 0){
-        name = "Point cloud";
-    }
-    cloudItem.id = nextObjID;
-    nextObjID++;
-    cloudItem.name = name;
-    cloudItem.type = 0;
-    cloudItem.cloud = cloud;
-    allItems.push_back(cloudItem);
-    createItemEntry(name, 0, cloudItem.id);
-}
-void MainWindow::createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name){
-    abstrItem triItem;
-    if(name.size() == 0){
-        name = "Point cloud";
-    }
-    triItem.id = nextObjID;
-    nextObjID++;
-    triItem.name = name;
-    triItem.type = 1;
-    triItem.triMesh = triMesh;
-    allItems.push_back(triItem);
-    createItemEntry(name, 1, triItem.id);
-}
-void MainWindow::createAbstrObj(std::vector<dvec>& pointSet, std::string name){
-    abstrItem pointSetItem;
-    if(name.size() == 0){
-        name = "Point cloud";
-    }
-    pointSetItem.id = nextObjID;
-    nextObjID++;
-    pointSetItem.name = name;
-    pointSetItem.type = 2;
-    pointSetItem.pointSet = pointSet;
-    allItems.push_back(pointSetItem);
-    createItemEntry(name, 2, pointSetItem.id);
-}
-void MainWindow::deleteAbstrObj(int id){
-    std::list<abstrItem>::iterator it = allItems.begin();
-    do{
-        if(it->id == id){
-            allItems.erase(it);
-            break;
-        }
-    ++it;
-    }while(it != allItems.end());
-}
-void MainWindow::createItemEntry(std::string name, int type, int id){
+void MainWindow::createEntry(std::string name, int type, int id){
     QString typeName;
     QTreeWidgetItem *item = new QTreeWidgetItem();
     item->setFlags(item->flags() | Qt::ItemIsSelectable);
@@ -301,14 +255,14 @@ void MainWindow::createItemEntry(std::string name, int type, int id){
     ui->treeWidget_objects->insertTopLevelItem(0, item);
     ui->treeWidget_objects->setCurrentItem(item);
 }
-void MainWindow::deleteItem(){
+void MainWindow::deleteEntry(){
     if(!ui->treeWidget_objects->currentItem()){
         return;
     }
     int id = getSelectedID();
     delete ui->treeWidget_objects->currentItem();
     //Delete data:
-    deleteAbstrObj(id);
+    entityHandler.deleteEntity(id);
     //View next item:
     boolCloudToGraph();
 }
@@ -319,13 +273,16 @@ void MainWindow::updateActionAvailability(){
         ui->actionGenerate_Mesh->setEnabled(false);
         ui->action_saveBCloud->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
+        ui->pushButton_viewObject->setEnabled(false);
         //Activate Generate button:
         ui->pushButton_generate->setEnabled(true);
         return;
     }
+    ui->pushButton_viewObject->setEnabled(true);
+
     int id = getSelectedID();
-    abstrItem item;
-    getObjAtID(id, item);
+    internalEntity item;
+    entityHandler.getEntityAtID(id, item);
     if(item.type == 0){
         //bool cloud:
         ui->action_saveInternal->setEnabled(true);
@@ -346,14 +303,4 @@ void MainWindow::updateActionAvailability(){
         ui->action_saveBCloud->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
     }
-}
-void MainWindow::getObjAtID(int id, abstrItem& item){
-    std::list<abstrItem>::iterator it = allItems.begin();
-    do{
-        if(it->id == id){
-            item = *it;
-            break;
-        }
-    ++it;
-    }while(it != allItems.end());
 }

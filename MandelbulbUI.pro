@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
 	boolcloud.cpp \
+	internalentity.cpp \
+	internalentityhandler.cpp \
 	main.cpp \
 	mw_connections.cpp \
 	mw_experimental.cpp \
@@ -29,6 +31,8 @@ SOURCES += \
 
 HEADERS += \
 	boolcloud.h \
+	internalentity.h \
+	internalentityhandler.h \
 	mainwindow.h
 
 FORMS += \

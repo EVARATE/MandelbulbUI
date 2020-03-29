@@ -20,38 +20,24 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <list>
-#include <iterator>
+
 #include <algorithm>
 #include <QMainWindow>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QProgressDialog>
 #include <Q3DScatter>
+#include <Q3DTheme>
 #include "boolcloud.h"
+#include "internalentityhandler.h"
 #include "utilityFunctions.cpp"
 
-//Structs:
-typedef struct {
-   dvec p[3];
-} TRIANGLE;
 
+//Structs:
 typedef struct {
    dvec p[8];
    double val[8];
 } GRIDCELL;
-//Items in memory:
-typedef struct {
-    std::string name = "Abstract Item";
-    int type = 0;
-    int id;
-    //Each item can only contain one of the following:
-    boolCloud cloud;//Type: 0
-    std::vector<TRIANGLE> triMesh;//Type: 1
-    std::vector<dvec> pointSet;//Type 2
-} abstrItem;
-
-
 
 
 QT_BEGIN_NAMESPACE
@@ -86,9 +72,7 @@ private:
         double maxLength = 2.0;
     } inputValues;
 
-    //List of all items:
-    int nextObjID = 0;
-    std::list<abstrItem> allItems;
+    internalEntityHandler entityHandler;//Contains and manages all internal Objects
 
 private slots:
     //Saving/Loading:
@@ -126,15 +110,10 @@ private slots:
     int highestPoint(std::vector<dvec>& pointSet, double index);
     bool isNear(dvec& pointA, dvec& pointB, double radius);
 
-    //Abstract object management:
-    void createAbstrObj(boolCloud& cloud, std::string name);
-    void createAbstrObj(std::vector<TRIANGLE>& triMesh, std::string name);
-    void createAbstrObj(std::vector<dvec>& pointSet, std::string name);
-    void deleteAbstrObj(int id);
-    void createItemEntry(std::string name, int type, int id);
-    void deleteItem();
+    //Entity list management
+    void createEntry(std::string name, int type, int id);
+    void deleteEntry();
     void updateActionAvailability();
-    void getObjAtID(int id, abstrItem& item);
 
 };
 #endif // MAINWINDOW_H
