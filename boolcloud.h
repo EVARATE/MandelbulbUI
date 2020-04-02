@@ -67,9 +67,9 @@ public:
     bool getState(dvec &coord);
     bool getState(int xindex, int yindex, int zindex);
     //Load/Save:
-    void loadInternal(std::string fpath);
-    void saveInternal(std::string fpath);
-    void saveCoords(std::string fpath);
+    void loadInternal(const std::string& fpath);
+    void saveInternal(const std::string& fpath);
+    void saveCoords(const std::string& fpath);
     //Converters:
     void convIndexToCoord(ivec &index, dvec &coord);
     void convCoordToIndex(dvec &coord, ivec &index);

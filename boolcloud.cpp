@@ -87,7 +87,7 @@ bool boolCloud::getState(int xindex, int yindex, int zindex){
     return getState(index);
 }
 //Load/Save:
-void boolCloud::loadInternal(std::string fpath){
+void boolCloud::loadInternal(const std::string& fpath){
     std::ifstream ifile;
     ifile.open(fpath);
     if(!ifile.is_open()){return;}
@@ -112,7 +112,7 @@ void boolCloud::loadInternal(std::string fpath){
     }
     ifile.close();
 }
-void boolCloud::saveInternal(std::string fpath){
+void boolCloud::saveInternal(const std::string& fpath){
     std::ofstream ofile;
     ofile.open(fpath);
     if(!ofile.is_open()){return;}
@@ -135,7 +135,7 @@ void boolCloud::saveInternal(std::string fpath){
     }
     ofile.close();
 }
-void boolCloud::saveCoords(std::string fpath){
+void boolCloud::saveCoords(const std::string& fpath){
     std::ofstream ofile;
     ofile.open(fpath);
     if(!ofile.is_open()){return;}

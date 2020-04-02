@@ -121,7 +121,7 @@ void MainWindow::actionSaveTriMesh(){
     entityHandler.getEntityAtID(id, cloudObj);
     actionSaveTriMesh(cloudObj.triMesh);
 }
-void MainWindow::actionLoadPointSet(){
+void MainWindow::actionLoadpointCloud(){
     //Select file:
     QFileDialog loadDialog;
     loadDialog.setDefaultSuffix("txt");
@@ -134,7 +134,7 @@ void MainWindow::actionLoadPointSet(){
     std::string extension = getFileExt(filePath);
 
     //Create and load object:
-    std::vector<dvec> pointSet;
+    std::vector<dvec> pointCloud;
     dvec point(3);
     if(extension == "txt"){
         std::ifstream ifile;
@@ -148,11 +148,11 @@ void MainWindow::actionLoadPointSet(){
                 break;
             }else{
                 ifile >> point[0] >> point[1] >> point[2];
-                pointSet.push_back(point);
+                pointCloud.push_back(point);
             }
         }
         ifile.close();
-        internalEntity pointCloudEntity(pointSet, "Point Cloud");
+        internalEntity pointCloudEntity(pointCloud, "Point Cloud");
         entityHandler.addEntity(pointCloudEntity);
         createEntry(pointCloudEntity.name, pointCloudEntity.type, pointCloudEntity.id);
         ui->label_infoText->setText(QString::fromStdString("Imported file: " + filePath));
@@ -185,6 +185,35 @@ void MainWindow::toggleScatterGraph(){
         scatterGraph.hide();
     }
 }
+void MainWindow::selectedToGraph(){
+    if(!ui->treeWidget_objects->currentItem()){
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    scatterGraph.addSeries(&scatterSeries);
+    return;
+    }
+
+    internalEntity selectedEntity;
+    int id = getSelectedID();
+    entityHandler.getEntityAtID(id, selectedEntity);
+    int type = selectedEntity.type;
+
+    if(type == 0){
+        //boolcloud
+        boolCloudToGraph(selectedEntity.bCloud);
+    }
+    else if(type == 1){
+        //triMesh
+        ui->label_infoText->setText("Can't yet render mesh in viewport.");
+    }
+    else if(type == 2){
+        //type = pointcloud
+        pointCloudToGraph(selectedEntity.pointCloud);
+    }
+    else{
+        return;
+    }
+    scatterGraph.seriesList().at(0)->setMesh(QtDataVisualization::QAbstract3DSeries::MeshCube);
+}
 //boolCloud to graph:
 void MainWindow::boolCloudToGraph(boolCloud& cloud){
     scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
@@ -203,17 +232,17 @@ void MainWindow::boolCloudToGraph(boolCloud& cloud){
     }
     scatterSeries.dataProxy()->addItems(scatterData);
     scatterGraph.addSeries(&scatterSeries);
+
 }
-void MainWindow::boolCloudToGraph(){
-    internalEntity cloudObj;
-    if(!ui->treeWidget_objects->currentItem()){
-    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
-    scatterGraph.addSeries(&scatterSeries);
-    return;
+
+void MainWindow::pointCloudToGraph(std::vector<dvec>& pointCloud){
+    scatterSeries.dataProxy()->removeItems(0, scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
+    for(int i = 0; i < pointCloud.size(); ++i){
+        scatterData << QVector3D(pointCloud[i][0], pointCloud[i][1], pointCloud[i][2]);
     }
-    int id = ui->treeWidget_objects->currentItem()->text(2).toInt();
-    entityHandler.getEntityAtID(id, cloudObj);
-    boolCloudToGraph(cloudObj.bCloud);
+    scatterSeries.dataProxy()->addItems(scatterData);
+    scatterGraph.addSeries(&scatterSeries);
 }
 
 //Update output:
@@ -229,9 +258,9 @@ void MainWindow::updateOutput(){
 
 }
 
-void MainWindow::createEntry(std::string name, int type, int id){
+void MainWindow::createEntry(const std::string& name, int type, int id){
     QString typeName;
-    QTreeWidgetItem *item = new QTreeWidgetItem();
+    auto *item = new QTreeWidgetItem();
     item->setFlags(item->flags() | Qt::ItemIsSelectable);
     item->setText(0,QString::fromStdString(name));
     if(type == 0){
@@ -243,8 +272,8 @@ void MainWindow::createEntry(std::string name, int type, int id){
         item->setIcon(0,(QIcon(":/icons/icons/icon_mesh.png")));
     }
     else if(type == 2){
-        typeName = "pointSet";
-        item->setIcon(0,(QIcon(":/icons/icons/icon_pointSet.png")));
+        typeName = "pointCloud";
+        item->setIcon(0,(QIcon(":/icons/icons/icon_pointCloud.png")));
     }
     else{
         typeName = "Unknown";
@@ -264,7 +293,7 @@ void MainWindow::deleteEntry(){
     //Delete data:
     entityHandler.deleteEntity(id);
     //View next item:
-    boolCloudToGraph();
+    selectedToGraph();
 }
 void MainWindow::updateActionAvailability(){
     if(!ui->treeWidget_objects->currentItem()){

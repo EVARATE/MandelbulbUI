@@ -27,6 +27,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <QFileDialog>
 #include <QProgressDialog>
 #include <Q3DScatter>
+#include <QAbstract3DSeries>
 #include <Q3DTheme>
 #include "boolcloud.h"
 #include "internalentityhandler.h"
@@ -81,7 +82,7 @@ private slots:
     void actionLoadBoolCloud();
     void actionSaveTriMesh(std::vector<TRIANGLE>& triMesh);
     void actionSaveTriMesh();
-    void actionLoadPointSet();
+    void actionLoadpointCloud();
     //Info/About Dialog:
     void actionInfo();
     void actionAbout();
@@ -90,8 +91,9 @@ private slots:
     void updateOutput();
     //Scatter graph:
     void toggleScatterGraph();
+    void selectedToGraph();
     void boolCloudToGraph(boolCloud& cloud);
-    void boolCloudToGraph();
+    void pointCloudToGraph(std::vector<dvec>& pointCloud);
 
     //Main functions:
     void calcMBulb();
@@ -103,15 +105,15 @@ private slots:
     void generateMesh();
 
     //Point set:
-    void pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth);
-    void pointSetToBoolCloud();
+    void pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& depth);
+    void pointCloudToBoolCloud();
     void checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist);
-    int lowestPoint(std::vector<dvec>& pointSet, double index);
-    int highestPoint(std::vector<dvec>& pointSet, double index);
+    int lowestPoint(std::vector<dvec>& pointCloud, double index);
+    int highestPoint(std::vector<dvec>& pointCloud, double index);
     bool isNear(dvec& pointA, dvec& pointB, double radius);
 
     //Entity list management
-    void createEntry(std::string name, int type, int id);
+    void createEntry(const std::string& name, int type, int id);
     void deleteEntry();
     void updateActionAvailability();
 

@@ -1297,7 +1297,7 @@
       <string>Import</string>
      </property>
      <addaction name="action_loadInternal"/>
-     <addaction name="action_loadPointSet"/>
+     <addaction name="action_loadPointCloud"/>
     </widget>
     <addaction name="menuImport"/>
     <addaction name="menuExport_2"/>
@@ -1317,7 +1317,7 @@
     </property>
     <addaction name="actionFilter_Hull"/>
     <addaction name="actionGenerate_Mesh"/>
-    <addaction name="action_pointSetToCloud"/>
+    <addaction name="action_pointCloudToBoolCloud"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuObject"/>
@@ -1464,17 +1464,17 @@
     <string>Internal Format (.bin)</string>
    </property>
   </action>
-  <action name="action_loadPointSet">
+  <action name="action_loadPointCloud">
    <property name="text">
-    <string>Point Set (.txt)</string>
+    <string>Point Cloud (.txt)</string>
    </property>
   </action>
-  <action name="action_pointSetToCloud">
+  <action name="action_pointCloudToBoolCloud">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Point Set to cloud</string>
+    <string>Point Cloud to Bool Cloud</string>
    </property>
    <property name="toolTip">
     <string>Work in progress</string>

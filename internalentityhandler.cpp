@@ -24,7 +24,7 @@ void internalEntityHandler::addEntity(internalEntity& entity){
     entityList.push_back(entity);
 }
 void internalEntityHandler::deleteEntity(int id){
-    std::list<internalEntity>::iterator it = entityList.begin();
+    auto it = entityList.begin();
     do{
         if(it->id == id){
             entityList.erase(it);
@@ -35,7 +35,7 @@ void internalEntityHandler::deleteEntity(int id){
 }
 
 void internalEntityHandler::getEntityAtID(int id, internalEntity &entity){
-    std::list<internalEntity>::iterator it = entityList.begin();
+    auto it = entityList.begin();
     do{
         if(it->id == id){
             entity = *it;

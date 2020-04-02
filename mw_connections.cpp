@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     //FILE ACTIONS:
     //Import:
     connect(ui->action_loadInternal, SIGNAL(triggered(bool)), this, SLOT(actionLoadBoolCloud()));
-    connect(ui->action_loadPointSet, SIGNAL(triggered(bool)), this, SLOT(actionLoadPointSet()));
+    connect(ui->action_loadPointCloud, SIGNAL(triggered(bool)), this, SLOT(actionLoadpointCloud()));
     //Export:
     connect(ui->action_saveMeshObj, SIGNAL(triggered(bool)), this, SLOT(actionSaveTriMesh()));
     connect(ui->action_saveBCloud, SIGNAL(triggered(bool)), this, SLOT(actionSaveBoolCloud()));
@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     //OBJECT ACTIONS:
     connect(ui->actionFilter_Hull, SIGNAL(triggered(bool)), this, SLOT(calcHull()));
     connect(ui->actionGenerate_Mesh, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
-    connect(ui->action_pointSetToCloud, SIGNAL(triggered(bool)), this, SLOT(pointSetToBoolCloud()));
+    connect(ui->action_pointCloudToBoolCloud, SIGNAL(triggered(bool)), this, SLOT(pointCloudToBoolCloud()));
 
     //HELP ACTIONS:
     connect(ui->actionInfo, SIGNAL(triggered(bool)),this, SLOT(actionInfo()));
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     //---SCATTER GRAPH---
     //Cloud to graph:
-    connect(ui->pushButton_viewObject, SIGNAL(clicked(bool)), this, SLOT(boolCloudToGraph()));
+    connect(ui->pushButton_viewObject, SIGNAL(clicked(bool)), this, SLOT(selectedToGraph()));
     //Checkbox:
     connect(ui->checkBox_showGraph, SIGNAL(stateChanged(int)),this, SLOT(toggleScatterGraph()));
     //Graph:
@@ -74,7 +74,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->horizontalLayout->addWidget(container);
     scatterGraph.setAspectRatio(1.0);
     scatterGraph.setHorizontalAspectRatio(1.0);
-    //scatterGraph.activeTheme().setType(Q3DTheme::ThemeEbony);
+    //scatterGraph.seriesList().at(0)->setMesh(QtDataVisualization::QAbstract3DSeries::MeshPoint);
+    scatterGraph.activeTheme()->setType(QtDataVisualization::Q3DTheme::ThemeStoneMoss);
 
     //Marching Cubes:
     connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));

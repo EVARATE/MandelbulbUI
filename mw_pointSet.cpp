@@ -20,16 +20,16 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include "ui_mainwindow.h"
 
 
-void MainWindow::pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth){
+void MainWindow::pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& depth){
     //Check if point set is valid:
-    if(pointSet.size() < 1){return;}
+    if(pointCloud.size() < 1){return;}
 
-    dvec xmin = pointSet[lowestPoint(pointSet, 0)];
-    dvec ymin = pointSet[lowestPoint(pointSet, 1)];
-    dvec zmin = pointSet[lowestPoint(pointSet, 2)];
-    dvec xmax = pointSet[highestPoint(pointSet, 0)];
-    dvec ymax = pointSet[highestPoint(pointSet, 1)];
-    dvec zmax = pointSet[highestPoint(pointSet, 2)];
+    dvec xmin = pointCloud[lowestPoint(pointCloud, 0)];
+    dvec ymin = pointCloud[lowestPoint(pointCloud, 1)];
+    dvec zmin = pointCloud[lowestPoint(pointCloud, 2)];
+    dvec xmax = pointCloud[highestPoint(pointCloud, 0)];
+    dvec ymax = pointCloud[highestPoint(pointCloud, 1)];
+    dvec zmax = pointCloud[highestPoint(pointCloud, 2)];
     double xminBorder = xmin[0];
     double xmaxBorder = xmax[0];
     double yminBorder = xmin[1];
@@ -45,12 +45,12 @@ void MainWindow::pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth){
     boolCloud cloud(dist, min, depth);
 
     double progress = 0.0;
-    double progdiv = double(pointSet.size()) / 100.0;
+    double progdiv = double(pointCloud.size()) / 100.0;
 
     //Check each point:
-    for(int n = 0; n < pointSet.size(); ++n){
+    for(int n = 0; n < pointCloud.size(); ++n){
         //Check for each slot of the cloud if the point is near it
-        checkPoint(depth, cloud, pointSet[n], xdist);
+        checkPoint(depth, cloud, pointCloud[n], xdist);
 
         progress += progdiv;
         ui->progressBar->setValue(progress);
@@ -62,12 +62,12 @@ void MainWindow::pointSetToBoolCloud(std::vector<dvec>& pointSet, ivec& depth){
     createEntry(cloudEntity.name, cloudEntity.type, cloudEntity.id);
     ui->label_infoText->setText("Generated boolcloud.");
 }
-void MainWindow::pointSetToBoolCloud(){
+void MainWindow::pointCloudToBoolCloud(){
     int id = getSelectedID();
-    internalEntity pointSetObj;
-    entityHandler.getEntityAtID(id, pointSetObj);
+    internalEntity pointCloudObj;
+    entityHandler.getEntityAtID(id, pointCloudObj);
     ivec depth = {100,100,100};
-    pointSetToBoolCloud(pointSetObj.pointCloud, depth);
+    pointCloudToBoolCloud(pointCloudObj.pointCloud, depth);
 }
 void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist){
     dvec slot(3);
@@ -85,23 +85,23 @@ void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double x
     }
 }
 
-int MainWindow::lowestPoint(std::vector<dvec>& pointSet, double index){
-    double min = pointSet[0][index];
+int MainWindow::lowestPoint(std::vector<dvec>& pointCloud, double index){
+    double min = pointCloud[0][index];
     int minIndex = 0;
-    for(int i = 0; i < pointSet.size(); ++i){
-        if(pointSet[i][index] < min){
-            min = pointSet[i][index];
+    for(int i = 0; i < pointCloud.size(); ++i){
+        if(pointCloud[i][index] < min){
+            min = pointCloud[i][index];
             minIndex = i;
         }
     }
     return minIndex;
 }
-int MainWindow::highestPoint(std::vector<dvec>& pointSet, double index){
-    double max = pointSet[0][index];
+int MainWindow::highestPoint(std::vector<dvec>& pointCloud, double index){
+    double max = pointCloud[0][index];
     int maxIndex = 0;
-    for(int i = 0; i < pointSet.size(); ++i){
-        if(pointSet[i][index] > max){
-            max = pointSet[i][index];
+    for(int i = 0; i < pointCloud.size(); ++i){
+        if(pointCloud[i][index] > max){
+            max = pointCloud[i][index];
             maxIndex = i;
         }
     }
