@@ -59,6 +59,7 @@ private:
     //Methods:
     int getSelectedID();
 
+
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
     QtDataVisualization::Q3DScatter scatterGraph;
@@ -89,6 +90,9 @@ private slots:
 
     //Output:
     void updateOutput();
+    void updatePropertyViewer();
+    void setPropertyAtRow(const int row, const std::string& name, const std::string& value);
+    void setStatus(const std::string& statusMessage);
     //Scatter graph:
     void toggleScatterGraph();
     void selectedToGraph();
@@ -107,6 +111,7 @@ private slots:
     //Point set:
     void pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& depth);
     void pointCloudToBoolCloud();
+    bool slotAboveThreshold(dvec& slotCoord, std::vector<dvec>& pointCloud, double threshold);
     void checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist);
     int lowestPoint(std::vector<dvec>& pointCloud, double index);
     int highestPoint(std::vector<dvec>& pointCloud, double index);

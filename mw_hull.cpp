@@ -36,7 +36,7 @@ void MainWindow::calcHull(boolCloud& cloud){
     //Create cloud object:
     boolCloud hull(vDist, vMin, vSize);
     //Reset UI:
-    ui->label_infoText->setText("Generating Hull...");
+    setStatus("Generating Hull...");
     //Progress:
         double progress = 0.0;
         double progdiv = 100.0 / pow(double(hull.xsize - 3), 3.0);
@@ -90,9 +90,10 @@ void MainWindow::calcHull(boolCloud& cloud){
         }
         }
         ui->checkBox_autoHull->setEnabled(true);
-        ui->label_infoText->setText("Generated Hull");
+        setStatus("Generated Hull");
 
-        std::string name = "Hull_r" + std::to_string(res);
+        std::string name = "Hull";
+        hull.pointCount = pC;
 
         internalEntity hullEntity(hull,name);
         entityHandler.addEntity(hullEntity);

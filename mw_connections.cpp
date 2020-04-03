@@ -71,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->checkBox_showGraph, SIGNAL(stateChanged(int)),this, SLOT(toggleScatterGraph()));
     //Graph:
     QWidget *container = QWidget::createWindowContainer(&scatterGraph,this);
-    ui->horizontalLayout->addWidget(container);
+    ui->horizontalLayout_scatterGraph->addWidget(container);
     scatterGraph.setAspectRatio(1.0);
     scatterGraph.setHorizontalAspectRatio(1.0);
     //scatterGraph.seriesList().at(0)->setMesh(QtDataVisualization::QAbstract3DSeries::MeshPoint);
@@ -81,6 +81,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionMesh_obj, SIGNAL(triggered(bool)), this, SLOT(generateMesh()));
 
     //Object management:
+    connect(ui->treeWidget_objects, SIGNAL(itemSelectionChanged()), this, SLOT(updatePropertyViewer()) );
     connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteEntry()));
     //Action buttons are only available when they fit:
     connect(ui->treeWidget_objects, SIGNAL(itemSelectionChanged()), this, SLOT(updateActionAvailability()));

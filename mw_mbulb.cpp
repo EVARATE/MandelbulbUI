@@ -52,7 +52,7 @@ void MainWindow::calcMBulb(){
     boolCloud mBulb(vDist,vMin,vSize);
 
     ui->label_setPoints->setText("0");
-    ui->label_infoText->setText("Generating Mandelbulb...");
+    setStatus("Generating Mandelbulb...");
 
     //Calculation:
           double density = 0;
@@ -113,10 +113,14 @@ void MainWindow::calcMBulb(){
             }//zpos loop end
             }//ypos loop end
             }//xpos loop end
-          ui->label_infoText->setText("Generated Mandelbulb");
-          std::string name = "Mbulb_r" + std::to_string(res) + "_i" + std::to_string(iter);
+          setStatus("Generated Mandelbulb");
+          std::string name = "Mandelbulb";
+          mBulb.pointCount = pointCount;
 
           internalEntity mBulbEntity(mBulb,name);
+          mBulbEntity.data0 = iter;
+          mBulbEntity.data1 = power;
+          mBulbEntity.data2 = maxLength;
           entityHandler.addEntity(mBulbEntity);
           createEntry(mBulbEntity.name, mBulbEntity.type, mBulbEntity.id);
 

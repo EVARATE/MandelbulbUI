@@ -53,6 +53,9 @@ public:
     std::string name = "Item";
     int id = -1;//Must be changed to a positive integer
     int type = 0;
+    int data0 = 0;//Custom data.
+    int data1 = 0;//Dependent on object and not always
+    int data2 = 0;//available
 
 };
 

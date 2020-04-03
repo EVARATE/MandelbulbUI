@@ -19,6 +19,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 #include "boolcloud.h"
 #include <string>
+#include <cmath>
 
 //inline reason: Compiler puts these functions into several files and
 //then complains that there are multiple definitions of it. Inline fixes that.
@@ -90,4 +91,8 @@ inline void setFileExt(std::string &filePath, std::string defaultExtension){
         }
         filePath.append(defaultExtension);
     }
+}
+
+inline double calcDistance(dvec& pointA, dvec& pointB){
+    return sqrt( pow(pointA[0] - pointB[0], 2.0) + pow(pointA[1] - pointB[1], 2.0) + pow(pointA[2] - pointB[2], 2.0) );
 }

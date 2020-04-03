@@ -45,8 +45,28 @@ void MainWindow::pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& dept
     boolCloud cloud(dist, min, depth);
 
     double progress = 0.0;
-    double progdiv = double(pointCloud.size()) / 100.0;
+    double progdiv = double( depth[0]*depth[1]*depth[2] -3.0 ) / 100.0;
 
+    //Calc distance of each gridpoint to each point; distance = weight.
+    //Add all weights. If result is above threshold, set gridpoint to true.
+    for(int i = 0; i < depth[0]; ++i){
+    for(int j = 0; j < depth[1]; ++j){
+    for(int k = 0; k < depth[2]; ++k){
+        ivec index = {i,j,k};
+        dvec coord(3);
+        cloud.convIndexToCoord(index, coord);
+        double threshold = 0.2;
+        bool derivedState = slotAboveThreshold(coord, pointCloud, threshold);
+        cloud.setState(index, derivedState);
+
+        progress += progdiv;
+        ui->progressBar->setValue(progress);
+    }
+    }
+    }
+
+
+    /*
     //Check each point:
     for(int n = 0; n < pointCloud.size(); ++n){
         //Check for each slot of the cloud if the point is near it
@@ -55,21 +75,37 @@ void MainWindow::pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& dept
         progress += progdiv;
         ui->progressBar->setValue(progress);
     }
+    */
+
 
     //Create object:
     internalEntity cloudEntity(cloud, "New cloud");
     entityHandler.addEntity(cloudEntity);
     createEntry(cloudEntity.name, cloudEntity.type, cloudEntity.id);
-    ui->label_infoText->setText("Generated boolcloud.");
+    setStatus("Generated boolCloud");
 }
 void MainWindow::pointCloudToBoolCloud(){
     int id = getSelectedID();
     internalEntity pointCloudObj;
     entityHandler.getEntityAtID(id, pointCloudObj);
-    ivec depth = {100,100,100};
+    ivec depth = {50,50,50};
     pointCloudToBoolCloud(pointCloudObj.pointCloud, depth);
 }
-void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double xdist){
+bool MainWindow::slotAboveThreshold(dvec& slotCoord, std::vector<dvec>& pointCloud, double threshold){
+    long double weight = 0;
+    for(int i = 0; i < pointCloud.size(); ++i){
+        double distance = calcDistance(slotCoord, pointCloud[i]);
+        weight += exp(- distance * distance);
+    }
+    weight = weight / pointCloud.size();
+    if(weight >= threshold){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double radius){
     dvec slot(3);
     for(int i = 0; i < depth[0]; ++i){
     for(int j = 0; j < depth[1]; ++j){
@@ -77,7 +113,7 @@ void MainWindow::checkPoint(ivec& depth, boolCloud& cloud, dvec& point, double x
         ivec index = {i,j,k};
 
         cloud.convIndexToCoord(index, slot);
-        if(isNear(slot, point, xdist / 2.0)){
+        if(isNear(slot, point, radius / 2.0)){
             cloud.setState(index, true);
         }
     }

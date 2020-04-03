@@ -79,6 +79,7 @@ public:
     double xmin, ymin, zmin;
     double xmax, ymax, zmax;
     int xsize, ysize, zsize;
+    int pointCount = 0;
     bool isInit = false;
 private:
     bmat3d cloud;

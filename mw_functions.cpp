@@ -27,6 +27,7 @@ MainWindow::~MainWindow()
 
 //Methods:
 int MainWindow::getSelectedID(){
+    if(!ui->treeWidget_objects->currentItem()){return -1;}
         return ui->treeWidget_objects->currentItem()->text(2).toInt();
 }
 
@@ -49,7 +50,7 @@ void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     else if(extension == "bin"){
         cloud.saveInternal(filePath);
     }
-    ui->label_infoText->setText(QString::fromStdString("Saved cloud to " + filePath ));
+    setStatus("Saved cloud to " + filePath);
 }
 void MainWindow::actionSaveBoolCloud(){
     int id = getSelectedID();
@@ -73,13 +74,13 @@ void MainWindow::actionLoadBoolCloud(){
     boolCloud cloud;
     if(extension == "bin"){
         cloud.loadInternal(filePath);
-        ui->label_infoText->setText(QString::fromStdString("Loaded " + filePath ));
+        setStatus("Loaded " + filePath);
         internalEntity bCloudEntity(cloud, "Imported boolCloud");
         entityHandler.addEntity(bCloudEntity);
         createEntry(bCloudEntity.name, bCloudEntity.type, bCloudEntity.id);
     }
     else{
-        ui->label_infoText->setText(QString::fromStdString("ERROR: Invalid file extension: " + extension));
+        setStatus("ERROR: Invalid file extension: " + extension);
     }
 
 }
@@ -113,7 +114,7 @@ void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
     }
     ofile << polyBuffer;
     ofile.close();
-    ui->label_infoText->setText(QString::fromStdString("Saved mesh to " + filePath ));
+    setStatus("Saved mesh to " + filePath);
 }
 void MainWindow::actionSaveTriMesh(){
     int id = getSelectedID();
@@ -140,7 +141,7 @@ void MainWindow::actionLoadpointCloud(){
         std::ifstream ifile;
         ifile.open(filePath);
         if(!ifile.is_open()){
-            ui->label_infoText->setText(QString::fromStdString("Couldn't open file: " + filePath));
+            setStatus("Couldn't open file: " + filePath);
             return;
         }
         while(true){
@@ -155,9 +156,9 @@ void MainWindow::actionLoadpointCloud(){
         internalEntity pointCloudEntity(pointCloud, "Point Cloud");
         entityHandler.addEntity(pointCloudEntity);
         createEntry(pointCloudEntity.name, pointCloudEntity.type, pointCloudEntity.id);
-        ui->label_infoText->setText(QString::fromStdString("Imported file: " + filePath));
+        setStatus("Imported file: " + filePath);
     }else{
-        ui->label_infoText->setText(QString::fromStdString("Invalid file extension: " + extension));
+        setStatus("Invalid file extension: " + extension);
         return;
     }
 }
@@ -203,7 +204,7 @@ void MainWindow::selectedToGraph(){
     }
     else if(type == 1){
         //triMesh
-        ui->label_infoText->setText("Can't yet render mesh in viewport.");
+        setStatus("Can't yet render mesh in viewport.");
     }
     else if(type == 2){
         //type = pointcloud
@@ -256,6 +257,68 @@ void MainWindow::updateOutput(){
     ui->label_distance->setText(QString::number(distance));
     ui->label_rawPoints->setText(QString::number(std::pow(res,3.0)));
 
+}
+void MainWindow::updatePropertyViewer(){
+    //Remove all rows
+    ui->tableWidget_ObjectProperties->setRowCount(0);
+
+    //Get selected object:
+
+    int id = getSelectedID();
+    if(id == -1){return;}
+    internalEntity selectedEntity;
+    entityHandler.getEntityAtID(id, selectedEntity);
+    int type = selectedEntity.type;
+
+    //Display properties depending on entity type
+    if(type == 0){
+        //bCloud
+        ui->tableWidget_ObjectProperties->setRowCount(19);
+
+        //data:
+        setPropertyAtRow(0, "name", selectedEntity.name);
+        setPropertyAtRow(1, "type", std::to_string(selectedEntity.type));
+        setPropertyAtRow(2, "id", std::to_string(selectedEntity.id));
+        //distance:
+        setPropertyAtRow(3, "xdistance", std::to_string(selectedEntity.bCloud.xdistance));
+        setPropertyAtRow(4, "ydistance", std::to_string(selectedEntity.bCloud.ydistance));
+        setPropertyAtRow(5, "zdistance", std::to_string(selectedEntity.bCloud.zdistance));
+        //min
+        setPropertyAtRow(6, "xmin", std::to_string(selectedEntity.bCloud.xmin));
+        setPropertyAtRow(7, "ymin", std::to_string(selectedEntity.bCloud.ymin));
+        setPropertyAtRow(8, "zmin", std::to_string(selectedEntity.bCloud.zmin));
+        //max
+        setPropertyAtRow(9, "xmax", std::to_string(selectedEntity.bCloud.xmax));
+        setPropertyAtRow(10, "ymax", std::to_string(selectedEntity.bCloud.ymax));
+        setPropertyAtRow(11, "zmax", std::to_string(selectedEntity.bCloud.zmax));
+        //size
+        setPropertyAtRow(12, "xsize", std::to_string(selectedEntity.bCloud.xsize));
+        setPropertyAtRow(13, "ysize", std::to_string(selectedEntity.bCloud.ysize));
+        setPropertyAtRow(14, "zsize", std::to_string(selectedEntity.bCloud.zsize));
+        //other
+        setPropertyAtRow(15, "pointCount", std::to_string(selectedEntity.bCloud.pointCount));
+        //custom data
+        setPropertyAtRow(16, "iterations", std::to_string(selectedEntity.data0));
+        setPropertyAtRow(17, "power", std::to_string(selectedEntity.data1));
+        setPropertyAtRow(18, "maxLength", std::to_string(selectedEntity.data2));
+
+    }
+    else if(type == 1){
+
+    }
+    else if(type == 2){
+
+    }
+    else{
+        return;
+    }
+}
+void MainWindow::setPropertyAtRow(const int row, const std::string& name, const std::string& value){
+    ui->tableWidget_ObjectProperties->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(name), 0));
+    ui->tableWidget_ObjectProperties->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(value), 0));
+}
+void MainWindow::setStatus(const std::string& statusMessage){
+    ui->statusBar->showMessage(QString::fromStdString(statusMessage));
 }
 
 void MainWindow::createEntry(const std::string& name, int type, int id){

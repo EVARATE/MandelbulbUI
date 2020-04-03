@@ -447,7 +447,7 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *pare
 }
 
 void MainWindow::generateMesh(boolCloud& cloud){
-    ui->label_infoText->setText("Generating mesh via marching Cubes algorithm...");
+    setStatus("Generating mesh via marching Cubes algorithm...");
     std::vector<TRIANGLE> triBuffer;
     cubeMarch(cloud, triBuffer,this);
     //Save as object:
@@ -455,7 +455,7 @@ void MainWindow::generateMesh(boolCloud& cloud){
     entityHandler.addEntity(triMeshEntity);
     createEntry(triMeshEntity.name, triMeshEntity.type, triMeshEntity.id);
 
-    ui->label_infoText->setText("Generated mesh.");
+    setStatus("Generated mesh.");
 }
 void MainWindow::generateMesh(){
     int id = getSelectedID();
