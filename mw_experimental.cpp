@@ -20,3 +20,4 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+//This file is for experimental code.
