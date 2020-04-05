@@ -32,21 +32,42 @@ void MainWindow::createContextMenu(const QPoint& pos){
         QAction *ViewAction = new QAction("View", this);
         QAction *DeleteAction = new QAction("Delete", this);
         QAction *HullAction = new QAction("Calculate Hull", this);
-        QAction *MeshAction = new QAction("Calculate Mesh", this);
+        QAction *MeshAction = new QAction("Generate Mesh", this);
+        QAction *SaveAction = new QAction("Export (.txt, .bin)", this);
 
         contextMenu.addAction(ViewAction);
         contextMenu.addAction(DeleteAction);
+        contextMenu.addSeparator();
         contextMenu.addAction(HullAction);
         contextMenu.addAction(MeshAction);
+        contextMenu.addSeparator();
+        contextMenu.addAction(SaveAction);
 
+
+        connect(ViewAction, SIGNAL(triggered()), this, SLOT(selectedToGraph()));
+        connect(DeleteAction, SIGNAL(triggered()), this, SLOT(deleteEntry()));
         connect(HullAction, SIGNAL(triggered()), this, SLOT(calcHull()));
-        //CONTINUE HERE===========================================================================
+        connect(MeshAction, SIGNAL(triggered()), this, SLOT(generateMesh()));
+        connect(SaveAction, SIGNAL(triggered()), this, SLOT(actionSaveBoolCloud()));
     }
     else if(type == 1){
+        //triMesh
+        QAction *DeleteAction = new QAction("Delete", this);
+        QAction *ExportAction = new QAction("Export (.obj)", this);
 
+        contextMenu.addAction(DeleteAction);
+        contextMenu.addAction(ExportAction);
+
+        connect(DeleteAction, SIGNAL(triggered()), this, SLOT(deleteEntry()));
+        connect(ExportAction, SIGNAL(triggered()), this, SLOT(actionSaveTriMesh()));
     }
     else if(type == 2){
+        //pointCloud
+        QAction *ViewAction = new QAction("View", this);
 
+        contextMenu.addAction(ViewAction);
+
+        connect(ViewAction, SIGNAL(triggered()), this, SLOT(selectedToGraph()));
     }
     else{
         return;

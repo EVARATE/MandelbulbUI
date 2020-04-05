@@ -40,14 +40,14 @@ int MainWindow::getSelectedType(){
 void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     //Select file:
     QFileDialog saveDialog;
-    saveDialog.setDefaultSuffix("txt");
+    saveDialog.setDefaultSuffix("bin");
     QString fileName = saveDialog.getSaveFileName();
     if(fileName.isNull()){
         return;
     }
 
     std::string filePath = fileName.toStdString();
-    std::string extension = getFileExt(filePath, "txt");
+    std::string extension = getFileExt(filePath, "bin");
 
     //Write data:
     if(extension == "txt"){
