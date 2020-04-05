@@ -29,6 +29,7 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 #include <Q3DScatter>
 #include <QAbstract3DSeries>
 #include <Q3DTheme>
+#include <QMenu>
 #include "boolcloud.h"
 #include "internalentityhandler.h"
 #include "utilityFunctions.cpp"
@@ -58,7 +59,7 @@ private:
 
     //Methods:
     int getSelectedID();
-
+    int getSelectedType();
 
     //Scatter graph:
     QtDataVisualization::QScatter3DSeries scatterSeries;
@@ -81,7 +82,7 @@ private slots:
     void actionSaveBoolCloud(boolCloud& cloud);
     void actionSaveBoolCloud();
     void actionLoadBoolCloud();
-    void actionSaveTriMesh(std::vector<TRIANGLE>& triMesh);
+    void actionSaveTriMesh(triVec& triMesh);
     void actionSaveTriMesh();
     void actionLoadpointCloud();
     //Info/About Dialog:
@@ -121,6 +122,9 @@ private slots:
     void createEntry(const std::string& name, int type, int id);
     void deleteEntry();
     void updateActionAvailability();
+
+    //Entity list context menu
+    void createContextMenu(const QPoint& pos);
 
 };
 #endif // MAINWINDOW_H

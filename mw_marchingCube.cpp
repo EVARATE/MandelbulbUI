@@ -392,7 +392,7 @@ void findTriVertices(int cubeindex, GRIDCELL &grid, std::vector<dvec> &vertlist)
     }
 }
 
-void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *parent){
+void cubeMarch(boolCloud& cloud, triVec &triBuffer, QWidget *parent){
     int maxProg = (cloud.xsize-1)*(cloud.ysize-1)*(cloud.zsize-1);
     int progress = 0;
     QProgressDialog progDialog("Generating mesh...", "Cancel", 0, maxProg, parent);
@@ -448,7 +448,7 @@ void cubeMarch(boolCloud& cloud, std::vector<TRIANGLE> &triBuffer, QWidget *pare
 
 void MainWindow::generateMesh(boolCloud& cloud){
     setStatus("Generating mesh via marching Cubes algorithm...");
-    std::vector<TRIANGLE> triBuffer;
+    triVec triBuffer;
     cubeMarch(cloud, triBuffer,this);
     //Save as object:
     internalEntity triMeshEntity(triBuffer, "MC_Mesh");

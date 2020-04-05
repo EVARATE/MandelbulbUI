@@ -26,6 +26,7 @@ SOURCES += \
 	mw_hull.cpp \
 	mw_marchingCube.cpp \
 	mw_mbulb.cpp \
+	mw_objectContextMenu.cpp \
 	mw_pointSet.cpp \
 	utilityFunctions.cpp
 

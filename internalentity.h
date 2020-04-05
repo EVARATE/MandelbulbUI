@@ -27,7 +27,7 @@ typedef struct {
    dvec p[3];
 } TRIANGLE;
 
-
+typedef std::vector<TRIANGLE> triVec;
 
 class internalEntity
 {
@@ -37,7 +37,7 @@ public:
     internalEntity(boolCloud& entityBCloud, std::string entityName):
         bCloud(entityBCloud), name(entityName) {type = 0;};
 
-    internalEntity(std::vector<TRIANGLE> entityTriMesh, std::string entityName):
+    internalEntity(triVec entityTriMesh, std::string entityName):
         triMesh(entityTriMesh), name(entityName) {type = 1;};
 
     internalEntity(std::vector<dvec>& entityPointCloud, std::string entityName):
@@ -47,7 +47,7 @@ public:
 
     //Type slots:
     boolCloud bCloud;//Type 0
-    std::vector<TRIANGLE> triMesh;//Type 1
+    triVec triMesh;//Type 1
     std::vector<dvec> pointCloud;//Type 2
     //Data:
     std::string name = "Item";
