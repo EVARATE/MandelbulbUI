@@ -85,4 +85,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_remObject, SIGNAL(clicked(bool)), this, SLOT(deleteEntry()));
     //Action buttons are only available when they fit:
     connect(ui->treeWidget_objects, SIGNAL(itemSelectionChanged()), this, SLOT(updateActionAvailability()));
+
+    //Context menu
+    connect(ui->treeWidget_objects, &QTreeWidget::customContextMenuRequested, this, &MainWindow::createContextMenu);
+
 }

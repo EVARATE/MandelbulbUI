@@ -30,18 +30,24 @@ int MainWindow::getSelectedID(){
     if(!ui->treeWidget_objects->currentItem()){return -1;}
         return ui->treeWidget_objects->currentItem()->text(2).toInt();
 }
+int MainWindow::getSelectedType(){
+    int id = getSelectedID();
+    internalEntity selectedEntity;
+    entityHandler.getEntityAtID(id, selectedEntity);
+    return selectedEntity.type;
+}
 
 void MainWindow::actionSaveBoolCloud(boolCloud& cloud){
     //Select file:
     QFileDialog saveDialog;
-    saveDialog.setDefaultSuffix("txt");
+    saveDialog.setDefaultSuffix("bin");
     QString fileName = saveDialog.getSaveFileName();
     if(fileName.isNull()){
         return;
     }
 
     std::string filePath = fileName.toStdString();
-    std::string extension = getFileExt(filePath, "txt");
+    std::string extension = getFileExt(filePath, "bin");
 
     //Write data:
     if(extension == "txt"){
@@ -84,7 +90,7 @@ void MainWindow::actionLoadBoolCloud(){
     }
 
 }
-void MainWindow::actionSaveTriMesh(std::vector<TRIANGLE>& triMesh){
+void MainWindow::actionSaveTriMesh(triVec& triMesh){
     //Save dialog:
     QFileDialog saveDialog;
     saveDialog.setDefaultSuffix("obj");
@@ -270,15 +276,16 @@ void MainWindow::updatePropertyViewer(){
     entityHandler.getEntityAtID(id, selectedEntity);
     int type = selectedEntity.type;
 
+    //Display base properties
+    ui->tableWidget_ObjectProperties->setRowCount(3);
+    setPropertyAtRow(0, "name", selectedEntity.name);
+    setPropertyAtRow(1, "type", std::to_string(selectedEntity.type));
+    setPropertyAtRow(2, "id", std::to_string(selectedEntity.id));
+
     //Display properties depending on entity type
     if(type == 0){
         //bCloud
         ui->tableWidget_ObjectProperties->setRowCount(19);
-
-        //data:
-        setPropertyAtRow(0, "name", selectedEntity.name);
-        setPropertyAtRow(1, "type", std::to_string(selectedEntity.type));
-        setPropertyAtRow(2, "id", std::to_string(selectedEntity.id));
         //distance:
         setPropertyAtRow(3, "xdistance", std::to_string(selectedEntity.bCloud.xdistance));
         setPropertyAtRow(4, "ydistance", std::to_string(selectedEntity.bCloud.ydistance));
@@ -304,10 +311,14 @@ void MainWindow::updatePropertyViewer(){
 
     }
     else if(type == 1){
-
+        //triMesh
+        ui->tableWidget_ObjectProperties->setRowCount(4);
+        setPropertyAtRow(3, "Triangles", std::to_string(selectedEntity.triMesh.size()));
     }
     else if(type == 2){
-
+        //pointCloud
+    ui->tableWidget_ObjectProperties->setRowCount(4);
+        setPropertyAtRow(3, "pointCount", std::to_string(selectedEntity.pointCloud.size()));
     }
     else{
         return;
