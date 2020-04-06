@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->action_loadInternal, SIGNAL(triggered(bool)), this, SLOT(actionLoadBoolCloud()));
     connect(ui->action_loadPointCloud, SIGNAL(triggered(bool)), this, SLOT(actionLoadpointCloud()));
     //Export:
+    connect(ui->action_ExportMeshObj, SIGNAL(triggered(bool)), this, SLOT(actionExportMesh()));
     connect(ui->action_saveMeshObj, SIGNAL(triggered(bool)), this, SLOT(actionSaveTriMesh()));
     connect(ui->action_saveBCloud, SIGNAL(triggered(bool)), this, SLOT(actionSaveBoolCloud()));
     //Exit:

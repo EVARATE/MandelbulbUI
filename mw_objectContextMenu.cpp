@@ -54,12 +54,15 @@ void MainWindow::createContextMenu(const QPoint& pos){
         //triMesh
         QAction *DeleteAction = new QAction("Delete", this);
         QAction *ExportAction = new QAction("Export (.obj)", this);
+        QAction *ExportActionOld = new QAction("Export (old) (.obj)", this);
 
         contextMenu.addAction(DeleteAction);
         contextMenu.addAction(ExportAction);
+        contextMenu.addAction(ExportActionOld);
 
         connect(DeleteAction, SIGNAL(triggered()), this, SLOT(deleteEntry()));
-        connect(ExportAction, SIGNAL(triggered()), this, SLOT(actionSaveTriMesh()));
+        connect(ExportAction, SIGNAL(triggered()), this, SLOT(actionExportMesh()));
+        connect(ExportActionOld, SIGNAL(triggered()), this, SLOT(actionSaveTriMesh()));
     }
     else if(type == 2){
         //pointCloud

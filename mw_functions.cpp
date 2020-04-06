@@ -90,6 +90,47 @@ void MainWindow::actionLoadBoolCloud(){
     }
 
 }
+
+void MainWindow::actionExportMesh(triVec& triMesh){
+    //Save dialog:
+    QFileDialog saveDialog;
+    saveDialog.setDefaultSuffix("obj");
+    QString fileName = saveDialog.getSaveFileName();
+    if(fileName.isNull()){
+        return;
+    }
+
+    std::string filePath = fileName.toStdString();
+    setFileExt(filePath, "obj");
+
+    //.obj Exporter:
+    setStatus("Exporting Mesh...");
+    std::vector<dvec> vertices;
+    ivec indices;
+    removeOverlapping(triMesh, vertices, indices);
+    setStatus("Writing to file...");
+    std::ofstream ofile;
+    ofile.open(filePath);
+    if(!ofile.is_open()){return;}
+    ofile << "#Exported by MandelbulbUI\n";
+    ofile << "o MandelbulbUI mesh\n";
+    for(int i = 0; i < vertices.size(); ++i){
+
+            ofile << "v " << vertices[i][0] << " " << vertices[i][1] << " " << vertices[i][2] << "\n";
+
+    }
+    for(int i = 0; i < indices.size(); i += 3){
+        ofile << "f " << indices[i] << " " << indices[i+1] << " " << indices[i+2] << "\n";
+    }
+    ofile.close();
+    setStatus("Saved mesh to " + filePath);
+}
+void MainWindow::actionExportMesh(){
+    int id = getSelectedID();
+    internalEntity cloudObj;
+    entityHandler.getEntityAtID(id, cloudObj);
+    actionExportMesh(cloudObj.triMesh);
+}
 void MainWindow::actionSaveTriMesh(triVec& triMesh){
     //Save dialog:
     QFileDialog saveDialog;
@@ -121,6 +162,7 @@ void MainWindow::actionSaveTriMesh(triVec& triMesh){
     ofile << polyBuffer;
     ofile.close();
     setStatus("Saved mesh to " + filePath);
+
 }
 void MainWindow::actionSaveTriMesh(){
     int id = getSelectedID();
@@ -375,6 +417,7 @@ void MainWindow::updateActionAvailability(){
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
         ui->action_saveBCloud->setEnabled(false);
+        ui->action_ExportMeshObj->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
         ui->pushButton_viewObject->setEnabled(false);
         //Activate Generate button:
@@ -398,12 +441,14 @@ void MainWindow::updateActionAvailability(){
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
         ui->action_saveBCloud->setEnabled(false);
+        ui->action_ExportMeshObj->setEnabled(true);
         ui->action_saveMeshObj->setEnabled(true);
     }else{
         ui->action_saveInternal->setEnabled(false);
         ui->actionFilter_Hull->setEnabled(false);
         ui->actionGenerate_Mesh->setEnabled(false);
         ui->action_saveBCloud->setEnabled(false);
+        ui->action_ExportMeshObj->setEnabled(false);
         ui->action_saveMeshObj->setEnabled(false);
     }
 }

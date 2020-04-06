@@ -96,3 +96,12 @@ inline void setFileExt(std::string &filePath, std::string defaultExtension){
 inline double calcDistance(dvec& pointA, dvec& pointB){
     return sqrt( pow(pointA[0] - pointB[0], 2.0) + pow(pointA[1] - pointB[1], 2.0) + pow(pointA[2] - pointB[2], 2.0) );
 }
+
+inline bool equalPoints(dvec& pointA, dvec& pointB){
+    for(int i = 0; i < pointA.size(); ++i){
+        if(pointA[i] != pointB[i]){
+            return false;
+        }
+    }
+    return true;
+}

@@ -1247,6 +1247,7 @@
      <property name="title">
       <string>Export</string>
      </property>
+     <addaction name="action_ExportMeshObj"/>
      <addaction name="action_saveMeshObj"/>
      <addaction name="action_saveBCloud"/>
     </widget>
@@ -1402,7 +1403,7 @@
     <bool>false</bool>
    </property>
    <property name="text">
-    <string>Mesh (.obj)</string>
+    <string>Mesh (old) (.obj)</string>
    </property>
   </action>
   <action name="action_saveBCloud">
@@ -1437,6 +1438,14 @@
    </property>
    <property name="toolTip">
     <string>DISCONTINUED</string>
+   </property>
+  </action>
+  <action name="action_ExportMeshObj">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Mesh (.obj)</string>
    </property>
   </action>
  </widget>

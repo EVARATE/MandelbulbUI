@@ -82,6 +82,8 @@ private slots:
     void actionSaveBoolCloud(boolCloud& cloud);
     void actionSaveBoolCloud();
     void actionLoadBoolCloud();
+    void actionExportMesh(triVec& triMesh);
+    void actionExportMesh();
     void actionSaveTriMesh(triVec& triMesh);
     void actionSaveTriMesh();
     void actionLoadpointCloud();
@@ -108,6 +110,10 @@ private slots:
     //Marching Cubes:
     void generateMesh(boolCloud& cloud);
     void generateMesh();
+
+    //.obj processing
+    void removeOverlapping(triVec& triMesh, std::vector<dvec>& newArray, ivec& indexOrder);
+    void triMeshToVecArray(triVec& triMesh, std::vector<dvec>& vecArray);
 
     //Point set:
     void pointCloudToBoolCloud(std::vector<dvec>& pointCloud, ivec& depth);
