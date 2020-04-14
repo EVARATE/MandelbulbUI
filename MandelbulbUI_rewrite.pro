@@ -1,4 +1,4 @@
-QT       += core gui datavisualization
+QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -16,28 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-	boolcloud.cpp \
-	internalentity.cpp \
-	internalentityhandler.cpp \
-	main.cpp \
-	mw_connections.cpp \
-	mw_experimental.cpp \
-	mw_functions.cpp \
-	mw_hull.cpp \
-	mw_marchingCube.cpp \
-	mw_mbulb.cpp \
-	mw_objectContextMenu.cpp \
-	mw_pointSet.cpp \
-	utilityFunctions.cpp
+    boolcloud.cpp \
+    internalentity.cpp \
+    internalentityhandler.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    mbulbwindow.cpp \
+    utilityFunctions.cpp
 
 HEADERS += \
-	boolcloud.h \
-	internalentity.h \
-	internalentityhandler.h \
-	mainwindow.h
+    boolcloud.h \
+    internalentity.h \
+    internalentityhandler.h \
+    mainwindow.h \
+    mbulbwindow.h
 
 FORMS += \
-	mainwindow.ui
+    mainwindow.ui \
+    mbulbwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -45,4 +41,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-	iconFile.qrc
+    resources.qrc

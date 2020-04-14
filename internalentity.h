@@ -22,12 +22,20 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include "boolcloud.h"
+#include <string>
 
 typedef struct {
    dvec p[3];
 } TRIANGLE;
 
+typedef struct {
+    std::string name;
+    std::string value;
+} internalProperty;
+
+typedef std::vector<internalProperty> propertyVec;
 typedef std::vector<TRIANGLE> triVec;
+
 
 class internalEntity
 {
@@ -35,27 +43,47 @@ public:
     internalEntity(){}
 
     internalEntity(boolCloud& entityBCloud, std::string entityName):
-        bCloud(entityBCloud), name(entityName) {type = 0;};
+        bCloud(entityBCloud), name(entityName) {
+        type = 0;
+        typeName = getTypeName();
+    };
 
     internalEntity(triVec entityTriMesh, std::string entityName):
-        triMesh(entityTriMesh), name(entityName) {type = 1;};
+        triMesh(entityTriMesh), name(entityName) {
+        type = 1;
+        typeName = getTypeName();
+    };
 
     internalEntity(std::vector<dvec>& entityPointCloud, std::string entityName):
-        pointCloud(entityPointCloud), name(entityName) {type = 2;};
+        pointCloud(entityPointCloud), name(entityName) {
+        type = 2;
+        typeName = getTypeName();
+    };
+    internalEntity(std::string entityName, int entityType){
+        name = entityName;
+        type = entityType;
+        typeName = getTypeName();
+    }
 
+    //Methods
+    void addProperty(std::string name, std::string value);
+    void addProperty(std::string name, int value);
+    void addProperty(std::string name, double value);
+    std::string getTypeName();
 
-
-    //Type slots:
+    //Data:
     boolCloud bCloud;//Type 0
     triVec triMesh;//Type 1
     std::vector<dvec> pointCloud;//Type 2
-    //Data:
-    std::string name = "Item";
-    int id = -1;//Must be changed to a positive integer
-    int type = 0;
-    int data0 = 0;//Custom data.
-    int data1 = 0;//Dependent on object and not always
-    int data2 = 0;//available
+    //Properties:
+    std::string name;
+    int id = -1;
+    int type;
+    std::string typeName;
+    propertyVec properties;
+
+    //Is empty?
+    bool isEmpty = false;
 
 };
 

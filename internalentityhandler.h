@@ -22,8 +22,6 @@ along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
 
 /*This class handles a set of internalEntity objects.
  *It takes care of assigning the correct id, storing, deleting, etc.
- *
- *
  */
 
 #include "internalentity.h"
@@ -36,6 +34,7 @@ public:
 
     void addEntity(internalEntity& entity);
     void deleteEntity(int id);
+    internalEntity returnEmptyEntity();
 
     void getEntityAtID(int id, internalEntity& entity);
     int getID();

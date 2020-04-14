@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/cil-plus.svg</file>
+        <file>icons/cil-reload.svg</file>
+        <file>icons/cil-camera.svg</file>
+        <file>icons/cil-screen-desktop.svg</file>
+        <file>icons/cil-trash.svg</file>
+    </qresource>
+</RCC>

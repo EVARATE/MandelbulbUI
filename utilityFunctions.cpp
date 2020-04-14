@@ -1,22 +1,3 @@
-/*
-Copyright 2019, 2020 Sebastian Motzet
-
-This file is part of MandelbulbUI.
-
-MandelbulbUI is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-MandelbulbUI is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with MandelbulbUI.  If not, see <https://www.gnu.org/licenses/>.
-*/
-
 #include "boolcloud.h"
 #include <string>
 #include <cmath>
@@ -104,4 +85,19 @@ inline bool equalPoints(dvec& pointA, dvec& pointB){
         }
     }
     return true;
+}
+
+inline void lineToWords(const std::string& line, std::vector<std::string>& stringVec){
+    std::string word;
+    stringVec.resize(0);
+    for(int i = 0; i < line.size(); ++i){
+        if(line[i] == ' '){
+            stringVec.push_back(word);
+            word.resize(0);
+        }else{
+            word.push_back(line[i]);
+        }
+    }
+
+
 }

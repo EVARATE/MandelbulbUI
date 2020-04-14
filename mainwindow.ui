@@ -10,1221 +10,155 @@
     <height>720</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>200</width>
-    <height>200</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>5000</width>
-    <height>5000</height>
-   </size>
-  </property>
-  <property name="palette">
-   <palette>
-    <active>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>127</red>
-        <green>131</green>
-        <blue>124</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>106</red>
-        <green>109</green>
-        <blue>103</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>56</red>
-        <green>58</green>
-        <blue>55</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>220</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </active>
-    <inactive>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>127</red>
-        <green>131</green>
-        <blue>124</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>106</red>
-        <green>109</green>
-        <blue>103</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>56</red>
-        <green>58</green>
-        <blue>55</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>220</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </inactive>
-    <disabled>
-     <colorrole role="WindowText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Button">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Light">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>127</red>
-        <green>131</green>
-        <blue>124</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Midlight">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>106</red>
-        <green>109</green>
-        <blue>103</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Dark">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Mid">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>56</red>
-        <green>58</green>
-        <blue>55</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Text">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="BrightText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ButtonText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>42</red>
-        <green>43</green>
-        <blue>41</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Base">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Window">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="Shadow">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="AlternateBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>85</red>
-        <green>87</green>
-        <blue>83</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipBase">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>255</red>
-        <green>255</green>
-        <blue>220</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="ToolTipText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="255">
-        <red>0</red>
-        <green>0</green>
-        <blue>0</blue>
-       </color>
-      </brush>
-     </colorrole>
-     <colorrole role="PlaceholderText">
-      <brush brushstyle="SolidPattern">
-       <color alpha="128">
-        <red>255</red>
-        <green>255</green>
-        <blue>255</blue>
-       </color>
-      </brush>
-     </colorrole>
-    </disabled>
-   </palette>
-  </property>
   <property name="windowTitle">
    <string>MandelbulbUI</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="iconFile.qrc">
-    <normaloff>:/icons/icons/icon_main1.png</normaloff>:/icons/icons/icon_main1.png</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QFormLayout" name="formLayout">
-    <item row="0" column="0">
-     <layout class="QVBoxLayout" name="vLayout_sidebar_Left">
-      <property name="spacing">
-       <number>5</number>
-      </property>
+   <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
+    <item>
+     <layout class="QVBoxLayout" name="vL_LeftSideBar">
       <item>
-       <layout class="QVBoxLayout" name="vLayout_EntityManager">
-        <property name="spacing">
-         <number>5</number>
-        </property>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <layout class="QVBoxLayout" name="vLayout_EntityBrowser">
-          <property name="spacing">
-           <number>5</number>
-          </property>
-          <item>
-           <layout class="QHBoxLayout" name="hLayout_BrowserButtons" stretch="0,0">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <item>
-             <widget class="QPushButton" name="pushButton_remObject">
-              <property name="palette">
-               <palette>
-                <active>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>255</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </active>
-                <inactive>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>255</red>
-                    <green>0</green>
-                    <blue>0</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </inactive>
-                <disabled>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>42</red>
-                    <green>43</green>
-                    <blue>41</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </disabled>
-               </palette>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>19</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>Delete</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="iconFile.qrc">
-                <normaloff>:/icons/icons/icon_trash.png</normaloff>:/icons/icons/icon_trash.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_viewObject">
-              <property name="palette">
-               <palette>
-                <active>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>32</red>
-                    <green>74</green>
-                    <blue>135</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </active>
-                <inactive>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>32</red>
-                    <green>74</green>
-                    <blue>135</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </inactive>
-                <disabled>
-                 <colorrole role="ButtonText">
-                  <brush brushstyle="SolidPattern">
-                   <color alpha="255">
-                    <red>42</red>
-                    <green>43</green>
-                    <blue>41</blue>
-                   </color>
-                  </brush>
-                 </colorrole>
-                </disabled>
-               </palette>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>17</pointsize>
-                <weight>75</weight>
-                <bold>true</bold>
-               </font>
-              </property>
-              <property name="toolTip">
-               <string>View in viewport</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="icon">
-               <iconset resource="iconFile.qrc">
-                <normaloff>:/icons/icons/icon_viewobject.png</normaloff>:/icons/icons/icon_viewobject.png</iconset>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="QTreeWidget" name="treeWidget_objects">
-            <property name="palette">
-             <palette>
-              <active>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>52</red>
-                  <green>52</green>
-                  <blue>52</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </active>
-              <inactive>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>52</red>
-                  <green>52</green>
-                  <blue>52</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </inactive>
-              <disabled>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>85</red>
-                  <green>87</green>
-                  <blue>83</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </disabled>
-             </palette>
-            </property>
-            <property name="contextMenuPolicy">
-             <enum>Qt::CustomContextMenu</enum>
-            </property>
-            <property name="alternatingRowColors">
-             <bool>true</bool>
-            </property>
-            <property name="iconSize">
-             <size>
-              <width>16</width>
-              <height>16</height>
-             </size>
-            </property>
-            <property name="indentation">
-             <number>1</number>
-            </property>
-            <property name="itemsExpandable">
-             <bool>false</bool>
-            </property>
-            <attribute name="headerVisible">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="headerCascadingSectionResizes">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="headerMinimumSectionSize">
-             <number>20</number>
-            </attribute>
-            <attribute name="headerDefaultSectionSize">
-             <number>170</number>
-            </attribute>
-            <attribute name="headerHighlightSections">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="headerShowSortIndicator" stdset="0">
-             <bool>false</bool>
-            </attribute>
-            <attribute name="headerStretchLastSection">
-             <bool>true</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string>Object</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Type</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>ID</string>
-             </property>
-            </column>
-           </widget>
-          </item>
-          <item>
-           <widget class="QTableWidget" name="tableWidget_ObjectProperties">
-            <property name="palette">
-             <palette>
-              <active>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>85</red>
-                  <green>87</green>
-                  <blue>83</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </active>
-              <inactive>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>85</red>
-                  <green>87</green>
-                  <blue>83</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </inactive>
-              <disabled>
-               <colorrole role="Base">
-                <brush brushstyle="SolidPattern">
-                 <color alpha="255">
-                  <red>85</red>
-                  <green>87</green>
-                  <blue>83</blue>
-                 </color>
-                </brush>
-               </colorrole>
-              </disabled>
-             </palette>
-            </property>
-            <property name="editTriggers">
-             <set>QAbstractItemView::NoEditTriggers</set>
-            </property>
-            <attribute name="horizontalHeaderVisible">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="horizontalHeaderStretchLastSection">
-             <bool>true</bool>
-            </attribute>
-            <attribute name="verticalHeaderVisible">
-             <bool>false</bool>
-            </attribute>
-            <column>
-             <property name="text">
-              <string>Property</string>
-             </property>
-            </column>
-            <column>
-             <property name="text">
-              <string>Value</string>
-             </property>
-            </column>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QVBoxLayout" name="vLayout_mBulb">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="label_Input">
-          <property name="font">
-           <font>
-            <pointsize>12</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
+         <widget class="QToolButton" name="buttonDeleteObject">
           <property name="text">
-           <string>Mandelbulb Generator:</string>
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/cil-trash.svg</normaloff>:/icons/cil-trash.svg</iconset>
           </property>
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="hLayout_mBulbInOut">
-          <item>
-           <layout class="QFormLayout" name="fLayout_mBulbInput">
-            <property name="horizontalSpacing">
-             <number>5</number>
-            </property>
-            <property name="verticalSpacing">
-             <number>5</number>
-            </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label">
-              <property name="toolTip">
-               <string>Divisions in each axis</string>
-              </property>
-              <property name="text">
-               <string>Resolution:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="toolTip">
-               <string>Maximum amount of iterations calculated for the sequence in each point (Determines quality of the Mandelbulb)</string>
-              </property>
-              <property name="text">
-               <string>Iterations:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_3">
-              <property name="toolTip">
-               <string>Lowerst coordinate in each axis</string>
-              </property>
-              <property name="text">
-               <string>Minimum:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_4">
-              <property name="toolTip">
-               <string>Highest coordinate in each axis</string>
-              </property>
-              <property name="text">
-               <string>Maximum:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="toolTip">
-               <string>Exponent in the sequence (Determines shape of the Mandelbulb)</string>
-              </property>
-              <property name="text">
-               <string>Power</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="label_6">
-              <property name="toolTip">
-               <string>Upper limit for one point to jump within one iteration step</string>
-              </property>
-              <property name="text">
-               <string>Max. Length:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_res" stretch="1,0">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QSpinBox" name="spinBox_res">
-                <property name="minimum">
-                 <number>2</number>
-                </property>
-                <property name="maximum">
-                 <number>32767</number>
-                </property>
-                <property name="value">
-                 <number>50</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_res">
-                <property name="toolTip">
-                 <string>Reset Resolution</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="1" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_iter" stretch="1,0">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QSpinBox" name="spinBox_iter">
-                <property name="minimum">
-                 <number>1</number>
-                </property>
-                <property name="maximum">
-                 <number>32767</number>
-                </property>
-                <property name="value">
-                 <number>10</number>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_iter">
-                <property name="toolTip">
-                 <string>Reset Iterations</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="2" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_min" stretch="1,0">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_min">
-                <property name="minimum">
-                 <double>-10.000000000000000</double>
-                </property>
-                <property name="maximum">
-                 <double>10.000000000000000</double>
-                </property>
-                <property name="value">
-                 <double>-1.750000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_min">
-                <property name="toolTip">
-                 <string>Reset Minimum</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="3" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_max" stretch="1,0">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_max">
-                <property name="minimum">
-                 <double>-10.000000000000000</double>
-                </property>
-                <property name="maximum">
-                 <double>10.000000000000000</double>
-                </property>
-                <property name="value">
-                 <double>1.750000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_max">
-                <property name="toolTip">
-                 <string>Reset Maximum</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="4" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_power">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_power">
-                <property name="maximum">
-                 <double>32767.000000000000000</double>
-                </property>
-                <property name="value">
-                 <double>8.000000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_power">
-                <property name="toolTip">
-                 <string>Reset Power</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="5" column="1">
-             <layout class="QHBoxLayout" name="hLayout_input_maxLength">
-              <property name="spacing">
-               <number>5</number>
-              </property>
-              <item>
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_maxLength">
-                <property name="maximum">
-                 <double>32767.000000000000000</double>
-                </property>
-                <property name="value">
-                 <double>2.000000000000000</double>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QPushButton" name="pushButtonReset_maxLength">
-                <property name="toolTip">
-                 <string>Reset Max. Length</string>
-                </property>
-                <property name="text">
-                 <string/>
-                </property>
-                <property name="icon">
-                 <iconset resource="iconFile.qrc">
-                  <normaloff>:/icons/icons/icon_reset.png</normaloff>:/icons/icons/icon_reset.png</iconset>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-           </layout>
-          </item>
-          <item>
-           <widget class="Line" name="line">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <layout class="QVBoxLayout" name="vLayout_mBulbGenerate">
-            <property name="spacing">
-             <number>5</number>
-            </property>
-            <item>
-             <layout class="QFormLayout" name="fLayout_mBulbFeedback">
-              <property name="horizontalSpacing">
-               <number>5</number>
-              </property>
-              <property name="verticalSpacing">
-               <number>5</number>
-              </property>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_8">
-                <property name="toolTip">
-                 <string>Distance between two neighbouring points</string>
-                </property>
-                <property name="text">
-                 <string>Distance:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QLabel" name="label_distance">
-                <property name="text">
-                 <string>0.07</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_7">
-                <property name="toolTip">
-                 <string>Raw amount of point to be calculated</string>
-                </property>
-                <property name="text">
-                 <string>Raw points:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QLabel" name="label_rawPoints">
-                <property name="text">
-                 <string>125000</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="toolTip">
-                 <string>Points for which the sequence doesn't diverge</string>
-                </property>
-                <property name="text">
-                 <string>In the set:</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QLabel" name="label_setPoints">
-                <property name="text">
-                 <string>0</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButton_generate">
-              <property name="toolTip">
-               <string>Generate Mandelbulb with the above settings</string>
-              </property>
-              <property name="text">
-               <string>Generate</string>
-              </property>
-              <property name="shortcut">
-               <string>Ctrl+G</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <layout class="QHBoxLayout" name="hLayout_mBulbOptions">
-              <item>
-               <widget class="QCheckBox" name="checkBox_autoHull">
-                <property name="toolTip">
-                 <string>Automatically filter hull after the generation has finished</string>
-                </property>
-                <property name="text">
-                 <string>Auto Hull</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QCheckBox" name="checkBox_autoMesh">
-                <property name="toolTip">
-                 <string>Automatically generate mesh. (Generates mesh from hull if 'Auto Hull' is checked)</string>
-                </property>
-                <property name="text">
-                 <string>Auto Mesh</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <widget class="QProgressBar" name="progressBar">
-              <property name="value">
-               <number>0</number>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-         </layout>
+         <widget class="QToolButton" name="buttonShowObject">
+          <property name="text">
+           <string>...</string>
+          </property>
+          <property name="icon">
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/cil-camera.svg</normaloff>:/icons/cil-camera.svg</iconset>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
+      </item>
+      <item>
+       <widget class="QTreeWidget" name="treeWidget_objectViewer">
+        <property name="alternatingRowColors">
+         <bool>true</bool>
+        </property>
+        <property name="rootIsDecorated">
+         <bool>false</bool>
+        </property>
+        <property name="uniformRowHeights">
+         <bool>true</bool>
+        </property>
+        <property name="itemsExpandable">
+         <bool>false</bool>
+        </property>
+        <attribute name="headerCascadingSectionResizes">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="headerDefaultSectionSize">
+         <number>110</number>
+        </attribute>
+        <attribute name="headerHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Type</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>ID</string>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="tableWidget_objectProperties">
+        <property name="editTriggers">
+         <set>QAbstractItemView::NoEditTriggers</set>
+        </property>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="horizontalHeaderStretchLastSection">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderHighlightSections">
+         <bool>false</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Property</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Value</string>
+         </property>
+        </column>
+       </widget>
       </item>
      </layout>
     </item>
-    <item row="0" column="1">
-     <layout class="QVBoxLayout" name="vLayout_viewport" stretch="0,1">
-      <property name="spacing">
-       <number>5</number>
-      </property>
+    <item>
+     <layout class="QVBoxLayout" name="vL_Viewport" stretch="0,1">
       <item>
-       <layout class="QHBoxLayout" name="hLayout_viewportOptions">
-        <property name="spacing">
-         <number>5</number>
-        </property>
+       <layout class="QHBoxLayout" name="hL_viewportToolbar">
         <item>
-         <widget class="QCheckBox" name="checkBox_showGraph">
-          <property name="toolTip">
-           <string>Display 3d graph of the calculated points. WARNING: Significant performance loss for resolutions above 100</string>
-          </property>
+         <widget class="QToolButton" name="toolButton_toggleViewport">
           <property name="text">
-           <string>Show viewport</string>
+           <string>...</string>
           </property>
           <property name="icon">
-           <iconset resource="iconFile.qrc">
-            <normaloff>:/icons/icons/icon_viewport.png</normaloff>:/icons/icons/icon_viewport.png</iconset>
-          </property>
-          <property name="shortcut">
-           <string>Alt+H</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
+           <iconset resource="resources.qrc">
+            <normaloff>:/icons/cil-screen-desktop.svg</normaloff>:/icons/cil-screen-desktop.svg</iconset>
           </property>
          </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_scatterGraph">
-        <property name="spacing">
-         <number>5</number>
-        </property>
-       </layout>
+       <widget class="QOpenGLWidget" name="openGLWidget"/>
       </item>
      </layout>
     </item>
@@ -1243,214 +177,78 @@
     <property name="title">
      <string>File</string>
     </property>
-    <widget class="QMenu" name="menuExport_2">
+    <widget class="QMenu" name="menuExport">
      <property name="title">
       <string>Export</string>
      </property>
-     <addaction name="action_ExportMeshObj"/>
-     <addaction name="action_saveMeshObj"/>
-     <addaction name="action_saveBCloud"/>
+     <addaction name="actionExport_Entity_dat"/>
+     <addaction name="separator"/>
     </widget>
     <widget class="QMenu" name="menuImport">
      <property name="title">
       <string>Import</string>
      </property>
-     <addaction name="action_loadInternal"/>
-     <addaction name="action_loadPointCloud"/>
+     <addaction name="actionImport_Entity_dat"/>
+     <addaction name="separator"/>
     </widget>
+    <addaction name="menuExport"/>
     <addaction name="menuImport"/>
-    <addaction name="menuExport_2"/>
     <addaction name="separator"/>
     <addaction name="actionExit"/>
-   </widget>
-   <widget class="QMenu" name="menuHelp">
-    <property name="title">
-     <string>Help</string>
-    </property>
-    <addaction name="actionInfo"/>
-    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuObject">
     <property name="title">
      <string>Object</string>
     </property>
-    <addaction name="actionFilter_Hull"/>
-    <addaction name="actionGenerate_Mesh"/>
-    <addaction name="action_pointCloudToBoolCloud"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuGenerate">
+    <property name="title">
+     <string>Generate</string>
+    </property>
    </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuGenerate"/>
    <addaction name="menuObject"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
-  <action name="actionSave_Mandelbulb">
-   <property name="enabled">
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <property name="movable">
     <bool>false</bool>
    </property>
-   <property name="text">
-    <string>Save Mandelbulb</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+S</string>
-   </property>
-   <property name="shortcutContext">
-    <enum>Qt::WindowShortcut</enum>
-   </property>
-  </action>
-  <action name="actionSave_Hull">
-   <property name="enabled">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
     <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Save Hull</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+S</string>
-   </property>
-  </action>
-  <action name="actionLoad_Mandelbulb">
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Load Mandelbulb</string>
-   </property>
-   <property name="toolTip">
-    <string>Disabled until saving in external format is implemented</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+O</string>
-   </property>
-  </action>
-  <action name="actionLoad_Hull">
-   <property name="checkable">
-    <bool>false</bool>
-   </property>
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="text">
-    <string>Load Hull</string>
-   </property>
-   <property name="toolTip">
-    <string>Disabled until saving in external format is implemented</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+O</string>
-   </property>
-  </action>
+   </attribute>
+  </widget>
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
    </property>
   </action>
-  <action name="actionAbout">
+  <action name="actionExport_Entity_dat">
    <property name="text">
-    <string>About</string>
+    <string>Export Entity (.dat)</string>
    </property>
   </action>
-  <action name="actionInfo">
+  <action name="actionImport_Entity_dat">
    <property name="text">
-    <string>Info</string>
-   </property>
-  </action>
-  <action name="actionExport_Mesh_obj">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Export Mesh (.obj)</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+E</string>
-   </property>
-  </action>
-  <action name="actionMesh_obj">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Mesh (.obj)</string>
-   </property>
-  </action>
-  <action name="actionFilter_Hull">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Filter Hull</string>
-   </property>
-   <property name="toolTip">
-    <string>Remove all points except those that lie on the hull</string>
-   </property>
-  </action>
-  <action name="actionGenerate_Mesh">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Generate Mesh</string>
-   </property>
-   <property name="toolTip">
-    <string>Generate triangle mesh (cube marching)</string>
-   </property>
-  </action>
-  <action name="action_saveMeshObj">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Mesh (old) (.obj)</string>
-   </property>
-  </action>
-  <action name="action_saveBCloud">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Bool Cloud (.txt, .bin)</string>
-   </property>
-  </action>
-  <action name="action_saveInternal">
-   <property name="text">
-    <string>Internal Format (.bin)</string>
-   </property>
-  </action>
-  <action name="action_loadInternal">
-   <property name="text">
-    <string>Internal Format (.bin)</string>
-   </property>
-  </action>
-  <action name="action_loadPointCloud">
-   <property name="text">
-    <string>Point Cloud (.txt)</string>
-   </property>
-  </action>
-  <action name="action_pointCloudToBoolCloud">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Point Cloud to Bool Cloud</string>
-   </property>
-   <property name="toolTip">
-    <string>DISCONTINUED</string>
-   </property>
-  </action>
-  <action name="action_ExportMeshObj">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="text">
-    <string>Mesh (.obj)</string>
+    <string>Import Entity (.dat)</string>
    </property>
   </action>
  </widget>
  <resources>
-  <include location="iconFile.qrc"/>
+  <include location="resources.qrc"/>
  </resources>
  <connections/>
 </ui>

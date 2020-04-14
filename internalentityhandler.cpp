@@ -33,6 +33,13 @@ void internalEntityHandler::deleteEntity(int id){
         ++it;
     }while(it != entityList.end());
 }
+internalEntity internalEntityHandler::returnEmptyEntity(){
+    internalEntity entity;
+    entity.isEmpty = true;
+    entity.type = -1;
+    entity.name = "nan";
+    return entity;
+}
 
 void internalEntityHandler::getEntityAtID(int id, internalEntity &entity){
     auto it = entityList.begin();
