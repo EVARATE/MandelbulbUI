@@ -16,11 +16,23 @@ MainWindow::MainWindow(QWidget *parent)
     //Connect actions
     connect(ui->actionExport_Entity_dat, SIGNAL(triggered()), this, SLOT(exportEntity()));
     connect(ui->actionImport_Entity_dat, SIGNAL(triggered()), this, SLOT(importEntity()));
+    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));
+    connect(ui->actionInfo, SIGNAL(triggered()), this, SLOT(actionInfo()));
+    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(actionAbout()));
 
     //ObjectViewer selection change updates property viewer:
     connect(ui->treeWidget_objectViewer, SIGNAL(itemSelectionChanged()), this, SLOT(updatePropertyViewer()));
     //ObjectViewer tools
     connect(ui->buttonDeleteObject, SIGNAL(clicked()), this, SLOT(deleteSelectedEntity()));
+
+    //Scatter graph
+    connect(ui->buttonShowObject, SIGNAL(clicked()), this, SLOT(selectedEntityToGraph()));
+    connect(ui->buttonToggleViewport, SIGNAL(clicked()), this, SLOT(toggleViewport()));
+    QWidget *container = QWidget::createWindowContainer(&scatterGraph, this);
+    ui->vL_Viewport->addWidget(container);
+    scatterGraph.setAspectRatio(1.0);
+    scatterGraph.setHorizontalAspectRatio(1.0);
+
 
 }
 
@@ -30,21 +42,19 @@ MainWindow::~MainWindow()
 }
 
 //File menu
-void MainWindow::actionExport(){
-
-}
-void MainWindow::actionImport(){
-
-}
 void MainWindow::actionExit(){
-
+    this->close();
 }
 //Help menu
 void MainWindow::actionAbout(){
-
+    QMessageBox aboutBox;
+    aboutBox.about(this,"MandelbulbUI", "Made with Qt Creator\n\nLicensed under the GNU General Public License v3.0\n\nCopyright 2019, 2020 Sebastian Motzet");
 }
 void MainWindow::actionInfo(){
-
+    QMessageBox infoBox;
+    infoBox.setWindowTitle("Info");
+    infoBox.setText("Please refer to the <a href='https://github.com/EVARATE/MandelbulbUI/wiki'>wiki</a> for detailed information.");
+    infoBox.exec();
 }
 //Import/Export
 QString MainWindow::getExportPath(const std::string& extension){
@@ -119,6 +129,12 @@ void MainWindow::importEntity(){
     ifile >> entityName;
     ifile >> entityType;
 
+    if(std::stoi(entityType) == -1){
+        setStatus("Error: invalid entity type: -1");
+        ifile.close();
+        return;
+    }
+
     internalEntity entity(entityName, std::stoi(entityType));
 
     std::string beginProp;
@@ -145,15 +161,15 @@ void MainWindow::importEntity(){
 
     if(entity.type == 0){
         //Initialize boolCloud:
-        double xmin = std::stod(entity.properties[3].value);
-        double ymin = std::stod(entity.properties[4].value);
-        double zmin = std::stod(entity.properties[5].value);
-        double xdist = std::stod(entity.properties[9].value);
-        double ydist = std::stod(entity.properties[10].value);
-        double zdist = std::stod(entity.properties[11].value);
-        int xsize = std::stoi(entity.properties[12].value);
-        int ysize = std::stoi(entity.properties[13].value);
-        int zsize = std::stoi(entity.properties[14].value);
+        double xmin = std::stod(entity.properties[4].value);
+        double ymin = std::stod(entity.properties[5].value);
+        double zmin = std::stod(entity.properties[6].value);
+        double xdist = std::stod(entity.properties[10].value);
+        double ydist = std::stod(entity.properties[11].value);
+        double zdist = std::stod(entity.properties[12].value);
+        int xsize = std::stoi(entity.properties[13].value);
+        int ysize = std::stoi(entity.properties[14].value);
+        int zsize = std::stoi(entity.properties[15].value);
         dvec dist = {xdist, ydist, zdist};
         dvec min = {xmin, ymin, zmin};
         ivec size = {xsize, ysize, zsize};
@@ -268,6 +284,10 @@ void MainWindow::displayTools(){
 void MainWindow::updatePropertyViewer(){
     internalEntity entity;
     getSelectedEntity(entity);
+    if(entity.id == -1){
+        ui->tableWidget_objectProperties->setRowCount(0);
+        return;
+    }
     int rowCount = 3 + entity.properties.size();
     ui->tableWidget_objectProperties->setRowCount(rowCount);
     //name, type, id
@@ -282,6 +302,73 @@ void MainWindow::updatePropertyViewer(){
 void MainWindow::setPropertyAtRow(const int row, const std::string& name, const std::string& value){
     ui->tableWidget_objectProperties->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(name), 0));
     ui->tableWidget_objectProperties->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(value), 0));
+}
+void MainWindow::toggleViewport(){
+    static bool checked = false;
+    if(checked){
+        scatterGraph.show();
+        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop_filled_custom.svg"));
+        checked = false;
+    }else{
+        scatterGraph.hide();
+        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop.svg"));
+        checked = true;
+    }
+}
+void MainWindow::selectedEntityToGraph(){
+    if(!ui->treeWidget_objectViewer->currentItem()){
+        scatterSeries.dataProxy()->removeItems(0, scatterSeries.dataProxy()->itemCount());
+        //scatterGraph.addSeries(&scatterSeries);
+        return;
+    }
+    internalEntity entity;
+    getSelectedEntity(entity);
+    if(entity.type == 0){
+        //boolCloud
+        boolCloudToGraph(entity);
+    }
+    else if(entity.type == 1){
+        //triMesh
+        //not supported
+        return;
+    }
+    else if(entity.type == 2){
+        //pointCloud
+        pointCloudToGraph(entity);
+    }
+    else{
+        return;
+    }
+    scatterGraph.seriesList().at(0)->setMesh(QtDataVisualization::QAbstract3DSeries::MeshCube);
+}
+void MainWindow::boolCloudToGraph(internalEntity& entity){
+    scatterSeries.dataProxy()->removeItems(0,scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
+    boolCloud& cloud = entity.bCloud;
+    for(int i = 0; i < cloud.xsize; ++i){
+    for(int j = 0; j < cloud.ysize; ++j){
+    for(int k = 0; k < cloud.zsize; ++k){
+        ivec index = {i,j,k};
+        if(cloud.getState(index)){
+            dvec coords(3);
+            cloud.convIndexToCoord(index,coords);
+            scatterData << QVector3D(coords[0], coords[1], coords[2]);
+        }
+    }
+    }
+    }
+    scatterSeries.dataProxy()->addItems(scatterData);
+    scatterGraph.addSeries(&scatterSeries);
+}
+void MainWindow::pointCloudToGraph(internalEntity& entity){
+    scatterSeries.dataProxy()->removeItems(0, scatterSeries.dataProxy()->itemCount());
+    QtDataVisualization::QScatterDataArray scatterData;
+    std::vector<dvec>& pointCloud = entity.pointCloud;
+    for(int i = 0; i < pointCloud.size(); ++i){
+        scatterData << QVector3D(pointCloud[i][0], pointCloud[i][1], pointCloud[i][2]);
+    }
+    scatterSeries.dataProxy()->addItems(scatterData);
+    scatterGraph.addSeries(&scatterSeries);
 }
 
 //internal entity management
@@ -306,6 +393,7 @@ void MainWindow::deleteSelectedEntity(){
     delete ui->treeWidget_objectViewer->currentItem();
     //Delete data
     entityHandler.deleteEntity(entity.id);
+    scatterSeries.dataProxy()->removeItems(0, scatterSeries.dataProxy()->itemCount());
 }
 int MainWindow::getSelectedID(){
     if(!ui->treeWidget_objectViewer->currentItem()){return -1;}

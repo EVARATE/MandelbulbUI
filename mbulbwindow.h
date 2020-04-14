@@ -24,12 +24,12 @@ private:
     Ui::MbulbWindow *ui;
 
     //Default parameters:
-    double defX1 = -1.75;
-    double defY1 = -1.75;
-    double defZ1 = -1.75;
-    double defX2 = 1.75;
-    double defY2 = 1.75;
-    double defZ2 = 1.75;
+    double defX1 = 1.75;
+    double defY1 = 1.75;
+    double defZ1 = 1.75;
+    double defX2 = -1.75;
+    double defY2 = -1.75;
+    double defZ2 = -1.75;
     int defIter = 10;
     double defPower = 8.0;
     double defMaxLength = 2.0;
@@ -39,6 +39,7 @@ private:
 
 private slots:
     void generateMBulb();
+    void updateOutput();
 signals:
     void transferEntity(internalEntity& entity);
 };

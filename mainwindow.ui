@@ -21,6 +21,9 @@
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <widget class="QToolButton" name="buttonDeleteObject">
+          <property name="toolTip">
+           <string>Delete selected</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -32,6 +35,9 @@
         </item>
         <item>
          <widget class="QToolButton" name="buttonShowObject">
+          <property name="toolTip">
+           <string>View selected</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
@@ -128,17 +134,29 @@
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="vL_Viewport" stretch="0,1">
+     <layout class="QVBoxLayout" name="vL_Viewport" stretch="0">
       <item>
        <layout class="QHBoxLayout" name="hL_viewportToolbar">
         <item>
-         <widget class="QToolButton" name="toolButton_toggleViewport">
+         <widget class="QToolButton" name="buttonToggleViewport">
+          <property name="toolTip">
+           <string>Toggle viewport</string>
+          </property>
           <property name="text">
            <string>...</string>
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/cil-screen-desktop.svg</normaloff>:/icons/cil-screen-desktop.svg</iconset>
+            <normaloff>:/icons/cil-screen-desktop_filled_custom.svg</normaloff>:/icons/cil-screen-desktop_filled_custom.svg</iconset>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+          <property name="arrowType">
+           <enum>Qt::NoArrow</enum>
           </property>
          </widget>
         </item>
@@ -156,9 +174,6 @@
          </spacer>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QOpenGLWidget" name="openGLWidget"/>
       </item>
      </layout>
     </item>
@@ -205,6 +220,8 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionInfo"/>
+    <addaction name="actionAbout"/>
    </widget>
    <widget class="QMenu" name="menuGenerate">
     <property name="title">
@@ -244,6 +261,16 @@
   <action name="actionImport_Entity_dat">
    <property name="text">
     <string>Import Entity (.dat)</string>
+   </property>
+  </action>
+  <action name="actionInfo">
+   <property name="text">
+    <string>Info</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
    </property>
   </action>
  </widget>

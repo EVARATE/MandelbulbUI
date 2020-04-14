@@ -5,7 +5,10 @@
 #include <QWindow>
 #include <QAction>
 #include <QFileDialog>
+#include <QMessageBox>
+#include <QtDataVisualization>
 #include <iostream>
+
 #include "utilityFunctions.cpp"
 #include "mbulbwindow.h"
 #include "ui_mbulbwindow.h"
@@ -28,10 +31,11 @@ private:
     internalEntityHandler entityHandler;
     MbulbWindow *mBulbWindow = new MbulbWindow;
 
+    QtDataVisualization::QScatter3DSeries scatterSeries;
+    QtDataVisualization::Q3DScatter scatterGraph;
+
 private slots:
     //File menu
-    void actionExport();
-    void actionImport();
     void actionExit();
     //Help menu
     void actionAbout();
@@ -56,6 +60,10 @@ private slots:
     void displayTools();
     void updatePropertyViewer();
     void setPropertyAtRow(const int row, const std::string& name, const std::string& value);
+    void toggleViewport();
+    void selectedEntityToGraph();
+    void boolCloudToGraph(internalEntity& entity);
+    void pointCloudToGraph(internalEntity& entity);
 
     //internal entity management
     void addEntity(internalEntity& entity);

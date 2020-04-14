@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>400</height>
+    <width>460</width>
+    <height>410</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -529,6 +529,24 @@
        </item>
        <item>
         <widget class="QLabel" name="zdistOutput">
+         <property name="text">
+          <string>0</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_19">
+       <item>
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Grid Slots</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="gridSlotsOutput">
          <property name="text">
           <string>0</string>
          </property>
