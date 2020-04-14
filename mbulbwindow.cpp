@@ -6,11 +6,9 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     ui(new Ui::MbulbWindow)
 {
     ui->setupUi(this);
-    updateOutput();
 
     //Connections
     connect(ui->ButtonGenerate, SIGNAL(clicked()), this, SLOT(generateMBulb()));
-
 
     //RESET BUTTONS
     //X1, Y1, Z1, X2, Y2, Z2
@@ -144,6 +142,7 @@ void MbulbWindow::generateMBulb(){
 
     emit transferEntity(entity);
     ui->ButtonGenerate->setEnabled(true);
+    ui->progressBar->setValue(0);
     this->close();
 }
 void MbulbWindow::updateOutput(){
@@ -163,4 +162,5 @@ void MbulbWindow::updateOutput(){
     ui->ydistOutput->setText(QString::number(ydist));
     ui->zdistOutput->setText(QString::number(zdist));
     ui->gridSlotsOutput->setText(QString::number(xres*yres*zres));
+    ui->progressBar->setValue(0);
 }

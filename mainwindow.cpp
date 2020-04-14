@@ -13,13 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     //Connections
     connect(mBulbWindow, SIGNAL(transferEntity(internalEntity&)), this, SLOT(addEntity(internalEntity&)));
 
-    //Connect actions
-    connect(ui->actionExport_Entity_dat, SIGNAL(triggered()), this, SLOT(exportEntity()));
-    connect(ui->actionImport_Entity_dat, SIGNAL(triggered()), this, SLOT(importEntity()));
-    connect(ui->actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));
-    connect(ui->actionInfo, SIGNAL(triggered()), this, SLOT(actionInfo()));
-    connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(actionAbout()));
-
     //ObjectViewer selection change updates property viewer:
     connect(ui->treeWidget_objectViewer, SIGNAL(itemSelectionChanged()), this, SLOT(updatePropertyViewer()));
     //ObjectViewer tools
@@ -74,6 +67,8 @@ QString MainWindow::getImportPath(const std::string& extension){
     return QString::fromStdString(path);
 }
 void MainWindow::exportEntity(){
+    //Check if any entity is selected
+    if(!ui->treeWidget_objectViewer->currentItem()){return;}
     //Get File path and name
     QString exportPath = getExportPath("dat");
     if(exportPath.isNull()){return;}
@@ -271,15 +266,47 @@ void MainWindow::displayTools(){
     actionGenMB->setIcon(QIcon(":/icons/cil-plus.svg"));
     actionGenMB->setToolTip("New Mandelbulb");
 
+    QAction *actionExportEntity = new QAction("Export entity (.dat)");
+    actionExportEntity->setIcon(QIcon(":/icons/cil-save.svg"));
+    actionExportEntity->setToolTip("Export selected entity");
+
+    QAction *actionImportEntity = new QAction("Import entity (.dat)");
+    actionImportEntity->setIcon(QIcon(":/icons/cil-folder-open.svg"));
+    actionImportEntity->setToolTip(("Import entity (.dat)"));
+
+    QAction *actionExit = new QAction("Exit");
+    actionExit->setToolTip("Exit the program");
+
+    QAction *actionInfo = new QAction("Info");
+    actionInfo->setToolTip("Show Info");
+
+    QAction *actionAbout = new QAction("About");
+    actionAbout->setToolTip("About the program");
+
     //Toolbar
     ui->toolBar->addAction(actionGenMB);
     ui->toolBar->addSeparator();
+    ui->toolBar->addAction(actionExportEntity);
+    ui->toolBar->addAction(actionImportEntity);
 
-    //Action menu
+    //Generate Menu
     ui->menuGenerate->addAction(actionGenMB);
+    //File menu
+    ui->menuFile->addAction(actionExportEntity);
+    ui->menuFile->addAction(actionImportEntity);
+    ui->menuFile->addSeparator();
+    ui->menuFile->addAction(actionExit);
+    //Help menu
+    ui->menuHelp->addAction(actionInfo);
+    ui->menuHelp->addAction(actionAbout);
 
     //Connections
     connect(actionGenMB, SIGNAL(triggered()), this, SLOT(showMBGenerator()));
+    connect(actionExportEntity, SIGNAL(triggered()), this, SLOT(exportEntity()));
+    connect(actionImportEntity, SIGNAL(triggered()), this, SLOT(importEntity()));
+    connect(actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));
+    connect(actionInfo, SIGNAL(triggered()), this, SLOT(actionInfo()));
+    connect(actionAbout, SIGNAL(triggered()), this, SLOT(actionAbout()));
 }
 void MainWindow::updatePropertyViewer(){
     internalEntity entity;

@@ -6,5 +6,7 @@
         <file>icons/cil-screen-desktop.svg</file>
         <file>icons/cil-trash.svg</file>
         <file>icons/cil-screen-desktop_filled_custom.svg</file>
+        <file>icons/cil-save.svg</file>
+        <file>icons/cil-folder-open.svg</file>
     </qresource>
 </RCC>

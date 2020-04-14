@@ -8,7 +8,7 @@ void boolCloud::init(){
     cloud.resize(xsize);
     for(int i = 0;i < xsize; ++i){
         cloud[i].resize(ysize);
-        for(int j = 0; j < zsize; ++j){
+        for(int j = 0; j < ysize; ++j){
             cloud[i][j].resize(zsize, false);
         }
     }
