@@ -8,5 +8,6 @@
         <file>icons/cil-screen-desktop_filled_custom.svg</file>
         <file>icons/cil-save.svg</file>
         <file>icons/cil-folder-open.svg</file>
+        <file>icons/MandelbulbUI_icon.svg</file>
     </qresource>
 </RCC>

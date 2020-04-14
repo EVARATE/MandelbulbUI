@@ -6,26 +6,27 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     ui(new Ui::MbulbWindow)
 {
     ui->setupUi(this);
+    addPreset(defaultPreset);
 
     //Connections
     connect(ui->ButtonGenerate, SIGNAL(clicked()), this, SLOT(generateMBulb()));
 
     //RESET BUTTONS
     //X1, Y1, Z1, X2, Y2, Z2
-    connect(ui->buttonResetX1, &QToolButton::clicked, this, [this](){ui->X1Input->setValue(defX1);});
-    connect(ui->buttonResetY1, &QToolButton::clicked, this, [this](){ui->Y1Input->setValue(defY1);});
-    connect(ui->buttonResetZ1, &QToolButton::clicked, this, [this](){ui->Z1Input->setValue(defZ1);});
-    connect(ui->buttonResetX2, &QToolButton::clicked, this, [this](){ui->X2Input->setValue(defX2);});
-    connect(ui->buttonResetY2, &QToolButton::clicked, this, [this](){ui->Y2Input->setValue(defY2);});
-    connect(ui->buttonResetZ2, &QToolButton::clicked, this, [this](){ui->Z2Input->setValue(defZ2);});
+    connect(ui->buttonResetX1, &QToolButton::clicked, this, [this](){ui->X1Input->setValue(defaultPreset.X1);});
+    connect(ui->buttonResetY1, &QToolButton::clicked, this, [this](){ui->Y1Input->setValue(defaultPreset.Y1);});
+    connect(ui->buttonResetZ1, &QToolButton::clicked, this, [this](){ui->Z1Input->setValue(defaultPreset.Z1);});
+    connect(ui->buttonResetX2, &QToolButton::clicked, this, [this](){ui->X2Input->setValue(defaultPreset.X2);});
+    connect(ui->buttonResetY2, &QToolButton::clicked, this, [this](){ui->Y2Input->setValue(defaultPreset.Y2);});
+    connect(ui->buttonResetZ2, &QToolButton::clicked, this, [this](){ui->Z2Input->setValue(defaultPreset.Z2);});
     //iter, power, maxLength
-    connect(ui->buttonResetIter, &QToolButton::clicked, this, [this](){ui->IterInput->setValue(defIter);});
-    connect(ui->buttonResetPower, &QToolButton::clicked, this, [this](){ui->IterInput->setValue(defPower);});
-    connect(ui->buttonResetMaxLength, &QToolButton::clicked, this, [this](){ui->IterInput->setValue(defMaxLength);});
+    connect(ui->buttonResetIter, &QToolButton::clicked, this, [this](){ui->IterInput->setValue(defaultPreset.iter);});
+    connect(ui->buttonResetPower, &QToolButton::clicked, this, [this](){ui->powerInput->setValue(defaultPreset.power);});
+    connect(ui->buttonResetMaxLength, &QToolButton::clicked, this, [this](){ui->maxLengthInput->setValue(defaultPreset.maxLength);});
     //xres, yres, zres
-    connect(ui->buttonResetXres, &QToolButton::clicked, this, [this](){ui->xresInput->setValue(defXres);});
-    connect(ui->buttonResetYres, &QToolButton::clicked, this, [this](){ui->yresInput->setValue(defYres);});
-    connect(ui->buttonResetZres, &QToolButton::clicked, this, [this](){ui->zresInput->setValue(defZres);});
+    connect(ui->buttonResetXres, &QToolButton::clicked, this, [this](){ui->xresInput->setValue(defaultPreset.xres);});
+    connect(ui->buttonResetYres, &QToolButton::clicked, this, [this](){ui->yresInput->setValue(defaultPreset.yres);});
+    connect(ui->buttonResetZres, &QToolButton::clicked, this, [this](){ui->zresInput->setValue(defaultPreset.zres);});
 
     //Input change updates output values
     connect(ui->X1Input, SIGNAL(valueChanged(double)), this, SLOT(updateOutput()));
@@ -37,6 +38,11 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     connect(ui->xresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
     connect(ui->yresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
     connect(ui->zresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
+
+    //Preset change
+    connect(ui->comboBox_presets, SIGNAL(currentIndexChanged(int)), this, SLOT(changePreset()));
+    connect(ui->buttonNewPreset, SIGNAL(clicked()), this, SLOT(newPreset()));
+    connect(ui->lineEdit_newPresetName, SIGNAL(textChanged(QString)), this, SLOT(checkPresetNameInput()));
 }
 
 MbulbWindow::~MbulbWindow()
@@ -163,4 +169,88 @@ void MbulbWindow::updateOutput(){
     ui->zdistOutput->setText(QString::number(zdist));
     ui->gridSlotsOutput->setText(QString::number(xres*yres*zres));
     ui->progressBar->setValue(0);
+}
+void MbulbWindow::addPreset(mBulbPreset &preset){
+    presets.push_back(preset);
+    ui->comboBox_presets->addItem(QString::fromStdString(preset.name));
+}
+
+//Manage presets
+void MbulbWindow::getPreset(const std::string& name, mBulbPreset& preset){
+    auto it = presets.begin();
+    do{
+        if(it->name == name){
+            preset = *it;
+            break;
+        }
+        ++it;
+    }while(it != presets.end());
+}
+void MbulbWindow::newPreset(){
+    mBulbPreset preset;
+    preset.name = ui->lineEdit_newPresetName->text().toStdString();
+    preset.X1 = ui->X1Input->value();
+    preset.Y1 = ui->Y1Input->value();
+    preset.Z1 = ui->Z1Input->value();
+    preset.X2 = ui->X2Input->value();
+    preset.Y2 = ui->Y2Input->value();
+    preset.Z2 = ui->Z2Input->value();
+
+    preset.iter = ui->IterInput->value();
+    preset.power = ui->powerInput->value();
+    preset.maxLength = ui->maxLengthInput->value();
+
+    preset.xres = ui->xresInput->value();
+    preset.yres = ui->yresInput->value();
+    preset.zres = ui->zresInput->value();
+
+    addPreset(preset);
+}
+void MbulbWindow::checkPresetNameInput(){
+    std::string inputText = ui->lineEdit_newPresetName->text().toStdString();
+    //check if name already exists
+    bool exists = false;
+    auto it = presets.begin();
+    do{
+        if(it->name == inputText){
+            exists = true;
+        }
+    }while(it != presets.end());
+    if(presets.end()->name == inputText){
+        exists = true;
+    }
+    //act accordingly
+    if(exists){
+        ui->buttonNewPreset->setEnabled(false);
+        ui->buttonNewPreset->setStyleSheet("{color: red}");
+    }else{
+        ui->buttonNewPreset->setEnabled(true);
+        ui->buttonNewPreset->setStyleSheet("{color: black}");
+    }
+}
+void MbulbWindow::changePreset(){
+    std::string presetName = ui->comboBox_presets->currentText().toStdString();
+    mBulbPreset preset;
+    getPreset(presetName, preset);
+
+    ui->checkBox_equidistance->setChecked(false);
+    ui->checkBox_equalValues_P1->setChecked(false);
+    ui->checkBox_equalValues_P2->setChecked(false);
+    ui->checkBox_equalValues_res->setChecked(false);
+
+    ui->X1Input->setValue(preset.X1);
+    ui->Y1Input->setValue(preset.Y1);
+    ui->Z1Input->setValue(preset.Z1);
+    ui->X2Input->setValue(preset.X2);
+    ui->Y2Input->setValue(preset.Y2);
+    ui->Z2Input->setValue(preset.Z2);
+
+    ui->IterInput->setValue(preset.iter);
+    ui->powerInput->setValue(preset.power);
+    ui->maxLengthInput->setValue(preset.maxLength);
+
+    ui->xresInput->setValue(preset.xres);
+    ui->yresInput->setValue(preset.yres);
+    ui->zresInput->setValue(preset.zres);
+
 }

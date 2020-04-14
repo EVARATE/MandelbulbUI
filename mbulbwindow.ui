@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>460</width>
-    <height>410</height>
+    <width>512</width>
+    <height>510</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>512</width>
+    <height>510</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Mandelbulb Generator</string>
@@ -17,7 +23,66 @@
    <item row="0" column="0">
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <layout class="QHBoxLayout" name="hL_volumeInput">
+      <layout class="QHBoxLayout" name="hL_presets" stretch="0,0,0,0">
+       <item>
+        <widget class="QLabel" name="label_18">
+         <property name="text">
+          <string>Presets</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBox_presets"/>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="hL_newPreset">
+         <item>
+          <widget class="QLineEdit" name="lineEdit_newPresetName">
+           <property name="placeholderText">
+            <string>preset name</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QToolButton" name="buttonNewPreset">
+           <property name="toolTip">
+            <string>Create new preset</string>
+           </property>
+           <property name="text">
+            <string>...</string>
+           </property>
+           <property name="icon">
+            <iconset resource="resources.qrc">
+             <normaloff>:/icons/cil-plus.svg</normaloff>:/icons/cil-plus.svg</iconset>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="Line" name="line_5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="hL_volumeInput" stretch="0,0,0">
        <item>
         <layout class="QVBoxLayout" name="vL_pointAInput">
          <item>
@@ -124,6 +189,13 @@
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_equalValues_P1">
+           <property name="text">
+            <string>Equal values</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -241,6 +313,13 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_equalValues_P2">
+           <property name="text">
+            <string>Equal values</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -354,6 +433,19 @@
             </widget>
            </item>
           </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
          </item>
         </layout>
        </item>
@@ -471,6 +563,13 @@
            </item>
           </layout>
          </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_equalValues_res">
+           <property name="text">
+            <string>Equal values</string>
+           </property>
+          </widget>
+         </item>
         </layout>
        </item>
       </layout>
@@ -483,92 +582,141 @@
       </widget>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_10">
+      <layout class="QHBoxLayout" name="horizontalLayout_20">
        <item>
-        <widget class="QLabel" name="label_10">
-         <property name="text">
-          <string>x-Distance</string>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_10">
+           <item>
+            <widget class="QLabel" name="label_10">
+             <property name="text">
+              <string>x-Distance</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="xdistOutput">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_11">
+           <item>
+            <widget class="QLabel" name="label_11">
+             <property name="text">
+              <string>y-Distance</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="ydistOutput">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QLabel" name="label_12">
+             <property name="text">
+              <string>z-Distance</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="zdistOutput">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_19">
+           <item>
+            <widget class="QLabel" name="label_17">
+             <property name="text">
+              <string>Grid Slots</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="gridSlotsOutput">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <widget class="QLabel" name="label_13">
+             <property name="text">
+              <string>Grid points</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="pointCountOutput">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="Line" name="line_6">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="xdistOutput">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_11">
-       <item>
-        <widget class="QLabel" name="label_11">
-         <property name="text">
-          <string>y-Distance</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="ydistOutput">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_12">
-       <item>
-        <widget class="QLabel" name="label_12">
-         <property name="text">
-          <string>z-Distance</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="zdistOutput">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_19">
-       <item>
-        <widget class="QLabel" name="label_17">
-         <property name="text">
-          <string>Grid Slots</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="gridSlotsOutput">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_13">
-       <item>
-        <widget class="QLabel" name="label_13">
-         <property name="text">
-          <string>Grid points</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="pointCountOutput">
-         <property name="text">
-          <string>0</string>
-         </property>
-        </widget>
+        <layout class="QVBoxLayout" name="vL_options" stretch="0,0,0">
+         <item>
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>Options</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QCheckBox" name="checkBox_equidistance">
+           <property name="toolTip">
+            <string>Adapt y-Resolution and z-Resolution so that x,y,z - distance is identical</string>
+           </property>
+           <property name="text">
+            <string>Even distribution</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
        </item>
       </layout>
      </item>

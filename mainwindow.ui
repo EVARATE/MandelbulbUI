@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MandelbulbUI</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/MandelbulbUI_icon.svg</normaloff>:/icons/MandelbulbUI_icon.svg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
     <item>

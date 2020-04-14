@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16px"
+   height="16px"
+   viewBox="0 0 16 16"
+   version="1.1"
+   id="SVGRoot"
+   inkscape:version="0.92.4 (fd57863, 2020-04-02)"
+   sodipodi:docname="MandelbulbUI_icon.svg">
+  <defs
+     id="defs34" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="45.254834"
+     inkscape:cx="13.083491"
+     inkscape:cy="7.6359697"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1877"
+     inkscape:window-height="1016"
+     inkscape:window-x="43"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:grid-bbox="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:pagecheckerboard="true">
+    <sodipodi:guide
+       position="-2.125,8"
+       orientation="0,1"
+       id="guide50"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="7.9991455,11.75565"
+       orientation="1,0"
+       id="guide52"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata37">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="rect63-5-8-9"
+       style="fill:#000000;fill-opacity:0;stroke-width:0.66596299"
+       d="m 0.1953125,13.5 v 1 H 15 v -1 z m 1.5332031,0.302734 c 0.024764,0.0059 0.052822,0.02154 0.078125,0.05078 0.00646,0.0075 0.013496,0.01405 0.019531,0.02148 0.01686,-0.0068 0.031807,-0.01564 0.056641,-0.01563 0.01834,1e-5 0.036355,-5.3e-4 0.054687,0 0.039591,3e-4 0.080313,-0.0091 0.1191406,0.0039 0.00586,0.002 0.012599,0.0022 0.017578,0.0059 0.00195,0.0014 -0.010196,0.0015 -0.00781,0.002 0.013201,0.0023 0.028251,-2.16e-4 0.041016,0.0039 0.00322,10e-4 0.01602,0.009 0.027344,0.01563 0.022203,1.62e-4 0.044203,0.0013 0.066406,0.002 0.015034,-5.05e-4 0.030394,-0.0063 0.044922,-0.0059 0.033704,7.91e-4 0.067584,0.01437 0.087891,0.04297 -0.08639,-0.03276 -0.063875,-0.01748 -0.033203,-0.02149 0.011133,-0.0015 0.047582,-0.0092 0.054688,-0.0078 0.017922,0.0034 0.033722,0.01088 0.050781,0.01758 0.039224,0.0024 0.089074,0.0081 0.125,0.01172 0.084173,0.0084 0.1136912,0.05805 0.1015625,0.09961 0.011431,0.0034 0.023194,0.0061 0.035156,0.0078 0,0 0.00195,0 0.00195,0 0.00387,-6.36e-4 0.00372,-0.0028 0.00781,-0.002 0.018112,-0.0026 0.035404,-0.0044 0.054687,-0.0039 0.023382,-0.0028 0.044111,0.01008 0.064453,0.01953 0,0 0.00195,0 0.00195,0 0.00986,0.0047 0.021749,0.0045 0.03125,0.0098 0.00236,0.0013 -0.00537,-0.0048 -0.00781,-0.0059 0.040953,-0.0048 0.078505,-0.0044 0.1191406,0.01562 4.654e-4,-0.0014 -0.00979,-0.0092 0.00195,-0.0059 0.021479,0.0059 0.041775,0.01328 0.0625,0.02149 0.00133,-2.78e-4 0.00259,0.0018 0.00391,0.002 0.01009,0.0015 0.019914,0.01161 0.03125,0.01172 0.02497,0.0069 0.036802,0.01275 0.060547,0.01367 0.040389,-0.0079 0.079302,0.0033 0.1171875,0.01758 0.012382,-6.52e-4 0.027903,-0.0055 0.060547,-0.0059 0.02945,-0.009 0.044974,0.01671 0.068359,0.02344 l 0.00195,-0.002 c 0.010799,-0.0032 0.011719,3.29e-4 0.00781,-0.002 0.026861,-0.0042 0.015363,-0.0032 0.037109,-0.0039 0.1477115,-0.0048 -0.1159137,0.162922 -0.00781,0.154297 0.00456,-8.58e-4 0.00902,0.0012 0.013672,0 -0.00368,0.0017 -0.00229,0.0013 -0.00586,0.002 -0.00678,0.0012 -0.00277,-0.0024 -0.00781,-0.002 -0.0366,0.0069 -0.07241,0.0056 -0.109375,-0.0059 -0.00589,-0.0018 -0.015953,-0.0016 -0.015625,-0.0078 -0.033065,0.0023 -0.066098,0.0094 -0.099609,-0.0059 -0.00591,-0.0023 -0.011672,-0.0036 -0.017578,-0.0059 5.458e-4,-0.0014 0.00333,-0.0033 0.00195,-0.0039 -0.018369,-0.0075 -0.042097,0.01278 -0.060547,0.0039 -0.030383,-0.0038 -0.038847,-0.0033 -0.068359,-0.01367 -0.0012,-4.22e-4 0.00515,-0.0017 0.00391,-0.002 -0.0213,-0.0054 -0.048641,-0.0038 -0.066406,-0.01953 -0.00883,-0.0044 -0.01657,-0.0093 -0.025391,-0.01367 -0.021996,-4.42e-4 -0.029104,-0.0012 -0.056641,-0.0098 -0.00517,-0.0025 -0.010458,-0.0053 -0.015625,-0.0078 -0.00751,1.92e-4 -0.015121,-1.07e-4 -0.019531,0 -0.028657,0.005 -0.032524,0.0077 -0.064453,0 -0.010219,-0.0025 -0.0198,-0.0072 -0.029297,-0.01172 -0.00112,-5.31e-4 -0.0051,-0.0036 -0.00391,-0.0039 -0.00378,1.5e-5 -0.00795,7.5e-5 -0.011719,0 -0.017661,-5.17e-4 -0.01975,-0.0016 -0.019531,-0.002 0.00151,-0.0024 0.010531,-0.0027 0.00781,-0.002 -0.025156,0.0064 -0.049627,0.01161 -0.076172,0.0059 -0.00192,-4.06e-4 -0.037383,-0.0089 -0.054687,-0.01563 -0.00192,4.61e-4 -0.0039,0.0017 -0.00586,0.002 -0.010858,0.0015 -0.022277,0.0012 -0.033203,0.002 -0.032856,-0.0047 -0.060396,-0.01326 -0.091797,-0.02344 -0.011509,-0.0037 -0.024286,-0.0064 -0.035156,-0.01172 -0.00276,-0.0014 0.012676,-0.0011 0.00977,-0.002 -0.00501,-0.0017 -0.010333,10e-7 -0.015625,0 -0.028513,-5e-6 -0.057425,-1.8e-5 -0.085937,0 -0.031042,6e-6 -0.062707,-4.2e-5 -0.09375,0 -0.029224,1.71e-4 -0.058694,0.0016 -0.087891,0 -0.044498,-8.97e-4 -0.08714,0.01003 -0.1308594,-0.0039 -0.01939,-0.0088 -0.03098,-0.01485 -0.044922,-0.02344 -0.00139,-1.02e-4 -0.00256,-5.9e-5 -0.00391,0 -0.027982,-0.0028 -0.086265,-0.01382 -0.109375,-0.02539 -0.013383,-0.0067 -0.032643,-0.01797 -0.035156,-0.02734 -0.058534,-0.02054 -0.1085281,-0.07732 -0.1445312,-0.117188 -0.077752,-0.0861 -0.023509,-0.158436 0.050781,-0.140625 z m 0.5644532,0.136719 c -0.00318,0.0086 0.00529,0.02733 0.00977,0.04492 0.00846,4e-6 0.016904,2e-6 0.025391,0 0.00584,-4e-6 0.011719,1e-6 0.017578,0 -0.012853,-0.0076 -0.050128,-0.05197 -0.052734,-0.04492 z"
+       inkscape:connector-curvature="0" />
+    <ellipse
+       style="fill:#000000;fill-opacity:0"
+       id="path335"
+       cx="8.3085051"
+       cy="7.0920587"
+       rx="2.8284271"
+       ry="2.5743105" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958;stroke-width:1.12218904"
+       id="rect4849"
+       width="14"
+       height="7"
+       x="1"
+       y="0.5"
+       rx="2" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958;stroke-width:0.91626352"
+       id="rect4849-3"
+       width="14"
+       height="2"
+       x="1"
+       y="5.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866"
+       width="1"
+       height="1"
+       x="7.5"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3"
+       width="1"
+       height="1"
+       x="5.5"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8"
+       width="1"
+       height="1"
+       x="7.4662137"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5"
+       width="1"
+       height="1"
+       x="5.4662137"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-1"
+       width="1"
+       height="1"
+       x="3.5337863"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-0"
+       width="1"
+       height="1"
+       x="1.5337863"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8"
+       width="1"
+       height="1"
+       x="3.5"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-7"
+       width="1"
+       height="1"
+       x="1.5"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-3"
+       width="1"
+       height="1"
+       x="13.5"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-0"
+       width="1"
+       height="1"
+       x="13.466214"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-1-8"
+       width="1"
+       height="1"
+       x="11.533787"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-0-0"
+       width="1"
+       height="1"
+       x="9.5337868"
+       y="8.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8-4"
+       width="1"
+       height="1"
+       x="11.5"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-7-1"
+       width="1"
+       height="1"
+       x="9.5"
+       y="10.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-1"
+       width="1"
+       height="1"
+       x="7.4662137"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-3"
+       width="1"
+       height="1"
+       x="5.4662137"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8-5"
+       width="1"
+       height="1"
+       x="3.5"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-7-9"
+       width="1"
+       height="1"
+       x="1.5"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-0-3"
+       width="1"
+       height="1"
+       x="13.466215"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8-4-4"
+       width="1"
+       height="1"
+       x="11.5"
+       y="12.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-7-1-1"
+       width="1"
+       height="1"
+       x="9.5"
+       y="12.5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="1.7148438"
+       y="7"
+       id="text5003"><tspan
+         sodipodi:role="line"
+         id="tspan5001"
+         x="1.7148438"
+         y="7"
+         style="fill:#ffffff">MB</tspan></text>
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-1-5"
+       width="1"
+       height="1"
+       x="7.4662142"
+       y="14.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-3-0"
+       width="1"
+       height="1"
+       x="5.4662142"
+       y="14.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8-5-8"
+       width="1"
+       height="1"
+       x="3.5"
+       y="14.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-8-8-4-4-3"
+       width="1"
+       height="1"
+       x="11.5"
+       y="14.5" />
+    <rect
+       style="fill:#333333;fill-opacity:0.98689958"
+       id="rect4866-3-5-7-1-1-5"
+       width="1"
+       height="1"
+       x="9.5"
+       y="14.5" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.52213764px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#008000;fill-opacity:1;stroke:none;stroke-width:1.06526721"
+       x="2.5334771"
+       y="15.71269"
+       id="text5007"
+       transform="scale(1.0555577,0.9473665)"><tspan
+         sodipodi:role="line"
+         id="tspan5005"
+         x="2.5334771"
+         y="15.71269"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#008000;stroke-width:1.06526721">UI</tspan></text>
+  </g>
+</svg>
