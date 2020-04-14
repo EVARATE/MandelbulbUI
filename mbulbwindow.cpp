@@ -7,6 +7,7 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     addPreset(defaultPreset);
+    checkPresetNameInput();
 
     //Connections
     connect(ui->ButtonGenerate, SIGNAL(clicked()), this, SLOT(generateMBulb()));
@@ -39,10 +40,16 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     connect(ui->yresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
     connect(ui->zresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
 
+    //Input options
+    connect(ui->checkBox_equalValues_P1, SIGNAL(stateChanged(int)), this, SLOT(equalP1Values()));
+    connect(ui->checkBox_equalValues_P2, SIGNAL(stateChanged(int)), this, SLOT(equalP2Values()));
+    connect(ui->checkBox_equalValues_res, SIGNAL(stateChanged(int)), this, SLOT(equalResValues()));
+    connect(ui->checkBox_equidistance, SIGNAL(stateChanged(int)), this, SLOT(evenDistribution()));
+
     //Preset change
     connect(ui->comboBox_presets, SIGNAL(currentIndexChanged(int)), this, SLOT(changePreset()));
     connect(ui->buttonNewPreset, SIGNAL(clicked()), this, SLOT(newPreset()));
-    connect(ui->lineEdit_newPresetName, SIGNAL(textChanged(QString)), this, SLOT(checkPresetNameInput()));
+    connect(ui->lineEdit_newPresetName, SIGNAL(textEdited(QString)), this, SLOT(checkPresetNameInput()));
 }
 
 MbulbWindow::~MbulbWindow()
@@ -170,6 +177,20 @@ void MbulbWindow::updateOutput(){
     ui->gridSlotsOutput->setText(QString::number(xres*yres*zres));
     ui->progressBar->setValue(0);
 }
+//Input options
+void MbulbWindow::equalP1Values(){
+
+}
+void MbulbWindow::equalP2Values(){
+
+}
+void MbulbWindow::equalResValues(){
+
+}
+void MbulbWindow::evenDistribution(){
+
+}
+
 void MbulbWindow::addPreset(mBulbPreset &preset){
     presets.push_back(preset);
     ui->comboBox_presets->addItem(QString::fromStdString(preset.name));
@@ -205,27 +226,35 @@ void MbulbWindow::newPreset(){
     preset.zres = ui->zresInput->value();
 
     addPreset(preset);
+
+    ui->buttonNewPreset->setEnabled(false);
+    ui->comboBox_presets->setCurrentIndex(ui->comboBox_presets->findText(QString::fromStdString(preset.name)));
 }
 void MbulbWindow::checkPresetNameInput(){
     std::string inputText = ui->lineEdit_newPresetName->text().toStdString();
-    //check if name already exists
     bool exists = false;
-    auto it = presets.begin();
-    do{
-        if(it->name == inputText){
+    //check if name is empty
+    if( (inputText.size() == 0) ){
+        exists = true;
+    }else{
+        //check if name already exists
+        auto it = presets.begin();
+        do{
+            if(it->name == inputText){
+                exists = true;
+                break;
+            }
+            ++it;
+        }while(it != presets.end());
+        if(presets.end()->name == inputText){
             exists = true;
         }
-    }while(it != presets.end());
-    if(presets.end()->name == inputText){
-        exists = true;
     }
     //act accordingly
     if(exists){
         ui->buttonNewPreset->setEnabled(false);
-        ui->buttonNewPreset->setStyleSheet("{color: red}");
     }else{
         ui->buttonNewPreset->setEnabled(true);
-        ui->buttonNewPreset->setStyleSheet("{color: black}");
     }
 }
 void MbulbWindow::changePreset(){

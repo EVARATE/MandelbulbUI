@@ -48,6 +48,12 @@ private slots:
     void generateMBulb();
     void updateOutput();
 
+    //Input options
+    void equalP1Values();
+    void equalP2Values();
+    void equalResValues();
+    void evenDistribution();
+
     //Manage presets
     void changePreset();
     void getPreset(const std::string& name, mBulbPreset& preset);

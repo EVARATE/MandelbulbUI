@@ -27,7 +27,7 @@
        <item>
         <widget class="QLabel" name="label_18">
          <property name="text">
-          <string>Presets</string>
+          <string>Preset</string>
          </property>
         </widget>
        </item>
