@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/MandelbulbUI_icon.svg</normaloff>:/icons/MandelbulbUI_icon.svg</iconset>
+    <normaloff>:/icons/MandelbulbUI_icon.png</normaloff>:/icons/MandelbulbUI_icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,1">
@@ -33,7 +33,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/cil-trash.svg</normaloff>:/icons/cil-trash.svg</iconset>
+            <normaloff>:/icons/cil-trash.png</normaloff>:/icons/cil-trash.png</iconset>
           </property>
          </widget>
         </item>
@@ -47,7 +47,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/cil-camera.svg</normaloff>:/icons/cil-camera.svg</iconset>
+            <normaloff>:/icons/cil-camera.png</normaloff>:/icons/cil-camera.png</iconset>
           </property>
          </widget>
         </item>
@@ -151,7 +151,7 @@
           </property>
           <property name="icon">
            <iconset resource="resources.qrc">
-            <normaloff>:/icons/cil-screen-desktop_filled_custom.svg</normaloff>:/icons/cil-screen-desktop_filled_custom.svg</iconset>
+            <normaloff>:/icons/cil-screen-desktop_filled_custom.png</normaloff>:/icons/cil-screen-desktop_filled_custom.png</iconset>
           </property>
           <property name="checkable">
            <bool>false</bool>

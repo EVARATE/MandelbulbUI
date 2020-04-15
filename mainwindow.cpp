@@ -329,19 +329,19 @@ void MainWindow::filterSelectedHull(){
 void MainWindow::displayTools(){
     //Actions
     QAction *actionGenMB = new QAction("Generate Mandelbulb", this);
-    actionGenMB->setIcon(QIcon(":/icons/cil-plus.svg"));
+    actionGenMB->setIcon(QIcon(":/icons/cil-plus.png"));
     actionGenMB->setToolTip("New Mandelbulb");
 
     QAction *actionFilterHull = new QAction("Filter Hull", this);
-    actionFilterHull->setIcon(QIcon(":/icons/icon_hull.svg"));
+    actionFilterHull->setIcon(QIcon(":/icons/icon_hull.png"));
     actionFilterHull->setToolTip("Filter Hull of boolCloud entity");
 
     QAction *actionExportEntity = new QAction("Export entity (.dat)");
-    actionExportEntity->setIcon(QIcon(":/icons/cil-save.svg"));
+    actionExportEntity->setIcon(QIcon(":/icons/cil-save.png"));
     actionExportEntity->setToolTip("Export selected entity");
 
     QAction *actionImportEntity = new QAction("Import entity (.dat)");
-    actionImportEntity->setIcon(QIcon(":/icons/cil-folder-open.svg"));
+    actionImportEntity->setIcon(QIcon(":/icons/cil-folder-open.png"));
     actionImportEntity->setToolTip(("Import entity (.dat)"));
 
     QAction *actionExit = new QAction("Exit");
@@ -408,11 +408,11 @@ void MainWindow::toggleViewport(){
     static bool checked = false;
     if(checked){
         scatterGraph.show();
-        ui->buttonToggleViewport->setIcon(QIcon("qrc://icons/cil-screen-desktop_filled_custom.svg"));
+        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop_filled_custom.png"));
         checked = false;
     }else{
         scatterGraph.hide();
-        ui->buttonToggleViewport->setIcon(QIcon("qrc://icons/cil-screen-desktop.svg"));
+        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop.png"));
         checked = true;
     }
 }

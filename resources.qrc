@@ -1,14 +1,14 @@
 <RCC>
     <qresource prefix="/">
-        <file>icons/cil-plus.svg</file>
-        <file>icons/cil-reload.svg</file>
-        <file>icons/cil-camera.svg</file>
-        <file>icons/cil-screen-desktop.svg</file>
-        <file>icons/cil-trash.svg</file>
-        <file>icons/cil-screen-desktop_filled_custom.svg</file>
-        <file>icons/cil-save.svg</file>
-        <file>icons/cil-folder-open.svg</file>
-        <file>icons/MandelbulbUI_icon.svg</file>
-        <file>icons/icon_hull.svg</file>
+        <file>icons/cil-camera.png</file>
+        <file>icons/cil-folder-open.png</file>
+        <file>icons/cil-plus.png</file>
+        <file>icons/cil-reload.png</file>
+        <file>icons/cil-save.png</file>
+        <file>icons/cil-screen-desktop.png</file>
+        <file>icons/cil-screen-desktop_filled_custom.png</file>
+        <file>icons/cil-trash.png</file>
+        <file>icons/icon_hull.png</file>
+        <file>icons/MandelbulbUI_icon.png</file>
     </qresource>
 </RCC>
