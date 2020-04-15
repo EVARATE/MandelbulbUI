@@ -5,6 +5,7 @@
 #include <QWindow>
 #include <QAction>
 #include <QFileDialog>
+#include <QProgressDialog>
 #include <QMessageBox>
 #include <QtDataVisualization>
 #include <iostream>
@@ -55,6 +56,8 @@ private slots:
 
     //Generate
     void showMBGenerator();
+    //Object
+    void filterSelectedHull();
 
     //UI
     void displayTools();

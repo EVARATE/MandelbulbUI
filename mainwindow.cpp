@@ -258,13 +258,83 @@ void MainWindow::showMBGenerator(){
     mBulbWindow->exec();
 
 }
+//Object
+void MainWindow::filterSelectedHull(){
+    internalEntity cloudEntity;
+    getSelectedEntity(cloudEntity);
+    if(cloudEntity.type != 0){return;}
+    boolCloud& cloud = cloudEntity.bCloud;
+
+    ivec size = {cloudEntity.bCloud.xsize, cloudEntity.bCloud.ysize, cloudEntity.bCloud.zsize};
+    dvec min = {cloudEntity.bCloud.xmin, cloudEntity.bCloud.ymin, cloudEntity.bCloud.zmin};
+    dvec dist = {cloudEntity.bCloud.xdistance, cloudEntity.bCloud.ydistance, cloudEntity.bCloud.zdistance};
+    boolCloud hull(dist, min, size);
+
+    QProgressDialog progDialog;
+    progDialog.setLabelText("Filtering Hull...");
+    progDialog.setCancelButton(0);
+    double progress = 0.0;
+    double progdiv = 100.0 / ((hull.xsize-1)*(hull.ysize-1)*(hull.zsize-1));
+    int pC = 0;
+
+    for(int i = 0; i < hull.xsize; ++i){
+    for(int j = 0; j < hull.ysize; ++j){
+    for(int k = 0; k < hull.zsize; ++k){
+        ivec active = {i,j,k};
+         dvec coord(3);
+         hull.convIndexToCoord(active,coord);
+         if(cloud.getState(active)){
+                  if(!cloud.getState(i-1,j-1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j-1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j-1,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j  ,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j  ,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j  ,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j+1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j+1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i-1,j+1,k+1)){hull.setState(active,true);pC++;}
+
+             else if(!cloud.getState(i  ,j-1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j-1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j-1,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j  ,k-1)){hull.setState(active,true);pC++;}
+
+             else if(!cloud.getState(i  ,j  ,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j+1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j+1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i  ,j+1,k+1)){hull.setState(active,true);pC++;}
+
+             else if(!cloud.getState(i+1,j-1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j-1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j-1,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j  ,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j  ,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j  ,k+1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j+1,k-1)){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j+1,k  )){hull.setState(active,true);pC++;}
+             else if(!cloud.getState(i+1,j+1,k+1)){hull.setState(active,true);pC++;}
+         }
+         //Display progress:
+         progress += progdiv;
+         progDialog.setValue(progress);
+    }
+    }
+    }
+    setStatus("Filtered Hull");
+    internalEntity hullEntity(hull, "Hull");
+    addEntity(hullEntity);
+}
 
 //UI
 void MainWindow::displayTools(){
     //Actions
-    QAction *actionGenMB = new QAction("New MB", this);
+    QAction *actionGenMB = new QAction("Generate Mandelbulb", this);
     actionGenMB->setIcon(QIcon(":/icons/cil-plus.svg"));
     actionGenMB->setToolTip("New Mandelbulb");
+
+    QAction *actionFilterHull = new QAction("Filter Hull", this);
+    actionFilterHull->setIcon(QIcon(":/icons/icon_hull.svg"));
+    actionFilterHull->setToolTip("Filter Hull of boolCloud entity");
 
     QAction *actionExportEntity = new QAction("Export entity (.dat)");
     actionExportEntity->setIcon(QIcon(":/icons/cil-save.svg"));
@@ -285,6 +355,7 @@ void MainWindow::displayTools(){
 
     //Toolbar
     ui->toolBar->addAction(actionGenMB);
+    ui->toolBar->addAction(actionFilterHull);
     ui->toolBar->addSeparator();
     ui->toolBar->addAction(actionExportEntity);
     ui->toolBar->addAction(actionImportEntity);
@@ -296,12 +367,15 @@ void MainWindow::displayTools(){
     ui->menuFile->addAction(actionImportEntity);
     ui->menuFile->addSeparator();
     ui->menuFile->addAction(actionExit);
+    //Object menu
+    ui->menuObject->addAction(actionFilterHull);
     //Help menu
     ui->menuHelp->addAction(actionInfo);
     ui->menuHelp->addAction(actionAbout);
 
     //Connections
     connect(actionGenMB, SIGNAL(triggered()), this, SLOT(showMBGenerator()));
+    connect(actionFilterHull, SIGNAL(triggered()), this, SLOT(filterSelectedHull()));
     connect(actionExportEntity, SIGNAL(triggered()), this, SLOT(exportEntity()));
     connect(actionImportEntity, SIGNAL(triggered()), this, SLOT(importEntity()));
     connect(actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));
@@ -334,11 +408,11 @@ void MainWindow::toggleViewport(){
     static bool checked = false;
     if(checked){
         scatterGraph.show();
-        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop_filled_custom.svg"));
+        ui->buttonToggleViewport->setIcon(QIcon("qrc://icons/cil-screen-desktop_filled_custom.svg"));
         checked = false;
     }else{
         scatterGraph.hide();
-        ui->buttonToggleViewport->setIcon(QIcon(":/icons/cil-screen-desktop.svg"));
+        ui->buttonToggleViewport->setIcon(QIcon("qrc://icons/cil-screen-desktop.svg"));
         checked = true;
     }
 }

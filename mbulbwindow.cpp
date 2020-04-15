@@ -47,6 +47,7 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     connect(ui->comboBox_presets, SIGNAL(currentIndexChanged(int)), this, SLOT(changePreset()));
     connect(ui->buttonNewPreset, SIGNAL(clicked()), this, SLOT(newPreset()));
     connect(ui->lineEdit_newPresetName, SIGNAL(textEdited(QString)), this, SLOT(checkPresetNameInput()));
+    connect(ui->buttonDeletePreset, SIGNAL(clicked()), this, SLOT(deletePreset()));
 }
 
 MbulbWindow::~MbulbWindow()
@@ -252,6 +253,18 @@ void MbulbWindow::newPreset(){
     ui->comboBox_presets->setCurrentIndex(ui->comboBox_presets->findText(QString::fromStdString(preset.name)));
 }
 void MbulbWindow::deletePreset(){
+    std::string name = ui->comboBox_presets->itemText(ui->comboBox_presets->currentIndex()).toStdString();
+    if(name == defaultPreset.name){return;}
+
+    ui->comboBox_presets->removeItem(ui->comboBox_presets->currentIndex());
+    auto it = presets.begin();
+    do{
+        if(it->name == name){
+            presets.erase(it);
+            break;
+        }
+        ++it;
+    }while(it != presets.end());
 
 }
 void MbulbWindow::checkPresetNameInput(){
@@ -274,6 +287,7 @@ void MbulbWindow::checkPresetNameInput(){
             exists = true;
         }
     }
+
     //act accordingly
     if(exists){
         ui->buttonNewPreset->setEnabled(false);
