@@ -36,7 +36,6 @@ typedef struct {
 typedef std::vector<internalProperty> propertyVec;
 typedef std::vector<TRIANGLE> triVec;
 
-
 class internalEntity
 {
 public:

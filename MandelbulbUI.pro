@@ -21,6 +21,7 @@ SOURCES += \
     internalentityhandler.cpp \
     main.cpp \
     mainwindow.cpp \
+    marchingCubes.cpp \
     mbulbwindow.cpp \
     utilityFunctions.cpp
 

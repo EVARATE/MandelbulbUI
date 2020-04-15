@@ -324,6 +324,87 @@ void MainWindow::filterSelectedHull(){
     internalEntity hullEntity(hull, "Hull");
     addEntity(hullEntity);
 }
+void MainWindow::meshCubeMarch(){
+    internalEntity entity;
+    getSelectedEntity(entity);
+    if(entity.type != 0){
+        return;
+    }
+    boolCloud& cloud = entity.bCloud;
+    triVec triMesh;
+    int maxProg = (cloud.xsize-1)*(cloud.ysize-1)*(cloud.zsize-1);
+    int progress = 0;
+    QProgressDialog progDialog;
+    progDialog.setLabelText("Generating Mesh...");
+    progDialog.setCancelButton(0);
+
+    for(int i = 1; i < cloud.xsize - 1; ++i){
+    for(int j = 1; j < cloud.ysize - 1; ++j){
+    for(int k = 1; k < cloud.zsize - 1; ++k){
+        GRIDCELL grid;
+        ivec index = {i,j,k};
+        constructGridCell(cloud, index, grid);
+
+        int isolevel = 1;
+        int cubeindex = 0;
+        if (grid.val[0] == isolevel) {cubeindex |= 1;}
+        if (grid.val[1] == isolevel) {cubeindex |= 2;}
+        if (grid.val[2] == isolevel) {cubeindex |= 4;}
+        if (grid.val[3] == isolevel) {cubeindex |= 8;}
+        if (grid.val[4] == isolevel) {cubeindex |= 16;}
+        if (grid.val[5] == isolevel) {cubeindex |= 32;}
+        if (grid.val[6] == isolevel) {cubeindex |= 64;}
+        if (grid.val[7] == isolevel) {cubeindex |= 128;}
+
+        if (!(edgeTable[cubeindex] == 0)){
+
+        std::vector<dvec> vertlist(12);
+        findTriVertices(cubeindex, grid, vertlist);
+        //Create triangle:
+        int ntriang = 0;
+        TRIANGLE triangles[5];
+        for(int n = 0;  triTable[cubeindex][n] != -1; n += 3){
+            triangles[ntriang].p[0] = vertlist[triTable[cubeindex][n  ]];
+            triangles[ntriang].p[1] = vertlist[triTable[cubeindex][n+1]];
+            triangles[ntriang].p[2] = vertlist[triTable[cubeindex][n+2]];
+            ntriang++;
+        }
+
+        //Add triangle to mesh:
+        for(int n = 0; n < ntriang; ++n){
+            triMesh.push_back(triangles[n]);
+        }
+        }
+        progress++;
+        progDialog.setValue(progress);
+        QApplication::processEvents();
+    }
+    }
+    }
+
+    internalEntity meshEntity(triMesh, "Mesh");
+
+    meshEntity.addProperty("triangleCount", (int)triMesh.size());
+    //mandelbulb properties
+    meshEntity.addProperty("", "");
+    meshEntity.addProperty("MBULB:", "");
+    meshEntity.addProperty("xmin", cloud.xmin);
+    meshEntity.addProperty("ymin", cloud.ymin);
+    meshEntity.addProperty("zmin", cloud.zmin);
+    meshEntity.addProperty("xmax", cloud.xmax);
+    meshEntity.addProperty("ymax", cloud.ymax);
+    meshEntity.addProperty("zmax", cloud.zmax);
+    meshEntity.addProperty("xdist", cloud.xdistance);
+    meshEntity.addProperty("ydist", cloud.ydistance);
+    meshEntity.addProperty("zdist", cloud.zdistance);
+    meshEntity.addProperty("xres", cloud.xsize);
+    meshEntity.addProperty("yres", cloud.ysize);
+    meshEntity.addProperty("zres", cloud.zsize);
+
+    addEntity(meshEntity);
+    setStatus("Generated mesh");
+
+}
 
 //UI
 void MainWindow::displayTools(){
@@ -335,6 +416,10 @@ void MainWindow::displayTools(){
     QAction *actionFilterHull = new QAction("Filter Hull", this);
     actionFilterHull->setIcon(QIcon(":/icons/icon_hull.png"));
     actionFilterHull->setToolTip("Filter Hull of boolCloud entity");
+
+    QAction *actionMarchingCubes = new QAction("Generate Mesh", this);
+    actionMarchingCubes->setIcon(QIcon(":/icons/meshgen_icon.png"));
+    actionMarchingCubes->setToolTip("Generate Mesh via marching cubes algorithm");
 
     QAction *actionExportEntity = new QAction("Export entity (.dat)");
     actionExportEntity->setIcon(QIcon(":/icons/cil-save.png"));
@@ -354,11 +439,13 @@ void MainWindow::displayTools(){
     actionAbout->setToolTip("About the program");
 
     //Toolbar
-    ui->toolBar->addAction(actionGenMB);
-    ui->toolBar->addAction(actionFilterHull);
-    ui->toolBar->addSeparator();
     ui->toolBar->addAction(actionExportEntity);
     ui->toolBar->addAction(actionImportEntity);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addAction(actionGenMB);
+    ui->toolBar->addSeparator();
+    ui->toolBar->addAction(actionFilterHull);
+    ui->toolBar->addAction(actionMarchingCubes);
 
     //Generate Menu
     ui->menuGenerate->addAction(actionGenMB);
@@ -369,6 +456,7 @@ void MainWindow::displayTools(){
     ui->menuFile->addAction(actionExit);
     //Object menu
     ui->menuObject->addAction(actionFilterHull);
+    ui->menuObject->addAction(actionMarchingCubes);
     //Help menu
     ui->menuHelp->addAction(actionInfo);
     ui->menuHelp->addAction(actionAbout);
@@ -376,6 +464,7 @@ void MainWindow::displayTools(){
     //Connections
     connect(actionGenMB, SIGNAL(triggered()), this, SLOT(showMBGenerator()));
     connect(actionFilterHull, SIGNAL(triggered()), this, SLOT(filterSelectedHull()));
+    connect(actionMarchingCubes, SIGNAL(triggered()), this, SLOT(meshCubeMarch()));
     connect(actionExportEntity, SIGNAL(triggered()), this, SLOT(exportEntity()));
     connect(actionImportEntity, SIGNAL(triggered()), this, SLOT(importEntity()));
     connect(actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));

@@ -10,5 +10,6 @@
         <file>icons/cil-trash.png</file>
         <file>icons/icon_hull.png</file>
         <file>icons/MandelbulbUI_icon.png</file>
+        <file>icons/meshgen_icon.png</file>
     </qresource>
 </RCC>

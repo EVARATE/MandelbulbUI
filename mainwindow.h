@@ -11,6 +11,7 @@
 #include <iostream>
 
 #include "utilityFunctions.cpp"
+#include "marchingCubes.cpp"
 #include "mbulbwindow.h"
 #include "ui_mbulbwindow.h"
 #include "internalentityhandler.h"
@@ -58,6 +59,7 @@ private slots:
     void showMBGenerator();
     //Object
     void filterSelectedHull();
+    void meshCubeMarch();
 
     //UI
     void displayTools();
