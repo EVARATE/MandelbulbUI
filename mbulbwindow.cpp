@@ -39,12 +39,9 @@ MbulbWindow::MbulbWindow(QWidget *parent) :
     connect(ui->xresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
     connect(ui->yresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
     connect(ui->zresInput, SIGNAL(valueChanged(int)), this, SLOT(updateOutput()));
-
-    //Input options
-    connect(ui->checkBox_equalValues_P1, SIGNAL(stateChanged(int)), this, SLOT(equalP1Values()));
-    connect(ui->checkBox_equalValues_P2, SIGNAL(stateChanged(int)), this, SLOT(equalP2Values()));
-    connect(ui->checkBox_equalValues_res, SIGNAL(stateChanged(int)), this, SLOT(equalResValues()));
-    connect(ui->checkBox_equidistance, SIGNAL(stateChanged(int)), this, SLOT(evenDistribution()));
+    connect(ui->checkBox_equalValues_P1, SIGNAL(stateChanged(int)), this, SLOT(updateOutput()));
+    connect(ui->checkBox_equalValues_P2, SIGNAL(stateChanged(int)), this, SLOT(updateOutput()));
+    connect(ui->checkBox_equalValues_res, SIGNAL(stateChanged(int)), this, SLOT(updateOutput()));
 
     //Preset change
     connect(ui->comboBox_presets, SIGNAL(currentIndexChanged(int)), this, SLOT(changePreset()));
@@ -159,6 +156,42 @@ void MbulbWindow::generateMBulb(){
     this->close();
 }
 void MbulbWindow::updateOutput(){
+
+    //Checkboxes
+    //EqualP1
+    if(ui->checkBox_equalValues_P1->isChecked()){
+        ui->Y1Input->setEnabled(false);
+        ui->Z1Input->setEnabled(false);
+        double xval = ui->X1Input->value();
+        ui->Y1Input->setValue(xval);
+        ui->Z1Input->setValue(xval);
+    }else{
+        ui->Y1Input->setEnabled(true);
+        ui->Z1Input->setEnabled(true);
+    }
+    //EqualP2
+    if(ui->checkBox_equalValues_P2->isChecked()){
+        ui->Y2Input->setEnabled(false);
+        ui->Z2Input->setEnabled(false);
+        double xval = ui->X2Input->value();
+        ui->Y2Input->setValue(xval);
+        ui->Z2Input->setValue(xval);
+    }else{
+        ui->Y2Input->setEnabled(true);
+        ui->Z2Input->setEnabled(true);
+    }
+    //Equal res
+    if(ui->checkBox_equalValues_res->isChecked()){
+        ui->yresInput->setEnabled(false);
+        ui->zresInput->setEnabled(false);
+        double xval = ui->xresInput->value();
+        ui->yresInput->setValue(xval);
+        ui->zresInput->setValue(xval);
+    }else{
+        ui->yresInput->setEnabled(true);
+        ui->zresInput->setEnabled(true);
+    }
+
     double x1 = ui->X1Input->value();
     double y1 = ui->Y1Input->value();
     double z1 = ui->Z1Input->value();
@@ -177,19 +210,7 @@ void MbulbWindow::updateOutput(){
     ui->gridSlotsOutput->setText(QString::number(xres*yres*zres));
     ui->progressBar->setValue(0);
 }
-//Input options
-void MbulbWindow::equalP1Values(){
 
-}
-void MbulbWindow::equalP2Values(){
-
-}
-void MbulbWindow::equalResValues(){
-
-}
-void MbulbWindow::evenDistribution(){
-
-}
 
 void MbulbWindow::addPreset(mBulbPreset &preset){
     presets.push_back(preset);
@@ -230,6 +251,9 @@ void MbulbWindow::newPreset(){
     ui->buttonNewPreset->setEnabled(false);
     ui->comboBox_presets->setCurrentIndex(ui->comboBox_presets->findText(QString::fromStdString(preset.name)));
 }
+void MbulbWindow::deletePreset(){
+
+}
 void MbulbWindow::checkPresetNameInput(){
     std::string inputText = ui->lineEdit_newPresetName->text().toStdString();
     bool exists = false;
@@ -262,7 +286,6 @@ void MbulbWindow::changePreset(){
     mBulbPreset preset;
     getPreset(presetName, preset);
 
-    ui->checkBox_equidistance->setChecked(false);
     ui->checkBox_equalValues_P1->setChecked(false);
     ui->checkBox_equalValues_P2->setChecked(false);
     ui->checkBox_equalValues_res->setChecked(false);

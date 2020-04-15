@@ -35,7 +35,7 @@ public:
     explicit MbulbWindow(QWidget *parent = nullptr);
     ~MbulbWindow();
 
-    void addPreset(mBulbPreset& preset);
+
 
     mBulbPreset defaultPreset;
     std::vector<mBulbPreset> presets;
@@ -48,16 +48,12 @@ private slots:
     void generateMBulb();
     void updateOutput();
 
-    //Input options
-    void equalP1Values();
-    void equalP2Values();
-    void equalResValues();
-    void evenDistribution();
-
     //Manage presets
     void changePreset();
     void getPreset(const std::string& name, mBulbPreset& preset);
+    void addPreset(mBulbPreset& preset);
     void newPreset();
+    void deletePreset();
     void checkPresetNameInput();
 signals:
     void transferEntity(internalEntity& entity);
