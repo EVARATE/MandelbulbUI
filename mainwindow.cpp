@@ -54,14 +54,21 @@ QString MainWindow::getExportPath(const std::string& extension){
     QFileDialog exportDialog;
     exportDialog.setDefaultSuffix(QString::fromStdString(extension));
 
-    std::string exportPath = exportDialog.getSaveFileName().toStdString();
-    setFileExt(exportPath, extension);
-    return QString::fromStdString(exportPath);
+    QString exportPath = exportDialog.getSaveFileName();
+    if(exportPath.isNull()){
+        return exportPath;
+    }
+    std::string path = exportPath.toStdString();
+    setFileExt(path, extension);
+    return QString::fromStdString(path);
 }
 QString MainWindow::getImportPath(const std::string& extension){
     QFileDialog importDialog;
     importDialog.setDefaultSuffix(QString::fromStdString(extension));
     QString importPath = importDialog.getOpenFileName();
+    if(importPath.isNull()){
+        return importPath;
+    }
     std::string path = importPath.toStdString();
     setFileExt(path, extension);
     return QString::fromStdString(path);
@@ -192,10 +199,13 @@ void MainWindow::saveData(){
     switch(entity.type){
     case 0:
         exportBoolCloud(entity);
+        break;
     case 1:
         exportTriMesh(entity);
+        break;
     case 2:
         exportPointCloud(entity);
+        break;
     default:
         return;
     }
@@ -222,6 +232,7 @@ void MainWindow::exportBoolCloud(internalEntity& entity){
     for(int k = 0; k < cloud.zsize; ++k){
 
         progDialog.setValue(progress);
+        QApplication::processEvents();
         progress += progdiv;
 
         ivec index = {i,j,k};
@@ -235,6 +246,7 @@ void MainWindow::exportBoolCloud(internalEntity& entity){
     }
     }
     ofile.close();
+    setStatus("Saved boolCloud to " + path.toStdString());
 }
 void MainWindow::exportTriMesh(internalEntity& entity){
     triVec& triMesh = entity.triMesh;
@@ -257,10 +269,11 @@ void MainWindow::exportTriMesh(internalEntity& entity){
     std::string polyBuffer;
     int lineCounter = 0;
     ofile << "#MandelbulbUI: Marching cubes mesh\n";
-    ofile << "o " << entity.name;
+    ofile << "o " << entity.name << "\n";
     for(int i = 0; i < triMesh.size(); ++i){
 
         progDialog.setValue(progress);
+        QApplication::processEvents();
         progress += progdiv;
 
         ofile << "v " << triMesh[i].p[0][0] << " " << triMesh[i].p[0][1] << " " << triMesh[i].p[0][2] << "\n";
@@ -272,7 +285,7 @@ void MainWindow::exportTriMesh(internalEntity& entity){
     }
     ofile << polyBuffer;
     ofile.close();
-    setStatus("Saved mesh to " + path.toStdString());
+    setStatus("Saved triMesh to " + path.toStdString());
 
 }
 void MainWindow::exportPointCloud(internalEntity& entity){
@@ -293,6 +306,14 @@ void MainWindow::exportPointCloud(internalEntity& entity){
     double progress = 0.0;
     double progdiv = 100.0 / pointCloud.size();
 
+    for(int i = 0; i < pointCloud.size(); ++i){
+        progDialog.setValue(progress);
+        QApplication::processEvents();
+        progress += progdiv;
+        ofile << pointCloud[i][0] << " " << pointCloud[i][1] << " " << pointCloud[i][2] << "\n";
+    }
+    ofile.close();
+    setStatus("Saved pointCloud to " + path.toStdString());
 }
 
 //Read/write specific data
@@ -530,9 +551,9 @@ void MainWindow::displayTools(){
     actionMarchingCubes->setIcon(QIcon(":/icons/meshgen_icon.png"));
     actionMarchingCubes->setToolTip("Generate Mesh via marching cubes algorithm");
 
-    QAction *saveAction = new QAction("Save", this);
-    saveAction->setIcon(QIcon(":/icons/cil-save.png"));
-    saveAction->setToolTip("Save entity data (.txt, .obj)");
+    QAction *actionSave = new QAction("Save", this);
+    actionSave->setIcon(QIcon(":/icons/cil-save.png"));
+    actionSave->setToolTip("Save entity data (.txt, .obj)");
 
     QAction *actionExportEntity = new QAction("Export entity (.dat)");
     actionExportEntity->setIcon(QIcon(":/icons/export.png"));
@@ -552,7 +573,7 @@ void MainWindow::displayTools(){
     actionAbout->setToolTip("About the program");
 
     //Toolbar
-    ui->toolBar->addAction(saveAction);
+    ui->toolBar->addAction(actionSave);
     ui->toolBar->addAction(actionExportEntity);
     ui->toolBar->addAction(actionImportEntity);
     ui->toolBar->addSeparator();
@@ -566,6 +587,7 @@ void MainWindow::displayTools(){
     //File menu
     ui->menuFile->addAction(actionExportEntity);
     ui->menuFile->addAction(actionImportEntity);
+    ui->menuFile->addAction(actionSave);
     ui->menuFile->addSeparator();
     ui->menuFile->addAction(actionExit);
     //Object menu
@@ -581,6 +603,7 @@ void MainWindow::displayTools(){
     connect(actionMarchingCubes, SIGNAL(triggered()), this, SLOT(meshCubeMarch()));
     connect(actionExportEntity, SIGNAL(triggered()), this, SLOT(exportEntity()));
     connect(actionImportEntity, SIGNAL(triggered()), this, SLOT(importEntity()));
+    connect(actionSave, SIGNAL(triggered()), this, SLOT(saveData()));
     connect(actionExit, SIGNAL(triggered()), this, SLOT(actionExit()));
     connect(actionInfo, SIGNAL(triggered()), this, SLOT(actionInfo()));
     connect(actionAbout, SIGNAL(triggered()), this, SLOT(actionAbout()));
