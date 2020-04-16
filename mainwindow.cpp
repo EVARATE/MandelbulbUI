@@ -185,6 +185,115 @@ void MainWindow::importEntity(){
 
     addEntity(entity);
 }
+//Export data
+void MainWindow::saveData(){
+    internalEntity entity;
+    getSelectedEntity(entity);
+    switch(entity.type){
+    case 0:
+        exportBoolCloud(entity);
+    case 1:
+        exportTriMesh(entity);
+    case 2:
+        exportPointCloud(entity);
+    default:
+        return;
+    }
+}
+void MainWindow::exportBoolCloud(internalEntity& entity){
+    boolCloud& cloud = entity.bCloud;
+    QString path = getExportPath("txt");
+    if(path.isNull()){return;}
+
+    std::ofstream ofile;
+    ofile.open(path.toStdString());
+    if(!ofile.is_open()){
+        setStatus("Error opening file " + path.toStdString());
+        return;
+    }
+    QProgressDialog progDialog;
+    progDialog.setLabelText("Exporting boolCloud...");
+    progDialog.setCancelButton(0);
+    double progress = 0.0;
+    double progdiv = 100.0 / ( (cloud.xsize-1)*(cloud.ysize-1)*(cloud.zsize) );
+
+    for(int i = 0; i < cloud.xsize; ++i){
+    for(int j = 0; j < cloud.ysize; ++j){
+    for(int k = 0; k < cloud.zsize; ++k){
+
+        progDialog.setValue(progress);
+        progress += progdiv;
+
+        ivec index = {i,j,k};
+        dvec coord(3);
+        if(cloud.getState(index)){
+            cloud.convIndexToCoord(index, coord);
+            ofile << coord[0] << " " << coord[1] << " " << coord[2] << "\n";
+        }
+
+    }
+    }
+    }
+    ofile.close();
+}
+void MainWindow::exportTriMesh(internalEntity& entity){
+    triVec& triMesh = entity.triMesh;
+    QString path = getExportPath("obj");
+    if(path.isNull()){return;}
+
+    std::ofstream ofile;
+    ofile.open(path.toStdString());
+    if(!ofile.is_open()){
+        setStatus("Error opening file " + path.toStdString());
+        return;
+    }
+    QProgressDialog progDialog;
+    progDialog.setLabelText("Exporting boolCloud...");
+    progDialog.setCancelButton(0);
+    double progress = 0.0;
+    double progdiv = 100.0 / triMesh.size();
+
+    //Quick .obj exporter:
+    std::string polyBuffer;
+    int lineCounter = 0;
+    ofile << "#MandelbulbUI: Marching cubes mesh\n";
+    ofile << "o " << entity.name;
+    for(int i = 0; i < triMesh.size(); ++i){
+
+        progDialog.setValue(progress);
+        progress += progdiv;
+
+        ofile << "v " << triMesh[i].p[0][0] << " " << triMesh[i].p[0][1] << " " << triMesh[i].p[0][2] << "\n";
+        ofile << "v " << triMesh[i].p[1][0] << " " << triMesh[i].p[1][1] << " " << triMesh[i].p[1][2] << "\n";
+        ofile << "v " << triMesh[i].p[2][0] << " " << triMesh[i].p[2][1] << " " << triMesh[i].p[2][2] << "\n";
+        lineCounter++; polyBuffer.append("f " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter));
+        lineCounter++; polyBuffer.append(" " + std::to_string(lineCounter) + "\n");
+    }
+    ofile << polyBuffer;
+    ofile.close();
+    setStatus("Saved mesh to " + path.toStdString());
+
+}
+void MainWindow::exportPointCloud(internalEntity& entity){
+    std::vector<dvec>& pointCloud = entity.pointCloud;
+    QString path = getExportPath("txt");
+    if(path.isNull()){return;}
+
+    std::ofstream ofile;
+    ofile.open(path.toStdString());
+    if(!ofile.is_open()){
+        setStatus("Error opening file " + path.toStdString());
+        return;
+    }
+
+    QProgressDialog progDialog;
+    progDialog.setLabelText("Exporting pointCloud...");
+    progDialog.setCancelButton(0);
+    double progress = 0.0;
+    double progdiv = 100.0 / pointCloud.size();
+
+}
 
 //Read/write specific data
 void MainWindow::writeBoolCloud(std::ofstream& ofile, internalEntity& entity){
@@ -421,8 +530,12 @@ void MainWindow::displayTools(){
     actionMarchingCubes->setIcon(QIcon(":/icons/meshgen_icon.png"));
     actionMarchingCubes->setToolTip("Generate Mesh via marching cubes algorithm");
 
+    QAction *saveAction = new QAction("Save", this);
+    saveAction->setIcon(QIcon(":/icons/cil-save.png"));
+    saveAction->setToolTip("Save entity data (.txt, .obj)");
+
     QAction *actionExportEntity = new QAction("Export entity (.dat)");
-    actionExportEntity->setIcon(QIcon(":/icons/cil-save.png"));
+    actionExportEntity->setIcon(QIcon(":/icons/export.png"));
     actionExportEntity->setToolTip("Export selected entity");
 
     QAction *actionImportEntity = new QAction("Import entity (.dat)");
@@ -439,6 +552,7 @@ void MainWindow::displayTools(){
     actionAbout->setToolTip("About the program");
 
     //Toolbar
+    ui->toolBar->addAction(saveAction);
     ui->toolBar->addAction(actionExportEntity);
     ui->toolBar->addAction(actionImportEntity);
     ui->toolBar->addSeparator();

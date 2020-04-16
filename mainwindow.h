@@ -47,6 +47,11 @@ private slots:
     QString getImportPath(const std::string& extension);
     void exportEntity();
     void importEntity();
+    //Export data
+    void saveData();
+    void exportBoolCloud(internalEntity& entity);
+    void exportTriMesh(internalEntity& entity);
+    void exportPointCloud(internalEntity& entity);
     //Read/write specific data
     void writeBoolCloud(std::ofstream& ofile, internalEntity& entity);
     void writeTriMesh(std::ofstream& ofile, internalEntity& entity);

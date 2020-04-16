@@ -11,5 +11,6 @@
         <file>icons/icon_hull.png</file>
         <file>icons/MandelbulbUI_icon.png</file>
         <file>icons/meshgen_icon.png</file>
+        <file>icons/export.png</file>
     </qresource>
 </RCC>
